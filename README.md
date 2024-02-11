@@ -2,7 +2,7 @@
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 <p align="center">
-  <img src="https://media.giphy.com/media/3o7TKz9b76kG18QRiM/giphy.gif" alt="DevOps GIF" width="300">
+  <img src=""C:\Users\mnflo\Desktop\komal gif.gif"" alt="DevOps GIF" width="300">
 </p>
 
 - 🔭 I’m currently working as **AWS DevOps Engineer**
