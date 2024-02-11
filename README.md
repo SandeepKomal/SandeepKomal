@@ -2,7 +2,7 @@
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 <p align="center">
-  <img src="https://github.com/SandeepKomal/SandeepKomal/assets/99358567/8e52255b-b0d2-474e-97c5-7ed1e7c50abc"alt="komal -Devops GIF" width="300">
+  <img src=""alt="komal -Devops GIF" width="300">
 </p>
 
 - 🔭 I’m currently working as **AWS DevOps Engineer**
@@ -51,5 +51,5 @@
   <img src="https://github-readme-stats.vercel.app/api?username=sandeepkomal&show_icons=true&theme=dark" alt="GitHub Stats" />
 </p>
 
-![komal gif](https://github.com/SandeepKomal/SandeepKomal/assets/99358567/8e52255b-b0d2-474e-97c5-7ed1e7c50abc)
+
 
