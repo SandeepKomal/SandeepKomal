@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Sandeep Komal Pothu</h1>
-<h3 align="center">A passionate Devops Engineer from India</h3>
+<h3 align="center">A passionate Devops Engineer </h3>
 
 - 🔭 I’m currently working as **AWS DevOps Engineer**
 
