@@ -56,6 +56,14 @@
   <img src="https://github-readme-stats.vercel.app/api?username=sandeepkomal&show_icons=true&theme=dark" alt="GitHub Stats" />
 </p>
 
+###
+
+<br clear="both">
+
+<img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg" alt="Snake animation" />
+
+###
+
 
 
 
