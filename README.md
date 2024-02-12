@@ -2,7 +2,7 @@
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 <p align="center">
-  <img src="https://github.com/SandeepKomal/SandeepKomal/issues/1#issuecomment-1938087718" alt="DevOps GIF" width="300">
+  <img src="https://github.com/SandeepKomal/SandeepKomal/issues/1#issue-2129449955" alt="DevOps GIF" width="300">
 </p>
 
 - 🔭 I’m currently working as **AWS DevOps Engineer**
