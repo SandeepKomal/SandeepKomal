@@ -2,7 +2,7 @@
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 <p align="center">
-  <img src="https://github.com/SandeepKomal/SandeepKomal/issues/1#issue-2129449955" alt="DevOps GIF" width="300">
+  <img src="https://private-user-images.githubusercontent.com/99358567/303976999-4163fe55-a75a-4083-a1e6-51f87a71b385.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDc3MTcxMzcsIm5iZiI6MTcwNzcxNjgzNywicGF0aCI6Ii85OTM1ODU2Ny8zMDM5NzY5OTktNDE2M2ZlNTUtYTc1YS00MDgzLWExZTYtNTFmODdhNzFiMzg1LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjEyVDA1NDcxN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTM5MmI5ZWYyM2YwZmM2N2Q3NjUwMzk2NjEzOWRkMmYxZjM5YWExYWFhZDI4MGEwMTg1MjA3NjM0MWNlMWU4YTYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.r0ylwiRLmh3G9KPO3aLSnptYpBos6flAU9MK5zy-Ats" alt="DevOps GIF" width="300">
 </p>
 
 - 🔭 I’m currently working as **AWS DevOps Engineer**
