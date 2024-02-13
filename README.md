@@ -2,7 +2,7 @@
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 <p align="center">
-  <img src="" alt="DevOps GIF" width="300">
+  <img src="" alt="" width="300">
 </p>
 
 - 🔭 I’m currently working as **AWS DevOps Engineer**
