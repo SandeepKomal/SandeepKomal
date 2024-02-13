@@ -2,7 +2,7 @@
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 <p align="center">
-  <img src="https://private-user-images.githubusercontent.com/99358567/304015590-8185cd8a-aa7c-4905-97db-97acf5578127.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDc3MzIyODUsIm5iZiI6MTcwNzczMTk4NSwicGF0aCI6Ii85OTM1ODU2Ny8zMDQwMTU1OTAtODE4NWNkOGEtYWE3Yy00OTA1LTk3ZGItOTdhY2Y1NTc4MTI3LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjEyVDA5NTk0NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTIzNzJmMDY4MTQzZWViNDExYTc5YjdjNzEzMjMwYzdmYWY2NzMwZThjZGM1OGU4MTcwOGY4Njc4MWZiZDA3MmImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.iUtLISF5VnbladD6XBZC1aa_bmd8wD-AU5wF3Qzi6JY" alt="DevOps GIF" width="300">
+  <img src="" alt="DevOps GIF" width="300">
 </p>
 
 - 🔭 I’m currently working as **AWS DevOps Engineer**
