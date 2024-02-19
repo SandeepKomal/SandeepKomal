@@ -1,4 +1,4 @@
-<h1 align="center">Hi <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Hi.gif?raw=true" alt="DevOps GIF" width="28">, I'm Sandeep Komal Pothu</h1>
+<h1 align="center">Hi <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Hi.gif?raw=true" alt="DevOps GIF" width="30">, I'm Sandeep Komal Pothu</h1>
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 
