@@ -1,4 +1,4 @@
-<h1 align="center">Hi <img src="https://private-user-images.githubusercontent.com/99358567/304333354-d09a74d2-be8f-4567-a14d-78e864e38675.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDc4MTEyODIsIm5iZiI6MTcwNzgxMDk4MiwicGF0aCI6Ii85OTM1ODU2Ny8zMDQzMzMzNTQtZDA5YTc0ZDItYmU4Zi00NTY3LWExNGQtNzhlODY0ZTM4Njc1LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjEzVDA3NTYyMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWUyZTZiNDU4N2FmMzE0ODg1YzgyN2FjMTQyYjVkMDFlNTExZDVkMjhiNTcxNmMwNWZiN2QwMWNjNGFmOGFlZjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.d6SVpzcC4SKgveTdo0BFQ24EA12kfcSN73nw1By_tBE" alt="DevOps GIF" width="30">, I'm Sandeep Komal Pothu</h1>
+<h1 align="center">Hi <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Hi.gif?raw=true" alt="DevOps GIF" width="28">, I'm Sandeep Komal Pothu</h1>
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 
