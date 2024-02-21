@@ -7,7 +7,7 @@
 
 
 
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/a9fd79b1391ff77fccecb124c5430eb1.gif?raw=true" alt="DevOps GIF" width="20"> I’m currently working as **AWS DevOps Engineer**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/a9fd79b1391ff77fccecb124c5430eb1.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently working as **AWS DevOps Engineer**
 
 - 🌱 I’m currently learning **Flutter**
 
