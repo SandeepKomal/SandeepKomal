@@ -15,7 +15,7 @@
 
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/90c6698dc6f9e00bb32ffb3e21042474.gif?raw=true" alt="DevOps GIF" width="25"> Ask me about **AWS DevOps ♾️ | CI/CD 🔁 | Docker 🐳 | Kubernetes ☸️ | Terraform | ECS ✴️**
 
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/giphy.gif?raw=true" alt="DevOps GIF" width="30"> How to reach me **sandeepkomalp@gmail.com**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/giphy.gif?raw=true" alt="DevOps GIF" width="35"> How to reach me **sandeepkomalp@gmail.com**
 
 <h3 align="left">Connect with me:</h3>
 <div align="left">
