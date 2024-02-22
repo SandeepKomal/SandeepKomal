@@ -9,13 +9,13 @@
 
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Developer.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently working as **AWS DevOps Engineer**
 
-- 🌱 I’m currently learning **Flutter**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Developer.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently learning **Flutter**
 
-- 🤝 I’m looking to collaborate on **DevOps**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Developer.gif?raw=true" alt="DevOps GIF" width="25"> I’m looking to collaborate on **DevOps**
 
-- 💬 Ask me about **AWS DevOps ♾️ | CI/CD 🔁 | Docker 🐳 | Kubernetes ☸️ | Terraform | ECS ✴️**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Developer.gif?raw=true" alt="DevOps GIF" width="25"> Ask me about **AWS DevOps ♾️ | CI/CD 🔁 | Docker 🐳 | Kubernetes ☸️ | Terraform | ECS ✴️**
 
-- 📫 How to reach me **sandeepkomalp@gmail.com**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/Developer.gif?raw=true" alt="DevOps GIF" width="25"> How to reach me **sandeepkomalp@gmail.com**
 
 <h3 align="left">Connect with me:</h3>
 <div align="left">
