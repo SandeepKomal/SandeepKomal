@@ -13,7 +13,7 @@
 
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/O3Qk.gif?raw=true" alt="DevOps GIF" width="30"> I’m looking to collaborate on **DevOps**
 
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/90c6698dc6f9e00bb32ffb3e21042474.gif?raw=true" alt="DevOps GIF" width="25"> Ask me about **AWS DevOps ♾️ | CI/CD 🔁 | Docker 🐳 | Kubernetes ☸️ | Terraform | ECS ✴️**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/90c6698dc6f9e00bb32ffb3e21042474.gif?raw=true" alt="DevOps GIF" width="25"> Ask me about **AWS DevOps ♾️ | CI/CD 🔁 | Docker 🐳 | Kubernetes ☸️ | Terraform | ECS ✴️ | Ansible | DataDog**
 
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/giphy.gif?raw=true" alt="DevOps GIF" width="35"> How to reach me **sandeepkomalp@gmail.com**
 
