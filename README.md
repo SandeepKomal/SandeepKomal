@@ -2,7 +2,7 @@
 <h3 align="center">A passionate DevOps Engineer </h3>
 
 
-<p align="center"> <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/giphy%20(1).gif?raw=true" alt="DevOps GIF" width="250"></p>
+<p align="center"> <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/giphy%20(1).gif?raw=true" alt="DevOps GIF" width="250"></p>
 
 
 
