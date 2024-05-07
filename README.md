@@ -9,7 +9,7 @@
 
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/Developer.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently working as **AWS DevOps Engineer**
 
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/E2Ak.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently learning **Ansible**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/E2Ak.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently learning **Ansible**, **helm**, **shell scripting**
 
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/O3Qk.gif?raw=true" alt="DevOps GIF" width="30"> I’m looking to collaborate on **DevOps**
 
