@@ -9,7 +9,7 @@
 
 ### 👨‍💻 About Me
 
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/Developer.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently working as **Senior Cloud OPerarions Engineer**
+- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/Developer.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently working as **Senior Cloud Operarions Engineer**
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/E2Ak.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently learning **Ansible**, **Helm**, **Shell Scripting**
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/O3Qk.gif?raw=true" alt="DevOps GIF" width="30"> I’m looking to collaborate on **DevOps**
 - <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/speech-bubble-5022_512.gif?raw=true" alt="DevOps GIF" width="20"> Ask me about **AWS DevOps | CI/CD - Jenkins | Docker | Kubernetes | Terraform | DevSecOps | ECS | Ansible | DataDog**
