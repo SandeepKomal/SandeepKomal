@@ -1,11 +1,9 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0077B5,100:00C9A7&height=200&section=header&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Cloud%20Operations%20Engineer%20%7C%20DevOps%20%7C%20SRE&descAlignY=55&descSize=18" width="100%"/>
-
-<img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/Hi.gif?raw=true" width="30"/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0077B5,100:00C9A7&height=200&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Cloud%20Operations%20Engineer%20%7C%20DevOps%20%7C%20SRE&descAlignY=65&descSize=18" width="100%"/>
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=800&color=00C9A7&center=true&vCenter=true&width=600&lines=Automating+the+Cloud%2C+One+Pipeline+at+a+Time;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps;Building+Resilient%2C+Scalable+Infrastructure;Always+Shipping.+Always+Learning." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=2800&pause=900&color=00C9A7&center=true&vCenter=true&multiline=true&width=800&height=80&lines=Automating+the+Cloud%2C+One+Pipeline+at+a+Time;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps;Building+Resilient%2C+Scalable+Infrastructure;Always+Shipping.+Always+Learning." alt="Typing SVG" />
 </a>
 
 <br/>
@@ -15,23 +13,20 @@
 
 </div>
 
-<br/>
-
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
 
 ## 👨‍💻 About Me
 
-```yaml
-name: Sandeep Komal Pothu
-role: Senior Cloud Operations Engineer
-focus: [AWS, CI/CD, Kubernetes, DevSecOps, Observability]
-currently_learning: [Ansible, Helm, Shell Scripting]
-looking_to_collaborate_on: DevOps & Cloud Automation projects
-ask_me_about: [AWS DevOps, Jenkins CI/CD, Docker, Kubernetes, Terraform, DevSecOps, ECS, Ansible, DataDog]
-fun_fact: "I turn 'it works on my machine' into 'it works everywhere'."
-```
+- 🔭 Currently working as **Senior Cloud Operations Engineer**
+- 🌱 Currently learning **Ansible**, **Helm**, **Shell Scripting**
+- 🤝 Looking to collaborate on **DevOps & Cloud Automation** projects
+- 💬 Ask me about **AWS DevOps · CI/CD (Jenkins) · Docker · Kubernetes · Terraform · DevSecOps · ECS · Ansible · Datadog**
+- 📫 Reach me at **[sandeepkomalp@gmail.com](mailto:sandeepkomalp@gmail.com)**
+- ⚡ Fun fact: I turn *"it works on my machine"* into *"it works everywhere."*
 
-<img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/giphy%20(1).gif?raw=true" alt="DevOps GIF" width="100%" style="border-radius:12px;">
+<div align="right">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="200">
+</div>
 
 <br/>
 
@@ -110,6 +105,7 @@ fun_fact: "I turn 'it works on my machine' into 'it works everywhere'."
   <img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" alt="snake animation" width="100%"/>
 </div>
 
+> Activates once the `Platane/snk` GitHub Action is added to this repo (see setup note below).
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
 
@@ -117,6 +113,6 @@ fun_fact: "I turn 'it works on my machine' into 'it works everywhere'."
 
 ### 💬 "Automate everything you can. Monitor everything you automate."
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9A7,100:0077B5&height=100&section=footer" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00C9A7,100:0077B5&height=80" width="100%"/>
 
 </div>
