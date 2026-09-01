@@ -101,8 +101,6 @@
   <img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" alt="snake animation" width="100%"/>
 </div>
 
-> Activates once the `Platane/snk` GitHub Action is added to this repo (see setup note below).
-
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
 
 <div align="center">
