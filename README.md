@@ -93,10 +93,6 @@
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=sandeepkomal&theme=tokyonight&hide_border=true" alt="streak stats"/>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=sandeepkomal&theme=tokyo-night&hide_border=true" width="100%"/>
-
-<img src="https://github-profile-trophy-winning.vercel.app/?username=sandeepkomal&theme=tokyonight&no-frame=true&row=1&column=7" width="100%"/>
-
 </div>
 
 ## 🐍 Contribution Snake
