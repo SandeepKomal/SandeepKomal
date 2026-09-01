@@ -110,7 +110,6 @@ fun_fact: "I turn 'it works on my machine' into 'it works everywhere'."
   <img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" alt="snake animation" width="100%"/>
 </div>
 
-> **Note:** The snake animation and 100% accurate view/follower counts activate automatically once you set up the two GitHub Actions linked in the setup notes below.
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
 
