@@ -1,70 +1,123 @@
-<h1 align="center">Hi <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/Hi.gif?raw=true" alt="DevOps GIF" width="30">, I'm Sandeep Komal Pothu</h1>
-<h3 align="center">A passionate DevOps Engineer</h3>
+<div align="center">
 
-<p align="center">
-  <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/giphy%20(1).gif?raw=true" alt="DevOps GIF" width="250">
-</p>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0077B5,100:00C9A7&height=200&section=header&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Cloud%20Operations%20Engineer%20%7C%20DevOps%20%7C%20SRE&descAlignY=55&descSize=18" width="100%"/>
 
----
+<img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/Hi.gif?raw=true" width="30"/>
 
-### 👨‍💻 About Me
+<a href="https://git.io/typing-svg">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=800&color=00C9A7&center=true&vCenter=true&width=600&lines=Automating+the+Cloud%2C+One+Pipeline+at+a+Time;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps;Building+Resilient%2C+Scalable+Infrastructure;Always+Shipping.+Always+Learning." alt="Typing SVG" />
+</a>
 
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/Developer.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently working as **Senior Cloud Operations Engineer**
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/E2Ak.gif?raw=true" alt="DevOps GIF" width="25"> I’m currently learning **Ansible**, **Helm**, **Shell Scripting**
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/O3Qk.gif?raw=true" alt="DevOps GIF" width="30"> I’m looking to collaborate on **DevOps**
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/speech-bubble-5022_512.gif?raw=true" alt="DevOps GIF" width="20"> Ask me about **AWS DevOps | CI/CD - Jenkins | Docker | Kubernetes | Terraform | DevSecOps | ECS | Ansible | DataDog**
-- <img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/giphy.gif?raw=true" alt="DevOps GIF" width="35"> How to reach me **[sandeepkomalp@gmail.com](mailto:sandeepkomalp@gmail.com)**
+<br/>
 
----
+<img src="https://komarev.com/ghpvc/?username=sandeepkomal&label=Profile%20Views&color=0077B5&style=for-the-badge" alt="profile views"/>
+<img src="https://img.shields.io/github/followers/sandeepkomal?label=Followers&style=for-the-badge&color=00C9A7" alt="followers"/>
 
-### 🌐 Connect with Me
+</div>
 
-<div align="left">
-  <a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283/" target="blank">
-    <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="LinkedIn" />
+<br/>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+
+## 👨‍💻 About Me
+
+```yaml
+name: Sandeep Komal Pothu
+role: Senior Cloud Operations Engineer
+focus: [AWS, CI/CD, Kubernetes, DevSecOps, Observability]
+currently_learning: [Ansible, Helm, Shell Scripting]
+looking_to_collaborate_on: DevOps & Cloud Automation projects
+ask_me_about: [AWS DevOps, Jenkins CI/CD, Docker, Kubernetes, Terraform, DevSecOps, ECS, Ansible, DataDog]
+fun_fact: "I turn 'it works on my machine' into 'it works everywhere'."
+```
+
+<img src="https://github.com/SandeepKomal/SandeepKomal/blob/main/assets/giphy%20(1).gif?raw=true" alt="DevOps GIF" width="100%" style="border-radius:12px;">
+
+<br/>
+
+## 🌐 Connect with Me
+
+<div align="center">
+  <a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
-  <a href="mailto:sandeepkomalp@gmail.com" target="blank">
-    <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="Gmail" />
+  <a href="mailto:sandeepkomalp@gmail.com" target="_blank">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
   </a>
 </div>
 
----
+<br/>
 
-### 🛠️ Languages and Tools
+## 🛠️ Tech Stack
 
-<p align="left">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="Docker" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="Flutter" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="Heroku" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="Jenkins" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg" alt="Kubernetes" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="PHP" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/datadoghq/datadoghq-icon.svg" alt="DataDog" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/prometheusio/prometheusio-icon.svg" alt="Prometheus" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg" alt="Grafana" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/apache_tomcat/apache_tomcat-icon.svg" alt="Tomcat" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apache/apache-original.svg" alt="Apache" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="Nginx" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/amazon_ecs/amazon_ecs-icon.svg" alt="AWS ECS" width="40" height="40"/>
-</p>
+<div align="center">
 
+**☁️ Cloud & Infrastructure**
+<br/>
+<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=FF9900" />
+<img src="https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white" />
+<img src="https://img.shields.io/badge/Amazon%20ECS-FF9900?style=for-the-badge&logo=amazonecs&logoColor=white" />
 
----
+**🚀 CI/CD & Containers**
+<br/>
+<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" />
+<img src="https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white" />
 
-### 📊 GitHub Stats
+**🔒 DevSecOps & Automation**
+<br/>
+<img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white" />
+<img src="https://img.shields.io/badge/Shell%20Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white" />
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 
-<p>
-  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=sandeepkomal&show_icons=true&locale=en&layout=compact" alt="Top Languages" />
-</p>
+**📊 Observability**
+<br/>
+<img src="https://img.shields.io/badge/Datadog-632CA6?style=for-the-badge&logo=datadog&logoColor=white" />
+<img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" />
+<img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" />
 
-<p>
-  &nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=sandeepkomal&show_icons=true&locale=en" alt="GitHub Stats" />
-</p>
+**🌍 Web & Data**
+<br/>
+<img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" />
+<img src="https://img.shields.io/badge/Apache-D22128?style=for-the-badge&logo=apache&logoColor=white" />
+<img src="https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black" />
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+<img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" />
 
-<p>
-  <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=sandeepkomal&" alt="GitHub Streak Stats" />
-</p>
+</div>
 
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+
+## 📊 GitHub Analytics
+
+<div align="center">
+
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=sandeepkomal&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true"/>
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sandeepkomal&layout=compact&theme=tokyonight&hide_border=true"/>
+
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=sandeepkomal&theme=tokyonight&hide_border=true" alt="streak stats"/>
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=sandeepkomal&theme=tokyo-night&hide_border=true" width="100%"/>
+
+<img src="https://github-profile-trophy.vercel.app/?username=sandeepkomal&theme=tokyonight&no-frame=true&row=1&column=7" width="100%"/>
+
+</div>
+
+## 🐍 Contribution Snake
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" alt="snake animation" width="100%"/>
+</div>
+
+> **Note:** The snake animation and 100% accurate view/follower counts activate automatically once you set up the two GitHub Actions linked in the setup notes below.
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+
+<div align="center">
+
+### 💬 "Automate everything you can. Monitor everything you automate."
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9A7,100:0077B5&height=100&section=footer" width="100%"/>
+
+</div>
