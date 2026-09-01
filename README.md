@@ -6,14 +6,18 @@
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=900&color=00C9A7&center=true&vCenter=true&multiline=true&width=800&height=150&lines=Automating+the+Cloud%2C+One+Pipeline+at+a+Time;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps;Building+Resilient%2C+Scalable+Infrastructure;Always+Shipping.+Always+Learning." alt="Typing SVG" />
 </a>
 
-<br/><br/>
+<br/>
 
 <img src="https://komarev.com/ghpvc/?username=sandeepkomal&label=Profile%20Views&color=0077B5&style=for-the-badge" alt="profile views"/>
 <img src="https://img.shields.io/github/followers/sandeepkomal?label=Followers&style=for-the-badge&color=00C9A7" alt="followers"/>
 
 </div>
 
+<br/>
+
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+
+<br/>
 
 ## 👨‍💻 About Me
 
@@ -23,10 +27,6 @@
 - 💬 Ask me about **AWS DevOps · CI/CD (Jenkins) · Docker · Kubernetes · Terraform · DevSecOps · ECS · Ansible · Datadog**
 - 📫 Reach me at **[sandeepkomalp@gmail.com](mailto:sandeepkomalp@gmail.com)**
 - ⚡ Fun fact: I turn *"it works on my machine"* into *"it works everywhere."*
-
-<div align="right">
-  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="200">
-</div>
 
 <br/>
 
@@ -84,6 +84,8 @@
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
 
+<br/>
+
 ## 📊 GitHub Analytics
 
 <div align="center">
@@ -95,13 +97,19 @@
 
 </div>
 
+<br/>
+
 ## 🐍 Contribution Snake
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" alt="snake animation" width="100%"/>
 </div>
 
+<br/>
+
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+
+<br/>
 
 <div align="center">
 
