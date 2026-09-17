@@ -94,11 +94,11 @@
 ## ⚡ Recent Activity
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#79](https://github.com/SandeepKomal/KOMORAPY_V4/pull/79) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-2. ℹ️ Assigned PR [#79](https://github.com/SandeepKomal/KOMORAPY_V4/pull/79) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-3. 💪 Opened PR [#79](https://github.com/SandeepKomal/KOMORAPY_V4/pull/79) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-4. ℹ️ Assigned PR [#78](https://github.com/SandeepKomal/KOMORAPY_V4/pull/78) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-5. 🎉 Merged PR [#78](https://github.com/SandeepKomal/KOMORAPY_V4/pull/78) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+1. 🎉 Merged PR [#2](https://github.com/SandeepKomal/kubernetes-k8s/pull/2) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
+2. 💪 Opened PR [#2](https://github.com/SandeepKomal/kubernetes-k8s/pull/2) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
+3. ℹ️ Assigned PR [#2](https://github.com/SandeepKomal/kubernetes-k8s/pull/2) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
+4. ℹ️ Assigned PR [#1](https://github.com/SandeepKomal/kubernetes-k8s/pull/1) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
+5. 🎉 Merged PR [#79](https://github.com/SandeepKomal/KOMORAPY_V4/pull/79) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
 <!--END_SECTION:activity-->
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
