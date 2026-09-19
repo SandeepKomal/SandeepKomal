@@ -98,13 +98,6 @@
 
 <br/>
 
-| Badge | How it was earned |
-|-------|-------------------|
-| 🦈 **Pull Shark** x2 | Had pull requests merged |
-| 🧠 **Galaxy Brain** | Had an answer accepted in a GitHub Discussion |
-| 🎲 **YOLO** | Merged a pull request without a code review |
-| ⚡ **Quickdraw** | Closed an issue or PR within 5 minutes of opening it |
-
 </div>
 
 ## 🐍 Contribution Snake
