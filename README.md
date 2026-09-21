@@ -1,3 +1,8 @@
+<!-- my-badges start -->
+<a href="my-badges/the-ultimate-question.md"><img src="https://my-badges.github.io/my-badges/the-ultimate-question.png" alt="I found the answer to the ultimate question of life, the universe, and everything!" title="I found the answer to the ultimate question of life, the universe, and everything!" width="64"></a>
+<a href="my-badges/this-is-fine.md"><img src="https://my-badges.github.io/my-badges/this-is-fine.png" alt="I merged a PR with failing checks" title="I merged a PR with failing checks" width="64"></a>
+<!-- my-badges end -->
+
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0077B5,100:00C9A7&height=200&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Cloud%20Operations%20Engineer%20%7C%20DevOps%20%7C%20SRE&descAlignY=65&descSize=18" width="100%"/>
