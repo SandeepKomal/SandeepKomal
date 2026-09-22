@@ -110,11 +110,11 @@
 ## ⚡ Recent Activity
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#105](https://github.com/SandeepKomal/KOMORAPY_V4/pull/105) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-2. ℹ️ Assigned PR [#105](https://github.com/SandeepKomal/KOMORAPY_V4/pull/105) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-3. 💪 Opened PR [#105](https://github.com/SandeepKomal/KOMORAPY_V4/pull/105) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-4. 🎉 Merged PR [#104](https://github.com/SandeepKomal/KOMORAPY_V4/pull/104) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-5. ℹ️ Assigned PR [#104](https://github.com/SandeepKomal/KOMORAPY_V4/pull/104) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+1. 🎉 Merged PR [#107](https://github.com/SandeepKomal/KOMORAPY_V4/pull/107) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+2. ℹ️ Assigned PR [#107](https://github.com/SandeepKomal/KOMORAPY_V4/pull/107) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+3. 💪 Opened PR [#107](https://github.com/SandeepKomal/KOMORAPY_V4/pull/107) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+4. 🎉 Merged PR [#105](https://github.com/SandeepKomal/KOMORAPY_V4/pull/105) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+5. ℹ️ Assigned PR [#105](https://github.com/SandeepKomal/KOMORAPY_V4/pull/105) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
 <!--END_SECTION:activity-->
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
