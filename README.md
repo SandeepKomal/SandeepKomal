@@ -110,11 +110,11 @@
 ## ⚡ Recent Activity
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#115](https://github.com/SandeepKomal/KOMORAPY_V4/pull/115) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-2. 💪 Opened PR [#115](https://github.com/SandeepKomal/KOMORAPY_V4/pull/115) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-3. ℹ️ Assigned PR [#115](https://github.com/SandeepKomal/KOMORAPY_V4/pull/115) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-4. ℹ️ Assigned PR [#74](https://github.com/SandeepKomal/KOMORAPY_V4/pull/74) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-5. 🎉 Merged PR [#109](https://github.com/SandeepKomal/KOMORAPY_V4/pull/109) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+1. 💪 Opened PR [#2](https://github.com/SandeepKomal/Terraform-HashiCorp/pull/2) in [SandeepKomal/Terraform-HashiCorp](https://github.com/SandeepKomal/Terraform-HashiCorp)
+2. 🎉 Merged PR [#1](https://github.com/SandeepKomal/Shell/pull/1) in [SandeepKomal/Shell](https://github.com/SandeepKomal/Shell)
+3. 💪 Opened PR [#1](https://github.com/SandeepKomal/Shell/pull/1) in [SandeepKomal/Shell](https://github.com/SandeepKomal/Shell)
+4. ℹ️ Assigned PR [#1](https://github.com/SandeepKomal/Shell/pull/1) in [SandeepKomal/Shell](https://github.com/SandeepKomal/Shell)
+5. ℹ️ Assigned PR [#4](https://github.com/SandeepKomal/Second-Hand-Bike-Price-Prediction-ML_Project/pull/4) in [SandeepKomal/Second-Hand-Bike-Price-Prediction-ML_Project](https://github.com/SandeepKomal/Second-Hand-Bike-Price-Prediction-ML_Project)
 <!--END_SECTION:activity-->
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
