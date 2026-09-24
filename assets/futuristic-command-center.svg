@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050B14"/><stop offset=".55" stop-color="#071B2D"/><stop offset="1" stop-color="#031014"/></linearGradient>
+ <linearGradient id="neon" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00F5D4"/><stop offset=".5" stop-color="#00A8FF"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#16324A" stroke-width="1" opacity=".45"/></pattern>
+</defs>
+<rect width="1200" height="520" rx="24" fill="url(#bg)"/>
+<rect width="1200" height="520" rx="24" fill="url(#grid)"/>
+<rect x="28" y="24" width="1144" height="472" rx="18" fill="none" stroke="#1B4762"/>
+<circle cx="54" cy="50" r="6" fill="#00F5D4"/><circle cx="74" cy="50" r="6" fill="#00A8FF"/><circle cx="94" cy="50" r="6" fill="#8B5CF6"/>
+<text x="1120" y="56" fill="#6B9AB5" font-family="monospace" font-size="13" text-anchor="end">SANDEEPKOMAL // ENGINEERING_OS</text>
+
+<text x="70" y="110" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="38" font-weight="700">ENGINEERING COMMAND CENTER</text>
+<text x="70" y="142" fill="#7FA6BD" font-family="monospace" font-size="16">CLOUD • DEVOPS • SRE • DEVSECOPS</text>
+
+<rect x="70" y="178" width="330" height="250" rx="16" fill="#071522" stroke="#17435A"/>
+<text x="94" y="214" fill="#00F5D4" font-family="monospace" font-size="14">IDENTITY</text>
+<text x="94" y="254" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="27" font-weight="700">Sandeep Komal</text>
+<text x="94" y="282" fill="#8FAFC2" font-family="monospace" font-size="14">Cloud &amp; DevOps Engineer</text>
+<line x1="94" y1="306" x2="376" y2="306" stroke="#16384C"/>
+<text x="94" y="336" fill="#7FA6BD" font-family="monospace" font-size="13">FOCUS</text>
+<text x="94" y="360" fill="#D7F7FF" font-family="monospace" font-size="14">AWS / Kubernetes / Terraform</text>
+<text x="94" y="384" fill="#D7F7FF" font-family="monospace" font-size="14">CI/CD / Security / Observability</text>
+<text x="94" y="410" fill="#00F5D4" font-family="monospace" font-size="12">● BUILDING SYSTEMS, NOT JUST SCRIPTS</text>
+
+<rect x="428" y="178" width="702" height="112" rx="16" fill="#071522" stroke="#17435A"/>
+<text x="452" y="207" fill="#00A8FF" font-family="monospace" font-size="13">DELIVERY PIPELINE</text>
+<g font-family="monospace" font-size="12" text-anchor="middle">
+ <rect x="452" y="226" width="90" height="42" rx="9" fill="#0A2638" stroke="#00A8FF"/><text x="497" y="252" fill="#D7F7FF">CODE</text>
+ <rect x="565" y="226" width="90" height="42" rx="9" fill="#0A2638" stroke="#00F5D4"/><text x="610" y="252" fill="#D7F7FF">CI/CD</text>
+ <rect x="678" y="226" width="90" height="42" rx="9" fill="#0A2638" stroke="#8B5CF6"/><text x="723" y="252" fill="#D7F7FF">SECURE</text>
+ <rect x="791" y="226" width="90" height="42" rx="9" fill="#0A2638" stroke="#00A8FF"/><text x="836" y="252" fill="#D7F7FF">CLOUD</text>
+ <rect x="904" y="226" width="90" height="42" rx="9" fill="#0A2638" stroke="#00F5D4"/><text x="949" y="252" fill="#D7F7FF">K8S</text>
+ <rect x="1017" y="226" width="90" height="42" rx="9" fill="#0A2638" stroke="#8B5CF6"/><text x="1062" y="252" fill="#D7F7FF">OBSERVE</text>
+</g>
+<path d="M542 247H565M655 247H678M768 247H791M881 247H904M994 247H1017" stroke="url(#neon)" stroke-width="3" filter="url(#glow)"/>
+
+<rect x="428" y="314" width="702" height="114" rx="16" fill="#071522" stroke="#17435A"/>
+<text x="452" y="344" fill="#8B5CF6" font-family="monospace" font-size="13">PLATFORM LAYERS</text>
+<g font-family="monospace" font-size="13">
+ <text x="452" y="376" fill="#D7F7FF">☁ AWS</text><text x="590" y="376" fill="#D7F7FF">☸ Kubernetes</text><text x="760" y="376" fill="#D7F7FF">🏗 Terraform</text><text x="920" y="376" fill="#D7F7FF">🐳 Docker</text>
+ <text x="452" y="405" fill="#D7F7FF">🔐 DevSecOps</text><text x="620" y="405" fill="#D7F7FF">📊 Prometheus</text><text x="790" y="405" fill="#D7F7FF">📈 Grafana</text><text x="930" y="405" fill="#D7F7FF">⚙ Ansible</text>
+</g>
+
+<text x="70" y="470" fill="#4E7B91" font-family="monospace" font-size="12">STATUS // AUTOMATE • SECURE • OBSERVE • SCALE</text>
+<text x="1130" y="470" fill="#00F5D4" font-family="monospace" font-size="12" text-anchor="end">● ONLINE</text>
+</svg>
