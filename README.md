@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="./assets/futuristic-command-center.svg" width="100%" alt="Sandeep Komal futuristic engineering command center"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:071A2B,45:0077B5,100:00C9A7&height=230&section=header&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Senior%20Cloud%20Operations%20Engineer%20%7C%20DevOps%20%7C%20SRE%20%7C%20DevSecOps&descAlignY=60&descSize=18" width="100%" alt="Sandeep Komal header"/>
+
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=900&color=00C9A7&center=true&vCenter=true&multiline=true&width=850&height=120&lines=Automating+the+Cloud%2C+One+Pipeline+at+a+Time;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps;Building+Resilient%2C+Scalable+Infrastructure;Always+Shipping.+Always+Learning." alt="Typing SVG"/></a>
 
 <br/>
 
@@ -10,10 +12,8 @@
 
 </div>
 
-<br/>
-
 <div align="center">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=19&duration=2800&pause=900&color=00C9A7&center=true&vCenter=true&multiline=true&width=850&height=90&lines=Cloud+systems+that+automate%2C+secure%2C+observe%2C+and+scale.;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps+%7C+SRE" alt="Engineering focus"/>
+<img src="./assets/futuristic-command-center.svg" width="100%" alt="Futuristic engineering command center"/>
 </div>
 
 ---
@@ -28,9 +28,7 @@
 
 <strong>Sandeep Komal Pothu</strong>
 
-Cloud & DevOps Engineer focused on building reliable infrastructure and automated delivery systems.
-
-<strong>Core areas</strong>
+Cloud & DevOps Engineer focused on reliable infrastructure, automation, security, and observability.
 
 <code>AWS</code> <code>Kubernetes</code> <code>Terraform</code><br/>
 <code>CI/CD</code> <code>Docker</code> <code>DevSecOps</code><br/>
@@ -43,8 +41,6 @@ Cloud & DevOps Engineer focused on building reliable infrastructure and automate
 
 > Build infrastructure that can <strong>ship itself, defend itself, and tell you when it is unhealthy.</strong>
 
-<strong>Engineering loop</strong>
-
 <code>BUILD</code> → <code>SECURE</code> → <code>DEPLOY</code> → <code>OBSERVE</code> → <code>IMPROVE</code>
 
 </td>
@@ -56,27 +52,17 @@ Cloud & DevOps Engineer focused on building reliable infrastructure and automate
 ## ⚡ LIVE ENGINEERING FABRIC
 
 <div align="center">
-
 <img src="https://img.shields.io/github/actions/workflow/status/SandeepKomal/SandeepKomal/ghactivity.yml?label=ACTIVITY%20ENGINE&style=for-the-badge" alt="Activity engine"/>
 <img src="https://img.shields.io/github/actions/workflow/status/SandeepKomal/SandeepKomal/snake.yml?label=CONTRIBUTION%20ENGINE&style=for-the-badge" alt="Contribution engine"/>
 <img src="https://img.shields.io/github/last-commit/SandeepKomal/SandeepKomal?label=LAST%20COMMIT&style=for-the-badge" alt="Last commit"/>
-
 </div>
-
-<strong>Automated profile systems</strong>
-
-- <code>ghactivity.yml</code> → keeps recent GitHub activity current
-- <code>snake.yml</code> → generates the contribution animation
-- GitHub Actions → the profile itself is treated as an automated artifact
 
 ---
 
 ## 🚀 FLAGSHIP SYSTEM — KOMORAPY_V4
 
 <div align="center">
-
-<img src="./assets/komorapy-pipeline.svg" width="100%" alt="KOMORAPY_V4 DevSecOps delivery pipeline"/>
-
+<img src="./assets/komorapy-pipeline.svg" width="100%" alt="KOMORAPY_V4 delivery pipeline"/>
 </div>
 
 A practical application platform connecting <strong>source control → CI/CD → security → container registry → Kubernetes → observability</strong>.
@@ -88,12 +74,8 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## 🛡️ DEVSECOPS SECURITY FABRIC
 
 <div align="center">
-
 <img src="./assets/devsecops-pipeline.svg" width="100%" alt="DevSecOps security fabric"/>
-
 </div>
-
-The security model spans the software supply chain instead of treating security as a final pipeline step.
 
 <strong>Security layers:</strong> <code>SAST</code> · <code>SCA</code> · <code>Container Security</code> · <code>IaC</code> · <code>Kubernetes</code> · <code>Runtime</code>
 
@@ -102,12 +84,8 @@ The security model spans the software supply chain instead of treating security 
 ## ☁️ CLOUD / PLATFORM STACK
 
 <div align="center">
-
 <img src="https://skillicons.dev/icons?i=aws,terraform,kubernetes,docker,ansible,githubactions,jenkins,linux,bash,python,prometheus,grafana,nginx,mysql&perline=7" alt="Technology stack"/>
-
 </div>
-
-<br/>
 
 <table>
 <tr>
@@ -129,14 +107,10 @@ The security model spans the software supply chain instead of treating security 
 ## 📡 ENGINEERING TELEMETRY
 
 <div align="center">
-
 <img height="180" src="https://github-stats-extended.vercel.app/api?username=sandeepkomal&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true" alt="GitHub statistics"/>
 <img height="180" src="https://github-stats-extended.vercel.app/api/top-langs/?username=sandeepkomal&layout=compact&theme=tokyonight&hide_border=true" alt="Top languages"/>
-
 <br/>
-
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=sandeepkomal&theme=tokyonight&hide_border=true" alt="GitHub streak"/>
-
 </div>
 
 ---
@@ -152,7 +126,11 @@ The security model spans the software supply chain instead of treating security 
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-<!-- Updated automatically by GitHub Actions -->
+1. 🎉 Merged PR [#124](https://github.com/SandeepKomal/KOMORAPY_V4/pull/124) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+2. 💪 Opened PR [#124](https://github.com/SandeepKomal/KOMORAPY_V4/pull/124) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+3. 🎉 Merged PR [#123](https://github.com/SandeepKomal/KOMORAPY_V4/pull/123) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+4. ℹ️ Assigned PR [#123](https://github.com/SandeepKomal/KOMORAPY_V4/pull/123) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+5. 💪 Opened PR [#123](https://github.com/SandeepKomal/KOMORAPY_V4/pull/123) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
 <!--END_SECTION:activity-->
 
 ---
@@ -173,8 +151,6 @@ The security model spans the software supply chain instead of treating security 
 
 ## ✍️ ENGINEERING NOTES
 
-I write about practical engineering across:
-
 <code>AWS</code> · <code>Kubernetes</code> · <code>Terraform</code> · <code>CI/CD</code> · <code>DevSecOps</code> · <code>Cloud Security</code> · <code>Observability</code>
 
 > <strong>Learn by building. Build by automating. Improve by observing.</strong>
@@ -188,8 +164,6 @@ I write about practical engineering across:
 <a href="mailto:sandeepkomalp@gmail.com"><img src="https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
 <a href="https://github.com/SandeepKomal"><img src="https://img.shields.io/badge/GITHUB-111827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
 </div>
-
-<br/>
 
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9A7,55:0077B5,100:071A2B&height=120&section=footer" width="100%" alt="Footer"/>
