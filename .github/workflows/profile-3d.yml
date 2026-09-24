@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 18 * * *"
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 # Only repository contents are needed: generate profile SVGs and commit them.
 permissions:
