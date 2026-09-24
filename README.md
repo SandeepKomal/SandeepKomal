@@ -123,6 +123,16 @@ A practical application platform connecting <strong>source control → CI/CD →
 
 ---
 
+## 🧊 3D CONTRIBUTION UNIVERSE
+
+<div align="center">
+<img src="./profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="3D GitHub contribution landscape"/>
+</div>
+
+> Generated automatically by the pinned GitHub Actions workflow.
+
+---
+
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
