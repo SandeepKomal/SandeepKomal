@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050B14"/><stop offset="1" stop-color="#0B1426"/></linearGradient><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00F5D4"/><stop offset=".45" stop-color="#00A8FF"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+<rect width="1200" height="390" rx="22" fill="url(#b)" stroke="#17435A"/>
+<text x="48" y="52" fill="#8B5CF6" font-family="monospace" font-size="13">SECURITY FABRIC // SHIFT LEFT + RUNTIME</text>
+<text x="48" y="86" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="28" font-weight="700">Security travels with the workload.</text>
+<g font-family="monospace" text-anchor="middle">
+<rect x="45" y="130" width="165" height="150" rx="16" fill="#091A28" stroke="#00A8FF"/><text x="127" y="166" fill="#00A8FF" font-size="12">01 • CODE</text><text x="127" y="208" fill="#FFF" font-size="17">SAST</text><text x="127" y="238" fill="#7FA6BD" font-size="12">CodeQL</text><text x="127" y="260" fill="#7FA6BD" font-size="12">Quality Gates</text>
+<rect x="230" y="130" width="165" height="150" rx="16" fill="#091A28" stroke="#00F5D4"/><text x="312" y="166" fill="#00F5D4" font-size="12">02 • SUPPLY</text><text x="312" y="208" fill="#FFF" font-size="17">SCA</text><text x="312" y="238" fill="#7FA6BD" font-size="12">Dependencies</text><text x="312" y="260" fill="#7FA6BD" font-size="12">Dependabot</text>
+<rect x="415" y="130" width="165" height="150" rx="16" fill="#091A28" stroke="#8B5CF6"/><text x="497" y="166" fill="#8B5CF6" font-size="12">03 • BUILD</text><text x="497" y="208" fill="#FFF" font-size="17">CONTAINER</text><text x="497" y="238" fill="#7FA6BD" font-size="12">Trivy</text><text x="497" y="260" fill="#7FA6BD" font-size="12">SBOM / Image Scan</text>
+<rect x="600" y="130" width="165" height="150" rx="16" fill="#091A28" stroke="#00A8FF"/><text x="682" y="166" fill="#00A8FF" font-size="12">04 • INFRA</text><text x="682" y="208" fill="#FFF" font-size="17">IaC</text><text x="682" y="238" fill="#7FA6BD" font-size="12">Terraform</text><text x="682" y="260" fill="#7FA6BD" font-size="12">Checkov</text>
+<rect x="785" y="130" width="165" height="150" rx="16" fill="#091A28" stroke="#00F5D4"/><text x="867" y="166" fill="#00F5D4" font-size="12">05 • CLUSTER</text><text x="867" y="208" fill="#FFF" font-size="17">K8S</text><text x="867" y="238" fill="#7FA6BD" font-size="12">RBAC • Network</text><text x="867" y="260" fill="#7FA6BD" font-size="12">Secrets • Policy</text>
+<rect x="970" y="130" width="185" height="150" rx="16" fill="#091A28" stroke="#8B5CF6"/><text x="1062" y="166" fill="#8B5CF6" font-size="12">06 • RUNTIME</text><text x="1062" y="208" fill="#FFF" font-size="17">DETECT</text><text x="1062" y="238" fill="#7FA6BD" font-size="12">Falco / Alerts</text><text x="1062" y="260" fill="#7FA6BD" font-size="12">Respond • Improve</text>
+</g>
+<g stroke="url(#g)" stroke-width="3"><path d="M210 205H230M395 205H415M580 205H600M765 205H785M950 205H970"/></g>
+<text x="48" y="337" fill="#4E7B91" font-family="monospace" font-size="12">SECURITY = CODE + SUPPLY CHAIN + BUILD + INFRA + CLUSTER + RUNTIME</text>
+<text x="1152" y="337" fill="#00F5D4" font-family="monospace" font-size="12" text-anchor="end">DEFENSE IN DEPTH</text>
+</svg>
