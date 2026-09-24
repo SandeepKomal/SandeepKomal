@@ -1,128 +1,225 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0077B5,100:00C9A7&height=200&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Cloud%20Operations%20Engineer%20%7C%20DevOps%20%7C%20SRE&descAlignY=65&descSize=18" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:071A2B,45:0077B5,100:00C9A7&height=230&section=header&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Cloud%20%7C%20DevOps%20%7C%20SRE%20%7C%20DevSecOps&descAlignY=60&descSize=20" width="100%"/>
 
-<a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=900&color=00C9A7&center=true&vCenter=true&multiline=true&width=800&height=150&lines=Automating+the+Cloud%2C+One+Pipeline+at+a+Time;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps;Building+Resilient%2C+Scalable+Infrastructure;Always+Shipping.+Always+Learning." alt="Typing SVG" />
-</a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=19&duration=2800&pause=900&color=00C9A7&center=true&vCenter=true&multiline=true&width=850&height=90&lines=Building+cloud+systems+that+automate%2C+secure%2C+observe%2C+and+scale.;AWS+%7C+Kubernetes+%7C+Terraform+%7C+GitHub+Actions+%7C+DevSecOps" alt="Typing SVG"/></a>
 
-<img src="https://komarev.com/ghpvc/?username=sandeepkomal&label=Profile%20Views&color=0077B5&style=for-the-badge" alt="profile views"/>
-<img src="https://img.shields.io/github/followers/sandeepkomal?label=Followers&style=for-the-badge&color=00C9A7" alt="followers"/>
+<br/>
+
+<a href="https://github.com/SandeepKomal"><img src="https://komarev.com/ghpvc/?username=sandeepkomal&label=PROFILE%20VIEWS&color=0077B5&style=for-the-badge" alt="Profile views"/></a>
+<a href="https://github.com/SandeepKomal?tab=followers"><img src="https://img.shields.io/github/followers/SandeepKomal?label=FOLLOWERS&style=for-the-badge&color=00C9A7" alt="Followers"/></a>
 
 </div>
 
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+---
 
-## 👨‍💻 About Me
+## 🧭 Engineering Command Center
 
-- 🔭 Currently working as **Senior Cloud Operations Engineer**
-- 🌱 Currently learning **Ansible**, **Helm**, **Shell Scripting**
-- 🤝 Looking to collaborate on **DevOps & Cloud Automation** projects
-- 💬 Ask me about **AWS DevOps · CI/CD (Jenkins) · Docker · Kubernetes · Terraform · DevSecOps · ECS · Ansible · Datadog**
-- 📫 Reach me at **[sandeepkomalp@gmail.com](mailto:sandeepkomalp@gmail.com)**
-- ⚡ Fun fact: I turn *"it works on my machine"* into *"it works everywhere."*
+> **Cloud engineer focused on reliable infrastructure, automation, security, and observability.**
 
-## 🌐 Connect with Me
+I work across the path from **code → pipeline → container → cloud → Kubernetes → observability**.
+
+\`\`\`
+┌──────────────────────────────────────────────────────────────────────┐
+│                         ENGINEERING LOOP                             │
+├──────────────────────────────────────────────────────────────────────┤
+│   CODE ──► CI/CD ──► SECURITY ──► CONTAINER ──► CLOUD ──► K8s      │
+│    │         │           │             │            │          │      │
+│    ▼         ▼           ▼             ▼            ▼          ▼      │
+│  GitHub   Actions    SAST/SCA       Docker         AWS      EKS     │
+│                                                                      │
+│                         ▼                                            │
+│                  OBSERVE & IMPROVE                                   │
+│             Prometheus • Grafana • Datadog • Logs                   │
+└──────────────────────────────────────────────────────────────────────┘
+\`\`\`
+
+### ⚡ What I Build
+
+| Domain | Focus |
+|---|---|
+| ☁️ Cloud | AWS infrastructure, networking, compute, storage and managed services |
+| ☸️ Kubernetes | EKS, workloads, scaling, networking, security and platform operations |
+| 🏗️ Infrastructure as Code | Terraform-based infrastructure and automation |
+| 🚀 CI/CD | GitHub Actions, Jenkins and deployment automation |
+| 🔐 DevSecOps | SAST, SCA, container security, IaC security and Kubernetes security |
+| 📊 Observability | Prometheus, Grafana, Datadog, monitoring and alerting |
+| 🤖 Automation | Ansible, Shell, Python and operational tooling |
+
+---
+
+## 🚀 Flagship Engineering
+
+### \`KOMORAPY_V4\`
+
+A practical application platform where application delivery meets DevSecOps and Kubernetes.
+
+\`\`\`
+Developer
+    │
+    ▼
+┌──────────────┐
+│    GitHub    │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────────────────────┐
+│ GitHub Actions               │
+│ Test → SAST → SCA → Build   │
+│                ↓             │
+│          Docker Image        │
+└──────────────┬───────────────┘
+               │
+               ▼
+          Amazon ECR
+               │
+               ▼
+        Kubernetes / Kind
+               │
+        ┌──────┴──────┐
+        ▼             ▼
+    Application    Security
+        │             │
+        └──────┬──────┘
+               ▼
+         Observability
+\`\`\`
+
+**Repository:** [KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+
+---
+
+## 🧰 Technology Matrix
 
 <div align="center">
-  <a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283/" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-  </a>
-  <a href="mailto:sandeepkomalp@gmail.com" target="_blank">
-    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
-  </a>
+
+### ☁️ Cloud & Infrastructure
+
+<img src="https://skillicons.dev/icons?i=aws,terraform,kubernetes,docker,ansible&perline=8" />
+
+### 🚀 Delivery & Automation
+
+<img src="https://skillicons.dev/icons?i=githubactions,jenkins,linux,bash,python&perline=8" />
+
+### 📊 Observability & Platforms
+
+<img src="https://skillicons.dev/icons?i=prometheus,grafana,nginx,mysql&perline=8" />
+
 </div>
 
-## 🛠️ Tech Stack
+---
+
+## 🔐 DevSecOps Mindset
+
+Security is not a final pipeline stage.
+
+\`\`\`
+PLAN
+  │
+  ▼
+CODE ───────► SAST
+  │
+  ▼
+DEPENDENCIES ─► SCA
+  │
+  ▼
+BUILD ──────► CONTAINER SCAN
+  │
+  ▼
+INFRASTRUCTURE ─► IaC SCAN
+  │
+  ▼
+KUBERNETES ──► RBAC / NETWORK POLICY / SECRETS
+  │
+  ▼
+RUNTIME ─────► MONITOR / DETECT / RESPOND
+\`\`\`
+
+The goal is to make security part of the delivery system rather than something bolted onto the end.
+
+---
+
+## 📈 GitHub Engineering Metrics
 
 <div align="center">
 
-**☁️ Cloud & Infrastructure**
-<br/>
-<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=FF9900" />
-<img src="https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white" />
-<img src="https://img.shields.io/badge/Amazon%20ECS-FF9900?style=for-the-badge&logo=amazonecs&logoColor=white" />
+<img height="180" src="https://github-stats-extended.vercel.app/api?username=sandeepkomal&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true" alt="GitHub statistics"/>
 
-**🚀 CI/CD & Containers**
-<br/>
-<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white" />
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" />
-<img src="https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white" />
+<img height="180" src="https://github-stats-extended.vercel.app/api/top-langs/?username=sandeepkomal&layout=compact&theme=tokyonight&hide_border=true" alt="Top languages"/>
 
-**🔒 DevSecOps & Automation**
 <br/>
-<img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white" />
-<img src="https://img.shields.io/badge/Shell%20Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white" />
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 
-**📊 Observability**
-<br/>
-<img src="https://img.shields.io/badge/Datadog-632CA6?style=for-the-badge&logo=datadog&logoColor=white" />
-<img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" />
-<img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" />
-
-**🌍 Web & Data**
-<br/>
-<img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" />
-<img src="https://img.shields.io/badge/Apache-D22128?style=for-the-badge&logo=apache&logoColor=white" />
-<img src="https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black" />
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
-<img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" />
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=sandeepkomal&theme=tokyonight&hide_border=true" alt="GitHub streak"/>
 
 </div>
 
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+---
 
-## 📊 GitHub Analytics
+## 🐍 Contribution Activity
 
 <div align="center">
 
-<img height="180em" src="https://github-stats-extended.vercel.app/api?username=sandeepkomal&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true"/>
-<img height="180em" src="https://github-stats-extended.vercel.app/api/top-langs/?username=sandeepkomal&layout=compact&theme=tokyonight&hide_border=true"/>
-
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=sandeepkomal&theme=tokyonight&hide_border=true" alt="streak stats"/>
+<img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" alt="GitHub contribution snake" width="100%"/>
 
 </div>
+
+---
+
+## ⚡ Recent Activity
+
+<!--START_SECTION:activity-->
+<!-- This section is updated automatically by GitHub Actions. -->
+<!--END_SECTION:activity-->
+
+---
 
 ## 🏆 GitHub Achievements
 
 <div align="center">
 
 <a href="https://github.com/SandeepKomal?tab=achievements">
-  <img src="https://github.githubassets.com/assets/pair-extraordinaire-default-579438a20e01.png" width="110" alt="Pair Extraordinaire" title="Pair Extraordinaire"/>
-  <img src="https://github.githubassets.com/assets/galaxy-brain-default-847262c21056.png" width="110" alt="Galaxy Brain" title="Galaxy Brain"/>
-  <img src="https://github.githubassets.com/assets/pull-shark-bronze-a37accb528d1.png" width="110" alt="Pull Shark x2" title="Pull Shark x2"/>
-  <img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" width="110" alt="YOLO" title="YOLO"/>
-  <img src="https://github.githubassets.com/assets/quickdraw-default-39c6aec8ff89.png" width="110" alt="Quickdraw" title="Quickdraw"/>
+<img src="https://github.githubassets.com/assets/pair-extraordinaire-default-579438a20e01.png" width="90" alt="Pair Extraordinaire"/>
+<img src="https://github.githubassets.com/assets/galaxy-brain-default-847262c21056.png" width="90" alt="Galaxy Brain"/>
+<img src="https://github.githubassets.com/assets/pull-shark-bronze-a37accb528d1.png" width="90" alt="Pull Shark"/>
+<img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" width="90" alt="YOLO"/>
+<img src="https://github.githubassets.com/assets/quickdraw-default-39c6aec8ff89.png" width="90" alt="Quickdraw"/>
 </a>
 
-<br/>
+</div>
+
+---
+
+## ✍️ Engineering Notes
+
+I enjoy writing about practical cloud and DevOps engineering:
+
+- AWS architecture and automation
+- Kubernetes operations and security
+- Terraform and Infrastructure as Code
+- CI/CD engineering
+- DevSecOps
+- Observability and reliability
+- Container security
+
+> **Learn by building. Build by automating. Improve by observing.**
+
+---
+
+## 🌐 Connect
+
+<div align="center">
+
+<a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+<a href="mailto:sandeepkomalp@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
 
 </div>
 
-## 🐍 Contribution Snake
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" alt="snake animation" width="100%"/>
-</div>
-
-## ⚡ Recent Activity
-
-<!--START_SECTION:activity-->
-1. 🎉 Merged PR [#124](https://github.com/SandeepKomal/KOMORAPY_V4/pull/124) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-2. 💪 Opened PR [#124](https://github.com/SandeepKomal/KOMORAPY_V4/pull/124) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-3. 🎉 Merged PR [#123](https://github.com/SandeepKomal/KOMORAPY_V4/pull/123) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-4. ℹ️ Assigned PR [#123](https://github.com/SandeepKomal/KOMORAPY_V4/pull/123) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-5. 💪 Opened PR [#123](https://github.com/SandeepKomal/KOMORAPY_V4/pull/123) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-<!--END_SECTION:activity-->
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
+---
 
 <div align="center">
 
-### 💬 "Automate everything you can. Monitor everything you automate."
+### \`AUTOMATE • SECURE • OBSERVE • SCALE\`
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00C9A7,100:0077B5&height=80" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9A7,55:0077B5,100:071A2B&height=120&section=footer" width="100%"/>
 
 </div>
