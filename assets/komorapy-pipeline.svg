@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050B14"/><stop offset="1" stop-color="#081D2C"/></linearGradient><linearGradient id="n" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00F5D4"/><stop offset=".5" stop-color="#00A8FF"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+<rect width="1200" height="390" rx="22" fill="url(#b)" stroke="#17435A"/>
+<text x="48" y="54" fill="#00F5D4" font-family="monospace" font-size="13">FLAGSHIP SYSTEM // KOMORAPY_V4</text>
+<text x="48" y="88" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="28" font-weight="700">Application Delivery → Secure → Deploy → Observe</text>
+<g font-family="monospace" text-anchor="middle">
+<rect x="45" y="135" width="150" height="150" rx="16" fill="#091A28" stroke="#00A8FF"/><text x="120" y="174" fill="#00A8FF" font-size="13">01</text><text x="120" y="214" fill="#FFF" font-size="17">GITHUB</text><text x="120" y="245" fill="#7FA6BD" font-size="12">Source</text><text x="120" y="264" fill="#7FA6BD" font-size="12">Pull Requests</text>
+<rect x="220" y="135" width="150" height="150" rx="16" fill="#091A28" stroke="#00F5D4"/><text x="295" y="174" fill="#00F5D4" font-size="13">02</text><text x="295" y="214" fill="#FFF" font-size="17">CI / CD</text><text x="295" y="245" fill="#7FA6BD" font-size="12">Test</text><text x="295" y="264" fill="#7FA6BD" font-size="12">Build • Release</text>
+<rect x="395" y="135" width="150" height="150" rx="16" fill="#091A28" stroke="#8B5CF6"/><text x="470" y="174" fill="#8B5CF6" font-size="13">03</text><text x="470" y="214" fill="#FFF" font-size="17">SECURITY</text><text x="470" y="245" fill="#7FA6BD" font-size="12">SAST • SCA</text><text x="470" y="264" fill="#7FA6BD" font-size="12">IaC • Container</text>
+<rect x="570" y="135" width="150" height="150" rx="16" fill="#091A28" stroke="#00A8FF"/><text x="645" y="174" fill="#00A8FF" font-size="13">04</text><text x="645" y="214" fill="#FFF" font-size="17">ECR</text><text x="645" y="245" fill="#7FA6BD" font-size="12">Immutable</text><text x="645" y="264" fill="#7FA6BD" font-size="12">Image Artifact</text>
+<rect x="745" y="135" width="150" height="150" rx="16" fill="#091A28" stroke="#00F5D4"/><text x="820" y="174" fill="#00F5D4" font-size="13">05</text><text x="820" y="214" fill="#FFF" font-size="17">K8S</text><text x="820" y="245" fill="#7FA6BD" font-size="12">Kind / EKS</text><text x="820" y="264" fill="#7FA6BD" font-size="12">Deploy • Scale</text>
+<rect x="920" y="135" width="235" height="150" rx="16" fill="#091A28" stroke="#8B5CF6"/><text x="1037" y="174" fill="#8B5CF6" font-size="13">06</text><text x="1037" y="214" fill="#FFF" font-size="17">OBSERVABILITY</text><text x="1037" y="245" fill="#7FA6BD" font-size="12">Metrics • Logs • Alerts</text><text x="1037" y="264" fill="#00F5D4" font-size="12">PROMETHEUS / GRAFANA</text>
+</g>
+<g stroke="url(#n)" stroke-width="3"><path d="M195 210H220M370 210H395M545 210H570M720 210H745M895 210H920"/></g>
+<text x="48" y="345" fill="#4E7B91" font-family="monospace" font-size="12">BUILD NUMBER → IMAGE TAG → DEPLOYMENT → RUNTIME SIGNALS</text>
+<text x="1152" y="345" fill="#00F5D4" font-family="monospace" font-size="12" text-anchor="end">PIPELINE READY</text>
+</svg>
