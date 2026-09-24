@@ -136,11 +136,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#6](https://github.com/SandeepKomal/SandeepKomal/pull/6) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
-2. ℹ️ Assigned PR [#6](https://github.com/SandeepKomal/SandeepKomal/pull/6) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
-3. 💪 Opened PR [#6](https://github.com/SandeepKomal/SandeepKomal/pull/6) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
-4. ℹ️ Assigned PR [#5](https://github.com/SandeepKomal/SandeepKomal/pull/5) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
-5. 🎉 Merged PR [#5](https://github.com/SandeepKomal/SandeepKomal/pull/5) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
+1. ℹ️ Assigned PR [#42](https://github.com/SandeepKomal/KOMORAPY_V4/pull/42) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+2. ❌ Closed PR [#42](https://github.com/SandeepKomal/KOMORAPY_V4/pull/42) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+3. ℹ️ Assigned PR [#8](https://github.com/SandeepKomal/SandeepKomal/pull/8) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
+4. 🎉 Merged PR [#8](https://github.com/SandeepKomal/SandeepKomal/pull/8) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
+5. 💪 Opened PR [#8](https://github.com/SandeepKomal/SandeepKomal/pull/8) in [SandeepKomal/SandeepKomal](https://github.com/SandeepKomal/SandeepKomal)
 <!--END_SECTION:activity-->
 
 ---
