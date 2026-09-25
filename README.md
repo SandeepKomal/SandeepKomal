@@ -123,6 +123,16 @@ A practical application platform connecting <strong>source control → CI/CD →
 
 ---
 
+## 🌈 JET CONTRIBUTION HEATMAP
+
+<div align="center">
+<img src="./dist/github-jet.svg" width="100%" alt="GitHub contribution heatmap"/>
+</div>
+
+> Automatically regenerated daily from GitHub contribution data.
+
+---
+
 ## 🧊 3D CONTRIBUTION UNIVERSE
 
 <div align="center">
