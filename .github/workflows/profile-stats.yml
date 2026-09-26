@@ -1,0 +1,40 @@
+name: Update Engineering Momentum Stats
+
+on:
+  schedule:
+    - cron: "30 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Generate profile stats
+        uses: shinpr/github-profile-stats@49b5f7091182a45f3ef93923505b660c6da5f835 # v0.2.0
+        with:
+          username: sandeepkomal
+          profile: activity-consistency
+          theme: dark
+          output_dir: profile-stats
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Commit generated stats if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile-stats/
+          if git diff --cached --quiet; then
+            echo "No profile stat changes."
+          else
+            git commit -m "chore: refresh engineering momentum stats"
+            git push
+          fi
