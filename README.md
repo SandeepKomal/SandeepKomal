@@ -104,14 +104,16 @@ A practical application platform connecting <strong>source control → CI/CD →
 
 ---
 
-## 📡 ENGINEERING TELEMETRY
+## 🛰️ ENGINEERING PORTFOLIO
 
 <div align="center">
-<img height="180" src="https://github-stats-extended.vercel.app/api?username=sandeepkomal&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true" alt="GitHub statistics"/>
-<img height="180" src="https://github-stats-extended.vercel.app/api/top-langs/?username=sandeepkomal&layout=compact&theme=tokyonight&hide_border=true" alt="Top languages"/>
-<br/>
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=sandeepkomal&theme=tokyonight&hide_border=true" alt="GitHub streak"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/portfolio.dark.svg">
+  <img src="./profile-stats/portfolio.light.svg" width="100%" alt="GitHub repository portfolio and project lifelines"/>
+</picture>
 </div>
+
+> Automatically regenerated from GitHub repository activity.
 
 ---
 
@@ -123,16 +125,16 @@ A practical application platform connecting <strong>source control → CI/CD →
 
 ---
 
-## 📈 ENGINEERING MOMENTUM
+## ⚡ ENGINEERING CADENCE
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/activity-consistency-wide-dark.svg">
-  <img src="./profile-stats/activity-consistency-wide-light.svg" width="100%" alt="GitHub activity consistency and engineering momentum"/>
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/cadence.dark.svg">
+  <img src="./profile-stats/cadence.light.svg" width="100%" alt="GitHub commit cadence by weekday and hour"/>
 </picture>
 </div>
 
-> Automatically regenerated daily from GitHub contribution activity.
+> Automatically regenerated from GitHub commit activity across the trailing year.
 
 ---
 
