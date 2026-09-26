@@ -1,4 +1,4 @@
-name: Update Engineering Cadence
+name: Update Engineering Profile Cards
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: update-engineering-cadence
+  group: update-engineering-profile-cards
   cancel-in-progress: false
 
 jobs:
@@ -21,25 +21,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Generate engineering cadence
+      - name: Generate engineering profile cards
         uses: seijikohara/profile-cards-action@1e22eeeb0c3fe4ba86bb63f625cb75cec05ec030 # v1.14.2
         with:
           github-token: ${{ github.token }}
           username: ${{ github.repository_owner }}
-          cards: cadence
+          cards: cadence,portfolio
           output-dir: profile-stats
           themes: light,dark
           commit: false
 
-      - name: Publish generated cadence
+      - name: Publish generated profile cards
         run: |
-          git add profile-stats/cadence.light.svg profile-stats/cadence.dark.svg
+          git add profile-stats/cadence.light.svg profile-stats/cadence.dark.svg profile-stats/portfolio.light.svg profile-stats/portfolio.dark.svg
           if git diff --cached --quiet; then
-            echo "No cadence changes."
+            echo "No profile card changes."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh engineering cadence"
+          git commit -m "chore: refresh engineering profile cards"
           git push
