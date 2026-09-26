@@ -1,4 +1,4 @@
-name: Update Engineering Momentum Stats
+name: Update Engineering Profile Cards
 
 on:
   schedule:
@@ -7,13 +7,13 @@ on:
   push:
     branches:
       - main
-      - feat/engineering-momentum-stats
+      - feat/engineering-cadence-13
 
 permissions:
   contents: write
 
 concurrency:
-  group: update-engineering-momentum-stats
+  group: update-engineering-profile-cards
   cancel-in-progress: false
 
 jobs:
@@ -25,34 +25,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Generate activity consistency profile
-        id: stats
-        uses: shinpr/github-profile-stats@49b5f7091182a45f3ef93923505b660c6da5f835 # v0.2.0
+      - name: Generate engineering profile cards
+        uses: seijikohara/profile-cards-action@1e22eeeb0c3fe4ba86bb63f625cb75cec05ec030 # v1.14.2
         with:
+          github-token: ${{ github.token }}
           username: ${{ github.repository_owner }}
-          token: ${{ github.token }}
-          profile: activity-consistency
+          cards: cadence,portfolio
+          output-dir: profile-stats
+          themes: light,dark
+          commit: false
 
-      - name: Stage complete artifact set
-        env:
-          READY_DIR: ${{ steps.stats.outputs.ready-dir }}
+      - name: Publish generated profile cards
         run: |
-          mkdir -p profile-stats
-          cp "$READY_DIR"/activity-consistency-*.svg profile-stats/
-          test -s profile-stats/activity-consistency-wide-light.svg
-          test -s profile-stats/activity-consistency-wide-dark.svg
-          test -s profile-stats/activity-consistency-compact-light.svg
-          test -s profile-stats/activity-consistency-compact-dark.svg
-          git add profile-stats/activity-consistency-*.svg
-
-      - name: Publish changed artifact set
-        run: |
+          git add profile-stats/cadence.light.svg profile-stats/cadence.dark.svg profile-stats/portfolio.light.svg profile-stats/portfolio.dark.svg
           if git diff --cached --quiet; then
-            echo "No profile stat changes."
+            echo "No profile card changes."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh engineering momentum stats"
+          git commit -m "chore: refresh engineering profile cards"
           git push
