@@ -123,13 +123,16 @@ A practical application platform connecting <strong>source control → CI/CD →
 
 ---
 
-## 🌈 JET CONTRIBUTION HEATMAP
+## 📈 ENGINEERING MOMENTUM
 
 <div align="center">
-<img src="./dist/github-jet.svg" width="100%" alt="GitHub contribution heatmap"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/activity-consistency-wide-dark.svg">
+  <img src="./profile-stats/activity-consistency-wide-light.svg" width="100%" alt="GitHub activity consistency and engineering momentum"/>
+</picture>
 </div>
 
-> Automatically regenerated daily from GitHub contribution data.
+> Automatically regenerated daily from GitHub contribution activity.
 
 ---
 
