@@ -123,16 +123,17 @@ A practical application platform connecting <strong>source control → CI/CD →
 
 ---
 
-## 📈 ENGINEERING MOMENTUM
+## ⚡ ENGINEERING CADENCE
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/activity-consistency-wide-dark.svg">
-  <img src="./profile-stats/activity-consistency-wide-light.svg" width="100%" alt="GitHub activity consistency and engineering momentum"/>
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/cadence.dark.svg">
+  <img src="./profile-stats/cadence.light.svg" width="100%" alt="GitHub commit cadence by weekday and hour"/>
 </picture>
 </div>
 
-> Automatically regenerated daily from GitHub contribution activity.
+> Automatically regenerated from GitHub commit activity across the trailing year.
+
 
 ---
 
