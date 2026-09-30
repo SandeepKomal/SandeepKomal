@@ -151,11 +151,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#32](https://github.com/SandeepKomal/git3d-profile/pull/32) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
-2. 💪 Opened PR [#32](https://github.com/SandeepKomal/git3d-profile/pull/32) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
-3. 🎉 Merged PR [#31](https://github.com/SandeepKomal/git3d-profile/pull/31) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
-4. 💪 Opened PR [#31](https://github.com/SandeepKomal/git3d-profile/pull/31) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
-5. 🎉 Merged PR [#30](https://github.com/SandeepKomal/git3d-profile/pull/30) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
+1. 💪 Opened PR [#46](https://github.com/SandeepKomal/git3d-profile/pull/46) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
+2. 🎉 Merged PR [#45](https://github.com/SandeepKomal/git3d-profile/pull/45) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
+3. ℹ️ Assigned PR [#45](https://github.com/SandeepKomal/git3d-profile/pull/45) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
+4. 💪 Opened PR [#45](https://github.com/SandeepKomal/git3d-profile/pull/45) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
+5. 🎉 Merged PR [#44](https://github.com/SandeepKomal/git3d-profile/pull/44) in [SandeepKomal/git3d-profile](https://github.com/SandeepKomal/git3d-profile)
 <!--END_SECTION:activity-->
 
 ---
