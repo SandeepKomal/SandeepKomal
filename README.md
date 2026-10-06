@@ -165,7 +165,7 @@ A practical application platform connecting <strong>source control → CI/CD →
 <div align="center">
 <a href="https://github.com/SandeepKomal?tab=achievements">
 <img src="https://github.githubassets.com/assets/pair-extraordinaire-default-579438a20e01.png" width="82" alt="Pair Extraordinaire"/>
-<img src="https://github.githubassets.com/assets/galaxy-brain-default-847262c21056.png" width="82" alt="Galaxy Brain"/>
+<img src="https://github.com/users/SandeepKomal/achievements/galaxy-brain" width="82" alt="Galaxy Brain"/>
 <img src="https://github.githubassets.com/assets/pull-shark-bronze-a37accb528d1.png" width="82" alt="Pull Shark"/>
 <img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" width="82" alt="YOLO"/>
 <img src="https://github.githubassets.com/assets/quickdraw-default-39c6aec8ff89.png" width="82" alt="Quickdraw"/>
