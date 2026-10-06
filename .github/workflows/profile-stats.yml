@@ -54,9 +54,24 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: refresh engineering profile cards"
 
-          # Rebase onto the latest main so a concurrent push cannot cause
-          # a non-fast-forward rejection.
-          git fetch origin main
-          git rebase origin/main
+          # Keep the generated commit based on the latest main.
+          # Retry because another workflow can push to main between
+          # the fetch/rebase and the push.
+          for attempt in 1 2 3; do
+            echo "Publish attempt $attempt/3"
+            git fetch origin main
+            git rebase origin/main
 
-          git push origin HEAD:main
+            if git push origin HEAD:main; then
+              echo "Profile cards published successfully."
+              exit 0
+            fi
+
+            if [ "$attempt" -lt 3 ]; then
+              echo "Remote main changed during push; retrying..."
+              sleep 2
+            fi
+          done
+
+          echo "Failed to publish profile cards after 3 attempts."
+          exit 1
