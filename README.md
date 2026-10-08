@@ -141,10 +141,13 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## 🧊 3D CONTRIBUTION UNIVERSE
 
 <div align="center">
-<img src="./profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="3D GitHub contribution landscape"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./git3d-universe/universe-dark.svg">
+  <img src="./git3d-universe/universe-light.svg" width="100%" alt="3D contribution universe: a year of contributions as a 3D terrain, with top repositories orbiting as planets"/>
+</picture>
 </div>
 
-> Generated automatically by the pinned GitHub Actions workflow.
+> Generated every 6 hours by [Git3D Universe](https://github.com/SandeepKomal/Git3D-Universe) v1.1.0.
 
 ---
 
