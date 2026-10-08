@@ -1,0 +1,55 @@
+# Preview run for the Git3D Universe redesign
+# (SandeepKomal/Git3D-Universe pull request #17).
+# Runs only on the git3d-preview branch; main and the live README are untouched.
+
+name: Git3D Universe preview
+
+on:
+  push:
+    branches:
+      - git3d-preview
+    paths:
+      - .github/workflows/git3d-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: git3d-preview
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout preview branch
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+
+      - name: Generate night theme
+        uses: SandeepKomal/Git3D-Universe@00cab4f96fa42d1e9c6e711a04bae152c9ffd0a1 # claude/eager-cori-gt710n
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          theme: aurora
+          output: git3d-preview/universe-dark.svg
+
+      - name: Generate day theme
+        uses: SandeepKomal/Git3D-Universe@00cab4f96fa42d1e9c6e711a04bae152c9ffd0a1 # claude/eager-cori-gt710n
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          theme: daylight
+          output: git3d-preview/universe-light.svg
+
+      - name: Commit previews to this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add git3d-preview/
+          if git diff --cached --quiet; then
+            echo "No preview changes."
+          else
+            git commit -m "chore: generate Git3D Universe preview"
+            git push origin HEAD:git3d-preview
+          fi
