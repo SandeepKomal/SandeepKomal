@@ -42,6 +42,25 @@ jobs:
           theme: daylight
           output: git3d-preview/universe-light.svg
 
+      - name: Checkout Git3D Universe renderer
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          repository: SandeepKomal/Git3D-Universe
+          ref: claude/eager-cori-gt710n
+          path: .git3d-src
+
+      - name: Save contribution data for local design previews
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node --input-type=module -e '
+            import { writeFileSync } from "node:fs";
+            const { fetchProfile } = await import(process.cwd() + "/.git3d-src/src/github.mjs");
+            const data = await fetchProfile(process.env.GITHUB_REPOSITORY_OWNER, process.env.GITHUB_TOKEN);
+            writeFileSync("git3d-preview/data.json", JSON.stringify(data));
+          '
+          rm -rf .git3d-src
+
       - name: Commit previews to this branch
         run: |
           git config user.name "github-actions[bot]"
