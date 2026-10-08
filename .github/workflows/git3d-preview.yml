@@ -29,14 +29,14 @@ jobs:
         uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
 
       - name: Generate night theme
-        uses: SandeepKomal/Git3D-Universe@54165f751f246f9052ee7c4f7cf3dd82983e351b # claude/eager-cori-gt710n
+        uses: SandeepKomal/Git3D-Universe@d9678e7017e123650a833355e76f6cb003361a2a # claude/eager-cori-gt710n
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: aurora
           output: git3d-preview/universe-dark.svg
 
       - name: Generate day theme
-        uses: SandeepKomal/Git3D-Universe@54165f751f246f9052ee7c4f7cf3dd82983e351b # claude/eager-cori-gt710n
+        uses: SandeepKomal/Git3D-Universe@d9678e7017e123650a833355e76f6cb003361a2a # claude/eager-cori-gt710n
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: daylight
