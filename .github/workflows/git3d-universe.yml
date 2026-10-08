@@ -1,0 +1,72 @@
+name: Git3D Universe
+
+on:
+  schedule:
+    - cron: "41 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/git3d-universe.yml
+
+# Only repository contents are needed: generate the SVGs and commit them.
+permissions:
+  contents: write
+
+concurrency:
+  group: git3d-universe
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+
+      - name: Generate night theme
+        uses: SandeepKomal/Git3D-Universe@16b6aad375382d04611e808d1cba3c776e38969d # v1.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          theme: aurora
+          output: git3d-universe/universe-dark.svg
+
+      - name: Generate day theme
+        uses: SandeepKomal/Git3D-Universe@16b6aad375382d04611e808d1cba3c776e38969d # v1.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          theme: daylight
+          output: git3d-universe/universe-light.svg
+
+      - name: Publish generated SVGs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git add git3d-universe/universe-dark.svg git3d-universe/universe-light.svg
+
+          if git diff --cached --quiet; then
+            echo "No Git3D Universe changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh Git3D Universe"
+
+          # Other profile workflows also push to main, so rebase and retry.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              echo "Git3D Universe published."
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "Failed to publish Git3D Universe after 3 attempts."
+          exit 1
