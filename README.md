@@ -147,7 +147,7 @@ A practical application platform connecting <strong>source control → CI/CD →
 </picture>
 </div>
 
-> Generated every 6 hours by [Git3D Universe](https://github.com/SandeepKomal/Git3D-Universe) v1.2.0.
+> Generated every 6 hours by [Git3D Universe](https://github.com/SandeepKomal/Git3D-Universe) v1.3.0.
 
 ---
 
