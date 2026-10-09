@@ -1,4 +1,4 @@
-name: Git3D Universe
+name: Neon Arena
 
 on:
   schedule:
@@ -8,14 +8,14 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/git3d-universe.yml
+      - .github/workflows/neon-arena.yml
 
 # Only repository contents are needed: generate the SVGs and commit them.
 permissions:
   contents: write
 
 concurrency:
-  group: git3d-universe
+  group: neon-arena
   cancel-in-progress: false
 
 jobs:
@@ -28,45 +28,45 @@ jobs:
         uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
 
       - name: Generate night theme
-        uses: SandeepKomal/Git3D-Universe@2cec72d8b14ec339d64e45d6d45e370996417163 # v1.3.1
+        uses: SandeepKomal/neon-arena@36d528138391691c95cb5e5191acdf8aae7748cb # main, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: aurora
-          output: git3d-universe/universe-dark.svg
+          output: neon-arena/arena-dark.svg
 
       - name: Generate day theme
-        uses: SandeepKomal/Git3D-Universe@2cec72d8b14ec339d64e45d6d45e370996417163 # v1.3.1
+        uses: SandeepKomal/neon-arena@36d528138391691c95cb5e5191acdf8aae7748cb # main, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: daylight
-          output: git3d-universe/universe-light.svg
+          output: neon-arena/arena-light.svg
 
       - name: Publish generated SVGs
         shell: bash
         run: |
           set -euo pipefail
 
-          git add git3d-universe/universe-dark.svg git3d-universe/universe-light.svg
+          git add neon-arena/arena-dark.svg neon-arena/arena-light.svg
 
           if git diff --cached --quiet; then
-            echo "No Git3D Universe changes."
+            echo "No Neon Arena changes."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh Git3D Universe"
+          git commit -m "chore: refresh Neon Arena"
 
           # Other profile workflows also push to main, so rebase and retry.
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase origin/main
             if git push origin HEAD:main; then
-              echo "Git3D Universe published."
+              echo "Neon Arena published."
               exit 0
             fi
             sleep 2
           done
 
-          echo "Failed to publish Git3D Universe after 3 attempts."
+          echo "Failed to publish Neon Arena after 3 attempts."
           exit 1
