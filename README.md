@@ -138,16 +138,16 @@ A practical application platform connecting <strong>source control → CI/CD →
 
 ---
 
-## 🧊 3D CONTRIBUTION UNIVERSE
+## 🏟️ NEON ARENA
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./git3d-universe/universe-dark.svg">
-  <img src="./git3d-universe/universe-light.svg" width="100%" alt="3D contribution universe: a year of contributions as a 3D terrain, with top repositories orbiting as planets"/>
+  <source media="(prefers-color-scheme: dark)" srcset="./neon-arena/arena-dark.svg">
+  <img src="./neon-arena/arena-light.svg" width="100%" alt="Neon Arena: a year of contributions as a neon 3D stadium, with an LED ticker of top repositories, a stadium board of stats and a light trail along the longest streak"/>
 </picture>
 </div>
 
-> Generated every 6 hours by [Git3D Universe](https://github.com/SandeepKomal/Git3D-Universe) v1.3.1.
+> Generated every 6 hours by [Neon Arena](https://github.com/SandeepKomal/neon-arena).
 
 ---
 
