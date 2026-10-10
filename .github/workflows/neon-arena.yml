@@ -28,14 +28,14 @@ jobs:
         uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
 
       - name: Generate night theme
-        uses: SandeepKomal/neon-arena@acc170f7216049eb9b9ec74be53b9cb6265ef032 # main, pre-release
+        uses: SandeepKomal/neon-arena@64db675fd3ad994c570c0f97a074f3aa9c2e498b # PR 2 test build, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: aurora
           output: neon-arena/arena-dark.svg
 
       - name: Generate day theme
-        uses: SandeepKomal/neon-arena@acc170f7216049eb9b9ec74be53b9cb6265ef032 # main, pre-release
+        uses: SandeepKomal/neon-arena@64db675fd3ad994c570c0f97a074f3aa9c2e498b # PR 2 test build, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: daylight
