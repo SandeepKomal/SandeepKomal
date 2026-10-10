@@ -143,7 +143,7 @@ A practical application platform connecting <strong>source control → CI/CD →
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./neon-arena/arena-dark.svg">
-  <img src="./neon-arena/arena-light.svg" width="100%" alt="Neon Arena: a year of contributions as a neon 3D stadium, with an LED ticker of top repositories, a stadium board of stats and a light trail along the longest streak"/>
+  <img src="./neon-arena/arena-light.svg" width="100%" alt="Neon Arena: a year of contributions as neon 3D bars on a glowing slab, with a scrolling LED ribbon of top repositories and a light trail along the longest streak"/>
 </picture>
 </div>
 
