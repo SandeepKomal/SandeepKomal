@@ -154,11 +154,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#20](https://github.com/SandeepKomal/README-Glassfolio/pull/20) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
-2. ℹ️ Assigned PR [#20](https://github.com/SandeepKomal/README-Glassfolio/pull/20) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
-3. 💪 Opened PR [#20](https://github.com/SandeepKomal/README-Glassfolio/pull/20) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
-4. ℹ️ Assigned PR [#215](https://github.com/SandeepKomal/KOMORAPY_V4/pull/215) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-5. 🎉 Merged PR [#19](https://github.com/SandeepKomal/README-Glassfolio/pull/19) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
+1. ℹ️ Assigned PR [#217](https://github.com/SandeepKomal/KOMORAPY_V4/pull/217) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+2. ℹ️ Assigned PR [#218](https://github.com/SandeepKomal/KOMORAPY_V4/pull/218) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
+3. 🚀 Published release [Neon Arena v1.0.1](https://github.com/SandeepKomal/Neon-Arena/releases/tag/v1.0.2) in [SandeepKomal/Neon-Arena](https://github.com/SandeepKomal/Neon-Arena)
+4. 🎉 Merged PR [#5](https://github.com/SandeepKomal/Neon-Arena/pull/5) in [SandeepKomal/Neon-Arena](https://github.com/SandeepKomal/Neon-Arena)
+5. ℹ️ Assigned PR [#5](https://github.com/SandeepKomal/Neon-Arena/pull/5) in [SandeepKomal/Neon-Arena](https://github.com/SandeepKomal/Neon-Arena)
 <!--END_SECTION:activity-->
 
 ---
