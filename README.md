@@ -154,11 +154,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned PR [#217](https://github.com/SandeepKomal/KOMORAPY_V4/pull/217) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-2. ℹ️ Assigned PR [#218](https://github.com/SandeepKomal/KOMORAPY_V4/pull/218) in [SandeepKomal/KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4)
-3. 🚀 Published release [Neon Arena v1.0.1](https://github.com/SandeepKomal/Neon-Arena/releases/tag/v1.0.2) in [SandeepKomal/Neon-Arena](https://github.com/SandeepKomal/Neon-Arena)
-4. 🎉 Merged PR [#5](https://github.com/SandeepKomal/Neon-Arena/pull/5) in [SandeepKomal/Neon-Arena](https://github.com/SandeepKomal/Neon-Arena)
-5. ℹ️ Assigned PR [#5](https://github.com/SandeepKomal/Neon-Arena/pull/5) in [SandeepKomal/Neon-Arena](https://github.com/SandeepKomal/Neon-Arena)
+1. 🎉 Merged PR [#13](https://github.com/SandeepKomal/SandeepKomal.github.io/pull/13) in [SandeepKomal/SandeepKomal.github.io](https://github.com/SandeepKomal/SandeepKomal.github.io)
+2. ℹ️ Assigned PR [#13](https://github.com/SandeepKomal/SandeepKomal.github.io/pull/13) in [SandeepKomal/SandeepKomal.github.io](https://github.com/SandeepKomal/SandeepKomal.github.io)
+3. 💪 Opened PR [#13](https://github.com/SandeepKomal/SandeepKomal.github.io/pull/13) in [SandeepKomal/SandeepKomal.github.io](https://github.com/SandeepKomal/SandeepKomal.github.io)
+4. 🎉 Merged PR [#12](https://github.com/SandeepKomal/SandeepKomal.github.io/pull/12) in [SandeepKomal/SandeepKomal.github.io](https://github.com/SandeepKomal/SandeepKomal.github.io)
+5. ℹ️ Assigned PR [#12](https://github.com/SandeepKomal/SandeepKomal.github.io/pull/12) in [SandeepKomal/SandeepKomal.github.io](https://github.com/SandeepKomal/SandeepKomal.github.io)
 <!--END_SECTION:activity-->
 
 ---
