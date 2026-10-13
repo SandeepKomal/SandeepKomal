@@ -1,0 +1,125 @@
+# Save as: .github/workflows/git3d-universe.yml
+# Set GIT3D_TIMEZONE to your IANA timezone.
+
+name: Git3D Universe
+
+on:
+  workflow_dispatch:
+
+  # Check once per hour.
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: git3d-universe
+  cancel-in-progress: true
+
+env:
+  # Examples:
+  # India: Asia/Kolkata
+  # New York: America/New_York
+  # London: Europe/London
+  # Tokyo: Asia/Tokyo
+  GIT3D_TIMEZONE: Asia/Kolkata
+  GIT3D_DAY_START: "06"
+  GIT3D_NIGHT_START: "18"
+
+jobs:
+  generate:
+    name: Generate Git3D Universe
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Determine local theme
+        id: theme
+        shell: bash
+        env:
+          TIMEZONE: ${{ env.GIT3D_TIMEZONE }}
+          DAY_START: ${{ env.GIT3D_DAY_START }}
+          NIGHT_START: ${{ env.GIT3D_NIGHT_START }}
+        run: |
+          set -euo pipefail
+
+          if ! TZ="${TIMEZONE}" date >/dev/null 2>&1; then
+            echo "ERROR: Invalid IANA timezone: ${TIMEZONE}"
+            exit 1
+          fi
+
+          HOUR=$(TZ="${TIMEZONE}" date +%H)
+          LOCAL_DATE=$(TZ="${TIMEZONE}" date '+%Y-%m-%d %H:%M:%S %Z')
+
+          echo "Local time: ${LOCAL_DATE}"
+
+          if [ "${HOUR}" -ge "${DAY_START}" ] && [ "${HOUR}" -lt "${NIGHT_START}" ]; then
+            THEME="daylight"
+            MODE="DAY"
+          else
+            THEME="aurora"
+            MODE="NIGHT"
+          fi
+
+          echo "Theme: ${THEME}"
+          echo "Mode: ${MODE}"
+
+          echo "theme=${THEME}" >> "$GITHUB_OUTPUT"
+          echo "mode=${MODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate Git3D Universe
+        uses: SandeepKomal/Git3D-Universe@v2.0.0
+        with:
+          username: ${{ github.repository_owner }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          theme: ${{ steps.theme.outputs.theme }}
+          output: profile/git3d-universe.svg
+
+      - name: Validate Git3D Universe
+        env:
+          SVG: profile/git3d-universe.svg
+          EXPECTED_LOGIN: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+
+          test -s "${SVG}"
+          grep -q "<svg" "${SVG}"
+          grep -q "</svg>" "${SVG}"
+          grep -qi "@${EXPECTED_LOGIN}" "${SVG}"
+          grep -q "contributions" "${SVG}"
+          grep -q "active days" "${SVG}"
+          grep -q "current streak" "${SVG}"
+          grep -q "longest streak" "${SVG}"
+
+          if grep -q "Ada Example" "${SVG}" || grep -q "ada-example" "${SVG}"; then
+            echo "ERROR: Sample profile detected."
+            exit 1
+          fi
+
+          SIZE=$(wc -c < "${SVG}")
+          if [ "${SIZE}" -lt 5000 ]; then
+            echo "ERROR: Generated SVG is unexpectedly small."
+            exit 1
+          fi
+
+      - name: Commit Git3D Universe
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add profile/git3d-universe.svg
+
+          if git diff --cached --quiet; then
+            echo "No changes detected."
+            exit 0
+          fi
+
+          git commit -m "chore: update Git3D Universe (${{ steps.theme.outputs.mode }})"
+          git push origin main
