@@ -7,7 +7,8 @@ on:
   push:
     branches:
       - main
-      - feat/engineering-cadence-13
+    paths:
+      - ".github/workflows/profile-stats.yml"
 
 permissions:
   contents: write
@@ -25,6 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: main
           fetch-depth: 0
           fetch-tags: false
 
@@ -43,35 +45,56 @@ jobs:
         run: |
           set -euo pipefail
 
-          git add profile-stats/cadence.light.svg profile-stats/cadence.dark.svg profile-stats/portfolio.light.svg profile-stats/portfolio.dark.svg
+          files=(
+            profile-stats/cadence.light.svg
+            profile-stats/cadence.dark.svg
+            profile-stats/portfolio.light.svg
+            profile-stats/portfolio.dark.svg
+          )
 
-          if git diff --cached --quiet; then
-            echo "No profile card changes."
-            exit 0
-          fi
+          # Keep generated files outside the checkout while syncing to the latest main.
+          temp_dir="$(mktemp -d)"
+          trap 'rm -rf "$temp_dir"' EXIT
+
+          for file in "${files[@]}"; do
+            if [[ ! -s "$file" ]]; then
+              echo "Expected generated file is missing or empty: $file"
+              exit 1
+            fi
+            cp "$file" "$temp_dir/$(basename "$file")"
+          done
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh engineering profile cards"
 
-          # Keep the generated commit based on the latest main.
-          # Retry because another workflow can push to main between
-          # the fetch/rebase and the push.
-          for attempt in 1 2 3; do
-            echo "Publish attempt $attempt/3"
+          # Regenerate a commit on top of the latest main on each attempt.
+          # This avoids line-by-line merge conflicts in generated SVG files.
+          for attempt in 1 2 3 4 5; do
+            echo "Publish attempt $attempt/5"
             git fetch origin main
-            git rebase origin/main
+            git checkout -B profile-cards-publish origin/main
+
+            for file in "${files[@]}"; do
+              cp "$temp_dir/$(basename "$file")" "$file"
+            done
+
+            git add "${files[@]}"
+
+            if git diff --cached --quiet; then
+              echo "No profile card changes."
+              exit 0
+            fi
+
+            git commit -m "chore: refresh engineering profile cards [skip ci]"
 
             if git push origin HEAD:main; then
               echo "Profile cards published successfully."
               exit 0
             fi
 
-            if [ "$attempt" -lt 3 ]; then
-              echo "Remote main changed during push; retrying..."
-              sleep 2
-            fi
+            echo "Remote main changed or push failed; retrying."
+            sleep 2
           done
 
-          echo "Failed to publish profile cards after 3 attempts."
+          echo "Failed to publish profile cards after 5 attempts."
           exit 1
