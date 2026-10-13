@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout profile repository
-        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a # v7.0.1
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v7.0.1
 
       - name: Generate night theme
         uses: SandeepKomal/neon-arena@30b29e02629a439f93d5b5cefb5848f372404862 # main, pre-release
