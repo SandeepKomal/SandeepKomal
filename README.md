@@ -124,7 +124,7 @@ A practical application platform connecting <strong>source control → CI/CD →
 </div>
 
 ---
-
+<!--
 ## ⚡ ENGINEERING CADENCE
 
 <div align="center">
@@ -137,6 +137,7 @@ A practical application platform connecting <strong>source control → CI/CD →
 > Automatically regenerated from GitHub commit activity across the trailing year.
 
 ---
+-->
 
 ## 🏟️ NEON ARENA
 
