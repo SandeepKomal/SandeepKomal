@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout latest main
-        uses: actions/checkout@de0fac2e4500dabe86ba86f1e1b8685f8e4a348a # pinned checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: main
           fetch-depth: 0
@@ -52,33 +52,36 @@ jobs:
             profile-stats/portfolio.dark.svg
           )
 
-          git add "${files[@]}"
+          # Keep generated files outside the checkout while syncing to the latest main.
+          temp_dir="$(mktemp -d)"
+          trap 'rm -rf "$temp_dir"' EXIT
 
-          if git diff --cached --quiet; then
-            echo "No profile card changes."
-            exit 0
-          fi
+          for file in "${files[@]}"; do
+            if [[ ! -s "$file" ]]; then
+              echo "Expected generated file is missing or empty: $file"
+              exit 1
+            fi
+            cp "$file" "$temp_dir/$(basename "$file")"
+          done
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh engineering profile cards [skip ci]"
 
-          # Publish only the generated SVG blobs onto the latest main.
-          # Avoid rebasing SVG text, which can conflict with concurrent regenerations.
+          # Regenerate a commit on top of the latest main on each attempt.
+          # This avoids line-by-line merge conflicts in generated SVG files.
           for attempt in 1 2 3 4 5; do
+            echo "Publish attempt $attempt/5"
             git fetch origin main
-            latest_main="$(git rev-parse origin/main)"
-            publish_branch="profile-cards-publish-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+            git checkout -B profile-cards-publish origin/main
 
-            git branch -f "$publish_branch" "$latest_main"
-            git checkout "$publish_branch"
+            for file in "${files[@]}"; do
+              cp "$temp_dir/$(basename "$file")" "$file"
+            done
 
-            # Restore the just-generated SVGs onto the latest main tree.
-            git checkout main -- "${files[@]}"
             git add "${files[@]}"
 
             if git diff --cached --quiet; then
-              echo "Generated cards already match main."
+              echo "No profile card changes."
               exit 0
             fi
 
@@ -89,9 +92,7 @@ jobs:
               exit 0
             fi
 
-            git checkout main
-            git branch -D "$publish_branch" || true
-            echo "Publish attempt $attempt did not succeed; retrying."
+            echo "Remote main changed or push failed; retrying."
             sleep 2
           done
 
