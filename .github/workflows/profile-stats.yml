@@ -7,7 +7,8 @@ on:
   push:
     branches:
       - main
-      - feat/engineering-cadence-13
+    paths:
+      - ".github/workflows/profile-stats.yml"
 
 permissions:
   contents: write
@@ -22,9 +23,10 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Checkout latest main
+        uses: actions/checkout@de0fac2e4500dabe86ba86f1e1b8685f8e4a348a # pinned checkout
         with:
+          ref: main
           fetch-depth: 0
           fetch-tags: false
 
@@ -43,7 +45,14 @@ jobs:
         run: |
           set -euo pipefail
 
-          git add profile-stats/cadence.light.svg profile-stats/cadence.dark.svg profile-stats/portfolio.light.svg profile-stats/portfolio.dark.svg
+          files=(
+            profile-stats/cadence.light.svg
+            profile-stats/cadence.dark.svg
+            profile-stats/portfolio.light.svg
+            profile-stats/portfolio.dark.svg
+          )
+
+          git add "${files[@]}"
 
           if git diff --cached --quiet; then
             echo "No profile card changes."
@@ -52,26 +61,39 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh engineering profile cards"
+          git commit -m "chore: refresh engineering profile cards [skip ci]"
 
-          # Keep the generated commit based on the latest main.
-          # Retry because another workflow can push to main between
-          # the fetch/rebase and the push.
-          for attempt in 1 2 3; do
-            echo "Publish attempt $attempt/3"
+          # Publish only the generated SVG blobs onto the latest main.
+          # Avoid rebasing SVG text, which can conflict with concurrent regenerations.
+          for attempt in 1 2 3 4 5; do
             git fetch origin main
-            git rebase origin/main
+            latest_main="$(git rev-parse origin/main)"
+            publish_branch="profile-cards-publish-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+            git branch -f "$publish_branch" "$latest_main"
+            git checkout "$publish_branch"
+
+            # Restore the just-generated SVGs onto the latest main tree.
+            git checkout main -- "${files[@]}"
+            git add "${files[@]}"
+
+            if git diff --cached --quiet; then
+              echo "Generated cards already match main."
+              exit 0
+            fi
+
+            git commit -m "chore: refresh engineering profile cards [skip ci]"
 
             if git push origin HEAD:main; then
               echo "Profile cards published successfully."
               exit 0
             fi
 
-            if [ "$attempt" -lt 3 ]; then
-              echo "Remote main changed during push; retrying..."
-              sleep 2
-            fi
+            git checkout main
+            git branch -D "$publish_branch" || true
+            echo "Publish attempt $attempt did not succeed; retrying."
+            sleep 2
           done
 
-          echo "Failed to publish profile cards after 3 attempts."
+          echo "Failed to publish profile cards after 5 attempts."
           exit 1
