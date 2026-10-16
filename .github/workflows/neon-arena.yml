@@ -21,7 +21,7 @@ concurrency:
 
 env:
   # Your local IANA timezone, e.g. Asia/Kolkata, America/New_York, Europe/London
-  NEON_TIMEZONE: Asia/Kolkata
+  NEON_TIMEZONE: America/New_York
   # Daylight theme from 06:00 local time, aurora (night) from 18:00
   NEON_DAY_START: "06"
   NEON_NIGHT_START: "18"
