@@ -2,7 +2,8 @@ name: Neon Arena
 
 on:
   schedule:
-    - cron: "41 */6 * * *"
+    # Hourly so the day/night theme flips close to the set times.
+    - cron: "41 * * * *"
   workflow_dispatch:
   push:
     branches:
@@ -10,13 +11,20 @@ on:
     paths:
       - .github/workflows/neon-arena.yml
 
-# Only repository contents are needed: generate the SVGs and commit them.
+# Only repository contents are needed: generate the SVG and commit it.
 permissions:
   contents: write
 
 concurrency:
   group: neon-arena
   cancel-in-progress: false
+
+env:
+  # Your local IANA timezone, e.g. Asia/Kolkata, America/New_York, Europe/London
+  NEON_TIMEZONE: Asia/Kolkata
+  # Daylight theme from 06:00 local time, aurora (night) from 18:00
+  NEON_DAY_START: "06"
+  NEON_NIGHT_START: "18"
 
 jobs:
   generate:
@@ -27,26 +35,45 @@ jobs:
       - name: Checkout profile repository
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v7.0.1
 
-      - name: Generate night theme
-        uses: SandeepKomal/neon-arena@30b29e02629a439f93d5b5cefb5848f372404862 # main, pre-release
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          theme: aurora
-          output: neon-arena/arena-dark.svg
-
-      - name: Generate day theme
-        uses: SandeepKomal/neon-arena@30b29e02629a439f93d5b5cefb5848f372404862 # main, pre-release
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          theme: daylight
-          output: neon-arena/arena-light.svg
-
-      - name: Publish generated SVGs
+      - name: Pick theme by local time
+        id: theme
         shell: bash
         run: |
           set -euo pipefail
 
-          git add neon-arena/arena-dark.svg neon-arena/arena-light.svg
+          if ! TZ="${NEON_TIMEZONE}" date >/dev/null 2>&1; then
+            echo "ERROR: Invalid IANA timezone: ${NEON_TIMEZONE}"
+            exit 1
+          fi
+
+          # 10# forces base 10 so hours like 08 and 09 are not read as octal
+          HOUR=$((10#$(TZ="${NEON_TIMEZONE}" date +%H)))
+
+          if [ "${HOUR}" -ge "$((10#${NEON_DAY_START}))" ] && [ "${HOUR}" -lt "$((10#${NEON_NIGHT_START}))" ]; then
+            THEME="daylight"
+          else
+            THEME="aurora"
+          fi
+
+          echo "Local hour: ${HOUR} -> theme: ${THEME}"
+          echo "theme=${THEME}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate Neon Arena
+        uses: SandeepKomal/neon-arena@30b29e02629a439f93d5b5cefb5848f372404862 # main, pre-release
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          theme: ${{ steps.theme.outputs.theme }}
+          output: neon-arena/arena.svg
+
+      - name: Publish generated SVG
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -s neon-arena/arena.svg
+          grep -q "<svg" neon-arena/arena.svg
+
+          git add neon-arena/arena.svg
 
           if git diff --cached --quiet; then
             echo "No Neon Arena changes."
@@ -55,7 +82,7 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh Neon Arena"
+          git commit -m "chore: refresh Neon Arena (${{ steps.theme.outputs.theme }})"
 
           # Other profile workflows also push to main, so rebase and retry.
           for attempt in 1 2 3; do
