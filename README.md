@@ -159,11 +159,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 💪 Opened PR [#31](https://github.com/SandeepKomal/Paste-Safe/pull/31) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
-2. 🎉 Merged PR [#30](https://github.com/SandeepKomal/Paste-Safe/pull/30) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
-3. ℹ️ Assigned PR [#30](https://github.com/SandeepKomal/Paste-Safe/pull/30) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
-4. 💪 Opened PR [#30](https://github.com/SandeepKomal/Paste-Safe/pull/30) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
-5. 🎉 Merged PR [#29](https://github.com/SandeepKomal/Paste-Safe/pull/29) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
+1. ❌ Closed PR [#31](https://github.com/SandeepKomal/Paste-Safe/pull/31) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
+2. 💪 Opened PR [#31](https://github.com/SandeepKomal/Paste-Safe/pull/31) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
+3. 🎉 Merged PR [#30](https://github.com/SandeepKomal/Paste-Safe/pull/30) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
+4. ℹ️ Assigned PR [#30](https://github.com/SandeepKomal/Paste-Safe/pull/30) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
+5. 💪 Opened PR [#30](https://github.com/SandeepKomal/Paste-Safe/pull/30) in [SandeepKomal/Paste-Safe](https://github.com/SandeepKomal/Paste-Safe)
 <!--END_SECTION:activity-->
 
 ---
