@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout profile repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Pick theme by local time
         id: theme
@@ -59,7 +59,7 @@ jobs:
           echo "theme=${THEME}" >> "$GITHUB_OUTPUT"
 
       - name: Generate Neon Arena
-        uses: SandeepKomal/neon-arena@30b29e02629a439f93d5b5cefb5848f372404862 # main, pre-release
+        uses: SandeepKomal/neon-arena@933658603b49090272b1163aaeebcc5ab8d7ae94 # main, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: ${{ steps.theme.outputs.theme }}

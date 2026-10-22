@@ -73,7 +73,7 @@ jobs:
           echo "mode=${MODE}" >> "$GITHUB_OUTPUT"
 
       - name: Generate Git3D Universe
-        uses: SandeepKomal/Git3D-Universe@v2.0.0
+        uses: SandeepKomal/Git3D-Universe@v2.0.1
         with:
           username: ${{ github.repository_owner }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
