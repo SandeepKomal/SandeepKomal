@@ -159,11 +159,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#44](https://github.com/SandeepKomal/paste-safe/pull/44) in [SandeepKomal/paste-safe](https://github.com/SandeepKomal/paste-safe)
-2. 💪 Opened PR [#49](https://github.com/SandeepKomal/paste-safe/pull/49) in [SandeepKomal/paste-safe](https://github.com/SandeepKomal/paste-safe)
-3. 🎉 Merged PR [#43](https://github.com/SandeepKomal/paste-safe/pull/43) in [SandeepKomal/paste-safe](https://github.com/SandeepKomal/paste-safe)
-4. 🎉 Merged PR [#48](https://github.com/SandeepKomal/paste-safe/pull/48) in [SandeepKomal/paste-safe](https://github.com/SandeepKomal/paste-safe)
-5. ℹ️ Assigned PR [#48](https://github.com/SandeepKomal/paste-safe/pull/48) in [SandeepKomal/paste-safe](https://github.com/SandeepKomal/paste-safe)
+1. 🎉 Merged PR [#44](https://github.com/SandeepKomal/README-Glassfolio/pull/44) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
+2. 💪 Opened PR [#44](https://github.com/SandeepKomal/README-Glassfolio/pull/44) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
+3. 🎉 Merged PR [#42](https://github.com/SandeepKomal/README-Glassfolio/pull/42) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
+4. 💪 Opened PR [#43](https://github.com/SandeepKomal/README-Glassfolio/pull/43) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
+5. 🎉 Merged PR [#39](https://github.com/SandeepKomal/README-Glassfolio/pull/39) in [SandeepKomal/README-Glassfolio](https://github.com/SandeepKomal/README-Glassfolio)
 <!--END_SECTION:activity-->
 
 ---
