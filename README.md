@@ -159,11 +159,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#11](https://github.com/SandeepKomal/blast-radius/pull/11) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
-2. 🎉 Merged PR [#7](https://github.com/SandeepKomal/paranoid-sre/pull/7) in [SandeepKomal/paranoid-sre](https://github.com/SandeepKomal/paranoid-sre)
-3. ℹ️ Assigned PR [#7](https://github.com/SandeepKomal/paranoid-sre/pull/7) in [SandeepKomal/paranoid-sre](https://github.com/SandeepKomal/paranoid-sre)
-4. 💪 Opened PR [#7](https://github.com/SandeepKomal/paranoid-sre/pull/7) in [SandeepKomal/paranoid-sre](https://github.com/SandeepKomal/paranoid-sre)
-5. 💪 Opened PR [#11](https://github.com/SandeepKomal/blast-radius/pull/11) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
+1. 🗣 Commented on [#16](https://github.com/SandeepKomal/DevSecOps/pull/16#issuecomment-6353788571) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+2. 🎉 Merged PR [#11](https://github.com/SandeepKomal/blast-radius/pull/11) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
+3. 🎉 Merged PR [#7](https://github.com/SandeepKomal/paranoid-sre/pull/7) in [SandeepKomal/paranoid-sre](https://github.com/SandeepKomal/paranoid-sre)
+4. ℹ️ Assigned PR [#7](https://github.com/SandeepKomal/paranoid-sre/pull/7) in [SandeepKomal/paranoid-sre](https://github.com/SandeepKomal/paranoid-sre)
+5. 💪 Opened PR [#7](https://github.com/SandeepKomal/paranoid-sre/pull/7) in [SandeepKomal/paranoid-sre](https://github.com/SandeepKomal/paranoid-sre)
 <!--END_SECTION:activity-->
 
 ---
