@@ -31,7 +31,7 @@ jobs:
           fetch-tags: false
 
       - name: Generate engineering profile cards
-        uses: seijikohara/profile-cards-action@1e22eeeb0c3fe4ba86bb63f625cb75cec05ec030 # v1.14.2
+        uses: seijikohara/profile-cards-action@10a2b4619ce449de517124d4fb1e92c3fd4185c4 # v1.17.0
         with:
           github-token: ${{ github.token }}
           username: ${{ github.repository_owner }}
