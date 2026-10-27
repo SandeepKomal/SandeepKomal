@@ -159,11 +159,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#23](https://github.com/SandeepKomal/blast-radius/pull/23) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
-2. ℹ️ Assigned PR [#23](https://github.com/SandeepKomal/blast-radius/pull/23) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
-3. 💪 Opened PR [#23](https://github.com/SandeepKomal/blast-radius/pull/23) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
-4. 🎉 Merged PR [#22](https://github.com/SandeepKomal/blast-radius/pull/22) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
-5. 🎉 Merged PR [#8](https://github.com/SandeepKomal/paranoid-sre/pull/8) in [SandeepKomal/paranoid-sre](https://github.com/SandeepKomal/paranoid-sre)
+1. 🎉 Merged PR [#27](https://github.com/SandeepKomal/blast-radius/pull/27) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
+2. 💪 Opened PR [#27](https://github.com/SandeepKomal/blast-radius/pull/27) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
+3. 🎉 Merged PR [#23](https://github.com/SandeepKomal/blast-radius/pull/23) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
+4. ℹ️ Assigned PR [#23](https://github.com/SandeepKomal/blast-radius/pull/23) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
+5. 💪 Opened PR [#23](https://github.com/SandeepKomal/blast-radius/pull/23) in [SandeepKomal/blast-radius](https://github.com/SandeepKomal/blast-radius)
 <!--END_SECTION:activity-->
 
 ---
