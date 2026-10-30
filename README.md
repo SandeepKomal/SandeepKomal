@@ -159,11 +159,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#1](https://github.com/SandeepKomal/python_scripts/pull/1) in [SandeepKomal/python_scripts](https://github.com/SandeepKomal/python_scripts)
-2. 🎉 Merged PR [#3](https://github.com/SandeepKomal/Shell/pull/3) in [SandeepKomal/Shell](https://github.com/SandeepKomal/Shell)
-3. 💪 Opened PR [#1](https://github.com/SandeepKomal/python_scripts/pull/1) in [SandeepKomal/python_scripts](https://github.com/SandeepKomal/python_scripts)
-4. 🎉 Merged PR [#38](https://github.com/SandeepKomal/kubernetes-k8s/pull/38) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
-5. 💪 Opened PR [#3](https://github.com/SandeepKomal/Shell/pull/3) in [SandeepKomal/Shell](https://github.com/SandeepKomal/Shell)
+1. 🎉 Merged PR [#22](https://github.com/SandeepKomal/DevSecOps/pull/22) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+2. 💪 Opened PR [#22](https://github.com/SandeepKomal/DevSecOps/pull/22) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+3. ❌ Closed PR [#18](https://github.com/SandeepKomal/DevSecOps/pull/18) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+4. ❌ Closed PR [#19](https://github.com/SandeepKomal/DevSecOps/pull/19) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+5. ❌ Closed PR [#21](https://github.com/SandeepKomal/DevSecOps/pull/21) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
 <!--END_SECTION:activity-->
 
 ---
