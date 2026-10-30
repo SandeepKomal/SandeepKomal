@@ -159,11 +159,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#26](https://github.com/SandeepKomal/kubernetes-k8s/pull/26) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
-2. 💪 Opened PR [#27](https://github.com/SandeepKomal/kubernetes-k8s/pull/27) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
-3. 💪 Opened PR [#26](https://github.com/SandeepKomal/kubernetes-k8s/pull/26) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
-4. 🎉 Merged PR [#25](https://github.com/SandeepKomal/kubernetes-k8s/pull/25) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
-5. 🎉 Merged PR [#23](https://github.com/SandeepKomal/kubernetes-k8s/pull/23) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
+1. 🎉 Merged PR [#1](https://github.com/SandeepKomal/python_scripts/pull/1) in [SandeepKomal/python_scripts](https://github.com/SandeepKomal/python_scripts)
+2. 🎉 Merged PR [#3](https://github.com/SandeepKomal/Shell/pull/3) in [SandeepKomal/Shell](https://github.com/SandeepKomal/Shell)
+3. 💪 Opened PR [#1](https://github.com/SandeepKomal/python_scripts/pull/1) in [SandeepKomal/python_scripts](https://github.com/SandeepKomal/python_scripts)
+4. 🎉 Merged PR [#38](https://github.com/SandeepKomal/kubernetes-k8s/pull/38) in [SandeepKomal/kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s)
+5. 💪 Opened PR [#3](https://github.com/SandeepKomal/Shell/pull/3) in [SandeepKomal/Shell](https://github.com/SandeepKomal/Shell)
 <!--END_SECTION:activity-->
 
 ---
