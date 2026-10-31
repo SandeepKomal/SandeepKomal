@@ -28,11 +28,14 @@ jobs:
           STATS_LOGIN: ${{ github.repository_owner }}
         run: python3 chaos/stats.py --write
 
+      # The README carries a content version for every panel, so refresh it too.
       - name: Render panel
-        run: python3 chaos/brand.py stats
+        run: |
+          python3 chaos/brand.py stats
+          python3 chaos/engine.py render
 
       - name: Publish
         env:
           GH_TOKEN: ${{ github.token }}
           MESSAGE: "chore: refresh stats"
-        run: .github/scripts/publish.sh brand/stats.json brand/stats.svg brand/stats-light.svg
+        run: .github/scripts/publish.sh brand/stats.json brand/stats.svg brand/stats-light.svg brand/hero.svg brand/hero-light.svg brand/production.svg brand/production-light.svg brand/events.svg brand/events-light.svg README.md

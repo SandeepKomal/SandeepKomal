@@ -2,7 +2,7 @@
 <title>SandeepKomal: 2258 contributions, longest streak 49 days</title>
 <desc>3D contribution pie for @SandeepKomal: 2258 contributions over 68 active days, current streak 49 days, longest streak 49 days, busiest day 2026-10-31 with 372 contributions.</desc>
 <defs>
-  <radialGradient id="bg" cx="62%" cy="58%" r="85%"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f3f6fd"/><stop offset="1" stop-color="#e7ecf8"/></radialGradient>
+  <radialGradient id="bg" cx="62%" cy="58%" r="85%"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff"/></radialGradient>
   <radialGradient id="nebA"><stop offset="0" stop-color="#ede9fe" stop-opacity="0.6"/><stop offset="1" stop-color="#ede9fe" stop-opacity="0"/></radialGradient>
   <radialGradient id="nebB"><stop offset="0" stop-color="#ccfbf1" stop-opacity="0.55"/><stop offset="1" stop-color="#ccfbf1" stop-opacity="0"/></radialGradient>
   <linearGradient id="glassFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0.97"/></linearGradient>

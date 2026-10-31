@@ -42,6 +42,10 @@ jobs:
           theme: daylight
           output: neon-arena/arena-light.svg
 
+      # Swap each render's own background for GitHub's page colour so it blends in.
+      - name: Blend into the profile page
+        run: python3 chaos/blend.py --apply neon-arena/arena.svg dark neon-arena/arena-light.svg light
+
       - name: Publish
         env:
           GH_TOKEN: ${{ github.token }}

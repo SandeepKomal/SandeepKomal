@@ -311,7 +311,9 @@ class ReadmeTest(unittest.TestCase):
 
         root = Path(__file__).resolve().parent.parent
         readme = (root / "README.md").read_text()
-        paths = set(re.findall(r'(?:src|srcset)="([^"]+\.svg)"', readme))
+        paths = set(
+            re.findall(r'(?:src|srcset)="([^"?]+\.svg)(?:\?v=[0-9a-f]+)?"', readme)
+        )
         self.assertTrue(paths)
         for path in paths:
             self.assertTrue((root / path).exists(), path)
@@ -344,7 +346,9 @@ class ClockThemeTest(unittest.TestCase):
             for source, fallback in pairs:
                 self.assertEqual(source, fallback)
                 self.assertEqual(
-                    source.endswith("-light.svg"), theme == "light", source
+                    source.split("?")[0].endswith("-light.svg"),
+                    theme == "light",
+                    source,
                 )
             self.assertIn(f"neon-arena/arena{suffix}.svg", text)
             self.assertIn(f"profile/git3d-universe{suffix}.svg", text)
@@ -377,6 +381,25 @@ class SeamlessTest(unittest.TestCase):
         doc = brand.events(brand.THEMES["dark"], [])
         xml.dom.minidom.parseString(doc)
         self.assertIn("No resources found", doc)
+
+
+class BlendAndCacheTest(unittest.TestCase):
+    def test_blend_replaces_only_the_background(self):
+        import blend
+
+        svg = '<radialGradient id="bg"><stop stop-color="#0b1530"/><stop stop-color="#02040b"/></radialGradient><radialGradient id="nebA"><stop stop-color="#3d2bd9"/></radialGradient>'
+        out = blend.blend(svg, "dark")
+        self.assertEqual(out.count("#0d1117"), 2)
+        self.assertIn("#3d2bd9", out)
+        self.assertEqual(blend.blend(out, "dark"), out)
+        self.assertEqual(blend.blend("<svg/>", "light"), "<svg/>")
+
+    def test_brand_urls_carry_a_content_version(self):
+        readme = (Path(__file__).resolve().parent.parent / "README.md").read_text()
+        self.assertIn('srcset="brand/hero.svg?v=', engine.apply_theme(readme, "dark"))
+        self.assertIn(
+            'src="neon-arena/arena-light.svg"', engine.apply_theme(readme, "light")
+        )
 
 
 class CliTest(unittest.TestCase):
