@@ -146,20 +146,50 @@ class ClusterTest(unittest.TestCase):
         self.assertEqual(m["incidents"], 2)
         self.assertAlmostEqual(m["mttr"], 20)
 
-    def test_render_is_wellformed_and_escapes(self):
+    def test_render_is_wellformed(self):
         import xml.dom.minidom
+
+        import brand
 
         state = fresh_state()
         engine.inject(self.config, state, T0, "chaos: partition kubernetes", "a-b", "1")
-        for theme in engine.PALETTES:
-            svg = engine.render_svg(self.config, state, T0, theme)
-            xml.dom.minidom.parseString(svg)
-            self.assertIn("Major outage", svg)
+        states = engine.effective_states(self.config, engine.current_faults(state))
+        label, severity = engine.overall_status(self.config, states)
+        m = engine.metrics(self.config, state, T0)
+        for doc in (
+            brand.hero(label, severity),
+            brand.production(self.config, states, label, severity, m),
+        ):
+            xml.dom.minidom.parseString(doc)
+            self.assertIn("Major outage", doc)
         block = engine.render_readme_block(self.config, state, T0)
         self.assertTrue(
             block.startswith(engine.README_START) and block.endswith(engine.README_END)
         )
-        self.assertIn("issues/new?title=chaos%3A%20kill%20profile", block)
+        self.assertIn("issues/new?title=chaos%3A%20kill%20", block)
+
+    def test_buttons_target_a_healthy_service(self):
+        state = fresh_state()
+        engine.inject(self.config, state, T0, "chaos: kill profile", "a", "1")
+        states = engine.effective_states(self.config, engine.current_faults(state))
+        self.assertEqual(
+            states[engine.next_target(self.config, state, states)], engine.HEALTHY
+        )
+
+    def test_static_panels_are_wellformed(self):
+        import xml.dom.minidom
+
+        import brand
+
+        for doc in (
+            brand.marquee(),
+            brand.about(),
+            brand.stack(),
+            brand.contact(),
+            brand.button("kill"),
+            brand.project_card(brand.PROJECTS[0], 0),
+        ):
+            xml.dom.minidom.parseString(doc)
 
 
 class CliTest(unittest.TestCase):

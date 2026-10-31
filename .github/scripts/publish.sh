@@ -3,7 +3,7 @@
 # Exit codes: 0 published or nothing to publish, 1 push failed after retries.
 set -euo pipefail
 
-files=(chaos/state.json chaos/cluster-dark.svg chaos/cluster-light.svg README.md)
+files=(chaos/state.json brand/hero.svg brand/production.svg README.md)
 
 git add "${files[@]}"
 if git diff --cached --quiet; then
