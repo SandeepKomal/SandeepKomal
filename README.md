@@ -159,11 +159,11 @@ A practical application platform connecting <strong>source control → CI/CD →
 ## ⚡ ACTIVITY STREAM
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#22](https://github.com/SandeepKomal/DevSecOps/pull/22) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-2. 💪 Opened PR [#22](https://github.com/SandeepKomal/DevSecOps/pull/22) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-3. ❌ Closed PR [#18](https://github.com/SandeepKomal/DevSecOps/pull/18) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-4. ❌ Closed PR [#19](https://github.com/SandeepKomal/DevSecOps/pull/19) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-5. ❌ Closed PR [#21](https://github.com/SandeepKomal/DevSecOps/pull/21) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+1. 🎉 Merged PR [#27](https://github.com/SandeepKomal/DevSecOps/pull/27) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+2. 💪 Opened PR [#27](https://github.com/SandeepKomal/DevSecOps/pull/27) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+3. 🎉 Merged PR [#26](https://github.com/SandeepKomal/DevSecOps/pull/26) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
+4. 🎉 Merged PR [#9](https://github.com/SandeepKomal/GitHub-Actions/pull/9) in [SandeepKomal/GitHub-Actions](https://github.com/SandeepKomal/GitHub-Actions)
+5. 🎉 Merged PR [#4](https://github.com/SandeepKomal/AWS/pull/4) in [SandeepKomal/AWS](https://github.com/SandeepKomal/AWS)
 <!--END_SECTION:activity-->
 
 ---
