@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 # Commit the chaos state and rendered files to main, rebasing over other profile jobs.
+# Usage: publish.sh [file...] (defaults to the chaos files); needs GH_TOKEN and MESSAGE.
 # Exit codes: 0 published or nothing to publish, 1 push failed after retries.
 set -euo pipefail
 
-files=(chaos/state.json brand/hero.svg brand/hero-light.svg brand/production.svg brand/production-light.svg README.md)
+files=("$@")
+if [ ${#files[@]} -eq 0 ]; then
+  files=(chaos/state.json brand/hero.svg brand/hero-light.svg brand/production.svg brand/production-light.svg README.md)
+fi
 
 git add "${files[@]}"
 if git diff --cached --quiet; then

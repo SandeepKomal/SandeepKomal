@@ -218,6 +218,88 @@ class ThemeTest(unittest.TestCase):
         self.assertIn("SANDEEP KOMAL POTHU", doc)
 
 
+class StatsTest(unittest.TestCase):
+    def sample(self):
+        days = [
+            {"date": f"2026-10-{d:02d}", "contributionCount": c}
+            for d, c in zip(range(1, 32), [0, 3, 1] + [2] * 28)
+        ]
+        return {
+            "followers": {"totalCount": 21},
+            "contributionsCollection": {
+                "totalCommitContributions": 900,
+                "totalPullRequestContributions": 80,
+                "totalPullRequestReviewContributions": 30,
+                "totalIssueContributions": 12,
+                "contributionCalendar": {
+                    "totalContributions": 61,
+                    "weeks": [{"contributionDays": days}],
+                },
+            },
+            "repositories": {
+                "totalCount": 2,
+                "nodes": [
+                    {
+                        "stargazerCount": 5,
+                        "languages": {
+                            "edges": [
+                                {
+                                    "size": 300,
+                                    "node": {"name": "Python", "color": "#3572A5"},
+                                }
+                            ]
+                        },
+                    },
+                    {
+                        "stargazerCount": 2,
+                        "languages": {
+                            "edges": [
+                                {"size": 100, "node": {"name": "HCL", "color": None}}
+                            ]
+                        },
+                    },
+                ],
+            },
+        }
+
+    def test_summary(self):
+        import stats
+
+        s = stats.summarise(self.sample())
+        self.assertEqual((s["contributions"], s["stars"], s["followers"]), (61, 7, 21))
+        self.assertEqual(s["longest_streak"], 30)
+        self.assertEqual([lang["name"] for lang in s["languages"]], ["Python", "HCL"])
+        self.assertAlmostEqual(s["languages"][0]["share"], 0.75)
+
+    def test_missing_token_fails_without_writing(self):
+        import stats
+
+        before = stats.OUT.read_text()
+        os.environ.pop("GITHUB_TOKEN", None)
+        self.assertEqual(stats.main(["stats.py", "--write"]), 2)
+        self.assertEqual(stats.main(["stats.py", "--bogus"]), 2)
+        self.assertEqual(stats.OUT.read_text(), before)
+
+    def test_panel_renders_partial_and_full_data(self):
+        import xml.dom.minidom
+
+        import stats
+
+        import brand
+
+        xml.dom.minidom.parseString(brand.stats(brand.THEMES["dark"]))
+        original = stats.OUT.read_text()
+        try:
+            stats.OUT.write_text(
+                __import__("json").dumps(stats.summarise(self.sample()))
+            )
+            doc = brand.stats(brand.THEMES["light"])
+            xml.dom.minidom.parseString(doc)
+            self.assertIn("Python", doc)
+        finally:
+            stats.OUT.write_text(original)
+
+
 class CliTest(unittest.TestCase):
     def test_unknown_command_fails(self):
         self.assertEqual(engine.main(["engine.py", "explode"]), 2)

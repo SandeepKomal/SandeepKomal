@@ -1,0 +1,38 @@
+name: Stats
+
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write # commit the refreshed stats panel
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Collect stats
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          STATS_LOGIN: ${{ github.repository_owner }}
+        run: python3 chaos/stats.py --write
+
+      - name: Render panel
+        run: python3 chaos/brand.py stats
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MESSAGE: "chore: refresh stats"
+        run: .github/scripts/publish.sh brand/stats.json brand/stats.svg brand/stats-light.svg

@@ -60,7 +60,11 @@ _Nobody has broken it yet._
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="brand/stack.svg"><img src="brand/stack-light.svg" width="100%" alt="tree ~/stack: cloud, platform, automation, security, observability and secrets tooling"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-projects.svg"><img src="brand/sec-projects-light.svg" width="100%" alt="04 Projects: things I shipped"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-stats.svg"><img src="brand/sec-stats-light.svg" width="100%" alt="04 Stats: by the numbers"></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/stats.svg"><img src="brand/stats-light.svg" width="100%" alt="GitHub stats for the last twelve months"></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-projects.svg"><img src="brand/sec-projects-light.svg" width="100%" alt="05 Projects: things I shipped"></picture>
 
 <p align="center">
 <a href="https://github.com/SandeepKomal/komorapy_v4"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-komora.svg"><img src="brand/card-komora-light.svg" width="49%" alt="KOMORA: Flask storefront on Kubernetes: restricted pods, default-deny networking, Kyverno, scanned CI/CD."></picture></a>
@@ -71,7 +75,7 @@ _Nobody has broken it yet._
 <a href="https://github.com/SandeepKomal/DevSecOps"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-devsecops.svg"><img src="brand/card-devsecops-light.svg" width="49%" alt="DevSecOps: Defense-in-depth lab: secrets, SAST, SCA, IaC, container and DAST scanning with SBOMs."></picture></a>
 </p>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-contact.svg"><img src="brand/sec-contact-light.svg" width="100%" alt="05 Contact: let's talk"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-contact.svg"><img src="brand/sec-contact-light.svg" width="100%" alt="06 Contact: let's talk"></picture>
 
 <p align="center">
 <a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-linkedin.svg"><img src="brand/link-linkedin-light.svg" width="49%" alt="Linkedin"></picture></a>

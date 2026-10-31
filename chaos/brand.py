@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import base64
 import json
+import sys
 from html import escape
 from pathlib import Path
 
@@ -687,6 +688,88 @@ def footer(t) -> str:
     return svg(t, 1200, 120, body, "Independent project, not affiliated with GitHub.")
 
 
+STAT_FIELDS = [
+    ("contributions", "CONTRIBUTIONS"),
+    ("commits", "COMMITS"),
+    ("pull_requests", "PULL REQUESTS"),
+    ("reviews", "REVIEWS"),
+    ("current_streak", "DAY STREAK"),
+    ("longest_streak", "LONGEST STREAK"),
+    ("active_days", "ACTIVE DAYS"),
+    ("stars", "STARS EARNED"),
+    ("repos", "REPOSITORIES"),
+    ("followers", "FOLLOWERS"),
+]
+
+
+def stats(t) -> str:
+    """Twelve months of GitHub activity from brand/stats.json; fields not collected yet are left out."""
+    data = json.loads((ROOT / "stats.json").read_text())
+    shown = [
+        (label, data[key]) for key, label in STAT_FIELDS if data.get(key) is not None
+    ][:8]
+    per_row, cell = 4, 1056 / 4
+    rows = (len(shown) + per_row - 1) // per_row
+    y = 100
+    body = []
+    for i, (label, value) in enumerate(shown):
+        x = 72 + (i % per_row) * cell
+        top = y + (i // per_row) * 104
+        body.append(
+            f'<text x="{x:.0f}" y="{top + 44}" font-family="Hubot" font-size="44" fill="url(#title)">{value:,}</text>'
+            f'<text x="{x:.0f}" y="{top + 72}" font-family="MonaW" font-size="12" letter-spacing="2" '
+            f'fill="{t["muted"]}">{label}</text>'
+        )
+    y += rows * 104 + 10
+    weeks = data.get("weeks") or []
+    if weeks:
+        body.append(
+            f'<text x="72" y="{y + 10}" font-family="{MONO}" font-size="13" fill="{t["muted"]}">weekly activity · 52 weeks</text>'
+        )
+        peak, width = max(weeks) or 1, 1056 / len(weeks)
+        for i, count in enumerate(weeks):
+            h = 4 + 86 * count / peak
+            last = ' class="pulse"' if i == len(weeks) - 1 else ""
+            body.append(
+                f'<rect{last} x="{72 + i * width:.1f}" y="{y + 116 - h:.1f}" width="{width - 4:.1f}" height="{h:.1f}" '
+                f'rx="2" fill="{ACCENT}" fill-opacity="{0.25 + 0.75 * count / peak:.2f}"/>'
+            )
+        y += 140
+    languages = data.get("languages") or []
+    if languages:
+        body.append(
+            f'<text x="72" y="{y + 10}" font-family="{MONO}" font-size="13" fill="{t["muted"]}">languages</text>'
+        )
+        x, total = 72.0, sum(lang["share"] for lang in languages) or 1
+        legend = []
+        for lang in languages:
+            w = 1056 * lang["share"] / total
+            body.append(
+                f'<rect x="{x:.1f}" y="{y + 26}" width="{max(w - 3, 2):.1f}" height="12" rx="6" fill="{lang["color"]}"/>'
+            )
+            x += w
+            legend.append(lang)
+        lx = 72
+        for lang in legend:
+            text = f"{lang['name']} {lang['share'] / total:.0%}"
+            body.append(
+                f'<circle cx="{lx + 5}" cy="{y + 64}" r="5" fill="{lang["color"]}"/>'
+                f'<text x="{lx + 16}" y="{y + 69}" font-family="Mona" font-size="15" fill="{t["muted"]}">{escape(text)}</text>'
+            )
+            lx += len(text) * 8.5 + 44
+        y += 90
+    body.append(
+        f'<text x="72" y="{y + 20}" font-family="{MONO}" font-size="13" fill="{t["muted"]}">'
+        f"last 12 months · updated {escape(data.get('updated', ''))}</text>"
+    )
+    height = y + 60
+    frame = terminal_frame(
+        t, 40, 10, 1120, height - 20, "gh stats SandeepKomal --last 12m"
+    )
+    label = "GitHub stats: " + ", ".join(f"{v:,} {k.lower()}" for k, v in shown)
+    return svg(t, 1200, height, frame + "".join(body), label, PULSE)
+
+
 # --------------------------------------------------------------------------- entry points
 
 
@@ -718,7 +801,7 @@ SECTIONS = {
         "Built, secured and running in public.",
     ),
     "sec-contact": (
-        "05 · CONTACT",
+        "06 · CONTACT",
         "LET'S TALK",
         "Sev 3: say hello. Sev 2: email me. Sev 1: production is down, and it was probably you.",
     ),
@@ -726,7 +809,12 @@ SECTIONS = {
 
 
 def render_static() -> list[Path]:
-    paths = write("whoami", whoami) + write("stack", stack) + write("footer", footer)
+    paths = (
+        write("whoami", whoami)
+        + write("stack", stack)
+        + write("stats", stats)
+        + write("footer", footer)
+    )
     for name, (kicker, title, sub) in SECTIONS.items():
         paths += write(name, lambda t, k=kicker, ti=title, s=sub: section(t, k, ti, s))
     for fault in FAULT_BUTTONS:
@@ -741,5 +829,9 @@ def render_static() -> list[Path]:
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["stats"]:
+        for written in write("stats", stats):
+            print(written.relative_to(ROOT.parent))
+        sys.exit(0)
     for written in render_static():
         print(written.relative_to(ROOT.parent))
