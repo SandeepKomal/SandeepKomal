@@ -682,10 +682,8 @@ def footer(t) -> str:
         f'<line x1="300" y1="20" x2="900" y2="20" stroke="{t["line"]}"/>'
         f'<text x="600" y="62" text-anchor="middle" font-family="{MONO}" font-size="14" fill="{t["muted"]}">'
         f'<tspan fill="{ACCENT}">❯ </tspan>exit 0</text>'
-        f'<text x="600" y="96" text-anchor="middle" font-family="Mona" font-size="14" fill="{t["muted"]}">'
-        "Independent project, not affiliated with GitHub. Rendered by GitHub Actions with Python's standard library.</text>"
     )
-    return svg(t, 1200, 120, body, "Independent project, not affiliated with GitHub.")
+    return svg(t, 1200, 90, body, "exit 0")
 
 
 STAT_FIELDS = [
