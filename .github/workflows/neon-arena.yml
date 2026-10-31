@@ -29,14 +29,14 @@ jobs:
 
       # One render per GitHub theme; the README picks with prefers-color-scheme.
       - name: Render for dark mode
-        uses: SandeepKomal/neon-arena@933658603b49090272b1163aaeebcc5ab8d7ae94 # main, pre-release
+        uses: SandeepKomal/neon-arena@a00b3cac105ef8003d2d2a62090bed9c423ab199 # main, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: aurora
           output: neon-arena/arena.svg
 
       - name: Render for light mode
-        uses: SandeepKomal/neon-arena@933658603b49090272b1163aaeebcc5ab8d7ae94 # main, pre-release
+        uses: SandeepKomal/neon-arena@a00b3cac105ef8003d2d2a62090bed9c423ab199 # main, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           theme: daylight
