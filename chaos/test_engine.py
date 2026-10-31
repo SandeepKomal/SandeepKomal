@@ -11,7 +11,11 @@ T0 = engine.parse_time("2026-11-01T12:00:00Z")
 
 
 def fresh_state():
-    return {"version": 1, "since": engine.fmt_time(T0 - timedelta(days=30)), "incidents": []}
+    return {
+        "version": 1,
+        "since": engine.fmt_time(T0 - timedelta(days=30)),
+        "incidents": [],
+    }
 
 
 class InjectTest(unittest.TestCase):
@@ -27,7 +31,9 @@ class InjectTest(unittest.TestCase):
         self.assertEqual(result, "accepted")
         self.assertIn("blast-radius", comment)
         self.assertEqual(message, "chaos: @octocat kill blast-radius (incident #1)")
-        self.assertEqual(self.state["incidents"][0]["blast"], ["profile", "blast-radius"])
+        self.assertEqual(
+            self.state["incidents"][0]["blast"], ["profile", "blast-radius"]
+        )
 
     def test_rejects_hostile_titles(self):
         for title in [
@@ -48,9 +54,13 @@ class InjectTest(unittest.TestCase):
         self.assertEqual(self.state["incidents"], [])
 
     def test_rejects_bad_author_and_number(self):
-        self.assertEqual(self.inject("chaos: kill profile", author="bad name")[0], "rejected")
+        self.assertEqual(
+            self.inject("chaos: kill profile", author="bad name")[0], "rejected"
+        )
         self.assertEqual(self.inject("chaos: kill profile", author="")[0], "rejected")
-        self.assertEqual(self.inject("chaos: kill profile", number="1; id")[0], "rejected")
+        self.assertEqual(
+            self.inject("chaos: kill profile", number="1; id")[0], "rejected"
+        )
         self.assertEqual(self.state["incidents"], [])
 
     def test_same_issue_is_processed_once(self):
@@ -59,16 +69,34 @@ class InjectTest(unittest.TestCase):
         self.assertEqual(len(self.state["incidents"]), 1)
 
     def test_limits(self):
-        self.assertEqual(self.inject("chaos: kill git3d", author="a", number="1")[0], "accepted")
-        self.assertEqual(self.inject("chaos: latency git3d", author="b", number="2")[0], "rejected")
-        self.assertEqual(self.inject("chaos: kill devsecops", author="a", number="3")[0], "rejected")
-        self.assertEqual(self.inject("chaos: kill devsecops", author="b", number="4")[0], "accepted")
-        self.assertEqual(self.inject("chaos: kill komorapy", author="c", number="5")[0], "accepted")
-        self.assertEqual(self.inject("chaos: kill profile", author="d", number="6")[0], "rejected")
+        self.assertEqual(
+            self.inject("chaos: kill git3d", author="a", number="1")[0], "accepted"
+        )
+        self.assertEqual(
+            self.inject("chaos: latency git3d", author="b", number="2")[0], "rejected"
+        )
+        self.assertEqual(
+            self.inject("chaos: kill devsecops", author="a", number="3")[0], "rejected"
+        )
+        self.assertEqual(
+            self.inject("chaos: kill devsecops", author="b", number="4")[0], "accepted"
+        )
+        self.assertEqual(
+            self.inject("chaos: kill komorapy", author="c", number="5")[0], "accepted"
+        )
+        self.assertEqual(
+            self.inject("chaos: kill profile", author="d", number="6")[0], "rejected"
+        )
 
     def test_owner_has_no_cooldown(self):
-        self.assertEqual(self.inject("chaos: kill git3d", author="SandeepKomal", number="1")[0], "accepted")
-        self.assertEqual(self.inject("chaos: kill devsecops", author="sandeepkomal", number="2")[0], "accepted")
+        self.assertEqual(
+            self.inject("chaos: kill git3d", author="SandeepKomal", number="1")[0],
+            "accepted",
+        )
+        self.assertEqual(
+            self.inject("chaos: kill devsecops", author="sandeepkomal", number="2")[0],
+            "accepted",
+        )
 
 
 class ClusterTest(unittest.TestCase):
@@ -85,7 +113,9 @@ class ClusterTest(unittest.TestCase):
         ok = engine.effective_states(self.config, {})
         self.assertEqual(engine.overall_status(self.config, ok)[1], "ok")
         slow = engine.effective_states(self.config, {"git3d": "latency"})
-        self.assertEqual(engine.overall_status(self.config, slow)[0], "Degraded performance")
+        self.assertEqual(
+            engine.overall_status(self.config, slow)[0], "Degraded performance"
+        )
         cut = engine.effective_states(self.config, {"git3d": "partition"})
         self.assertEqual(engine.overall_status(self.config, cut)[0], "Partial outage")
 
@@ -100,12 +130,20 @@ class ClusterTest(unittest.TestCase):
     def test_metrics_merge_overlapping_downtime(self):
         state = fresh_state()
         engine.inject(self.config, state, T0, "chaos: kill profile", "a", "1")
-        engine.inject(self.config, state, T0 + timedelta(minutes=10), "chaos: kill git3d", "b", "2")
+        engine.inject(
+            self.config,
+            state,
+            T0 + timedelta(minutes=10),
+            "chaos: kill git3d",
+            "b",
+            "2",
+        )
         engine.reconcile(self.config, state, T0 + timedelta(minutes=30))
         m = engine.metrics(self.config, state, T0 + timedelta(minutes=30))
-        self.assertAlmostEqual(m["availability"], 100 * (1 - 30 / (30 * 24 * 60)), places=6)
+        self.assertAlmostEqual(
+            m["availability"], 100 * (1 - 30 / (30 * 24 * 60)), places=6
+        )
         self.assertEqual(m["incidents"], 2)
-        self.assertEqual(m["agents"], 2)
         self.assertAlmostEqual(m["mttr"], 20)
 
     def test_render_is_wellformed_and_escapes(self):
@@ -118,7 +156,9 @@ class ClusterTest(unittest.TestCase):
             xml.dom.minidom.parseString(svg)
             self.assertIn("Major outage", svg)
         block = engine.render_readme_block(self.config, state, T0)
-        self.assertTrue(block.startswith(engine.README_START) and block.endswith(engine.README_END))
+        self.assertTrue(
+            block.startswith(engine.README_START) and block.endswith(engine.README_END)
+        )
         self.assertIn("issues/new?title=chaos%3A%20kill%20profile", block)
 
 

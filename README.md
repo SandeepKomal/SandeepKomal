@@ -1,13 +1,13 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./chaos/cluster-dark.svg">
-  <img src="./chaos/cluster-light.svg" width="100%" alt="Live map of the sandeep-prod cluster: eight services, their health, and the profile's availability against its SLO">
+  <img src="./chaos/cluster-light.svg" width="100%" alt="3D map of the sandeep-prod cluster: eight services, their health, and the profile's uptime">
 </picture>
 
 # Sandeep Komal Pothu
 
 Senior Cloud Operations Engineer. I keep production boring with AWS, Kubernetes, Terraform and DevSecOps.
 
-**This profile is a running system, and you're allowed to break it.** Pick a service, open the issue, and a GitHub Action injects the fault, works out the blast radius and updates the map above. The cluster heals itself. The downtime is real, measured, and counted against a 99.5% SLO.
+**This profile is a running system, and you're allowed to break it.** Pick a service, open the issue, and a GitHub Action injects the fault, works out the blast radius and updates the map above. The cluster heals itself, and the uptime shown is measured from real breaks.
 
 ## Break production
 
@@ -24,9 +24,9 @@ Senior Cloud Operations Engineer. I keep production boring with AWS, Kubernetes,
 | [`git3d`](https://github.com/SandeepKomal/Git3D-Universe) | renderer | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20git3d&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20git3d&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20git3d&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
 | [`kubernetes`](https://github.com/SandeepKomal/kubernetes-k8s) | control plane | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20kubernetes&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20kubernetes&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20kubernetes&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
 
-#### Incident log
+#### Recent breaks
 
-_No incidents yet. Production has never been this quiet, which is suspicious._
+_Nobody has broken it yet._
 
 <!-- chaos:end -->
 
@@ -36,7 +36,7 @@ _No incidents yet. Production has never been this quiet, which is suspicious._
 - Each link opens an issue titled `chaos: <fault> <service>`. Submitting it runs [`chaos.yml`](.github/workflows/chaos.yml).
 - [`chaos/engine.py`](chaos/engine.py) checks the title against a strict pattern, records the incident in [`chaos/state.json`](chaos/state.json), and follows the dependency graph to find everything the fault takes with it. Killing `kubernetes-k8s` takes out the whole cluster.
 - A reconciler runs every 15 minutes and heals faults once their recovery time has passed: 20 minutes for a killed pod, 30 for latency, 45 for a partition.
-- Availability, error budget and mean time to recover come from the incident history, not made-up numbers.
+- Uptime, times broken and average fix time come from the recorded breaks.
 - Guardrails: at most 3 open incidents at once, one fault per service, and one fault per person every 10 minutes.
 
 </details>
