@@ -319,13 +319,6 @@ def inject(
 
 # --------------------------------------------------------------------------- render: readme
 
-STATE_LABEL = {
-    HEALTHY: "running",
-    DEGRADED: "degraded",
-    "slow": "slow",
-    "down": "**down**",
-    "cut": "**partitioned**",
-}
 FAULT_ALT = {
     "kill": "Kill a pod",
     "latency": "Inject latency",
@@ -371,71 +364,47 @@ def apply_theme(text: str, theme: str) -> str:
 
 
 def picture(name: str, alt: str, width: str = "100%") -> str:
-    """A brand panel; apply_theme picks which variant it shows."""
+    """A brand panel; apply_theme picks which variant it shows. align=top stops the
+    gap browsers leave under inline images, so panels sit flush."""
     return (
         f'<picture><source media="(prefers-color-scheme: dark)" srcset="brand/{name}.svg">'
-        f'<img src="brand/{name}-light.svg" width="{width}" alt="{alt}"></picture>'
+        f'<img src="brand/{name}-light.svg" width="{width}" align="top" alt="{alt}"></picture>'
     )
 
 
 def render_readme_block(config: dict, state: dict, current: datetime) -> str:
-    faults = current_faults(state)
-    states = effective_states(config, faults)
+    """Production, the three break buttons and recent events, as images only, so the
+    whole section follows the profile's theme."""
+    states = effective_states(config, current_faults(state))
     label, _ = overall_status(config, states)
     target = next_target(config, state, states)
-    buttons = "\n".join(
-        f'<a href="{issue_url(config, fault, target)}">{picture(f"btn-{fault}", f"{alt} on {target}", "32%")}</a>'
+    buttons = "".join(
+        f'<a href="{issue_url(config, fault, target)}">{picture(f"btn-{fault}", f"{alt} on {target}", "33.33%")}</a>'
         for fault, alt in FAULT_ALT.items()
     )
-    lines = [
-        README_START,
-        picture("production", f"kubectl get pods: production is {label}."),
-        "",
-        f'<p align="center">\n{buttons}\n</p>',
-        "",
-        f'<p align="center"><sub>Next target: <code>{target}</code>. Edit the issue title to pick another service.</sub></p>',
-        "",
-        "<details>\n<summary>Pick a specific service</summary>\n",
-        "| Service | Role | Status | Break it |",
-        "| --- | --- | --- | --- |",
-    ]
-    for s in config["services"]:
-        links = " · ".join(
-            f"[{f}]({issue_url(config, f, s['id'])})" for f in config["faults"]
-        )
-        lines.append(
-            f"| [`{s['id']}`](https://github.com/{s['repo']}) | {s['role']} | {STATE_LABEL[states[s['id']]]} | {links} |"
-        )
-    lines += ["", "</details>", "", "<details>\n<summary>Recent breaks</summary>\n"]
-    recent = list(reversed(state["incidents"]))[:8]
-    if recent:
-        lines += [
-            "| # | When (UTC) | What broke | Broken by | Services hit | Fixed in |",
-            "| --- | --- | --- | --- | --- | --- |",
+    return "\n".join(
+        [
+            README_START,
+            picture("production", f"kubectl get pods: production is {label}."),
+            buttons,
+            picture("events", "Recent breaks of production"),
+            README_END,
         ]
-        for i in recent:
-            started = parse_time(i["started"])
-            if i.get("healed"):
-                ttr = fmt_duration(
-                    (parse_time(i["healed"]) - started).total_seconds() / 60
-                )
-            else:
-                ttr = "**still broken**"
-            lines.append(
-                f"| [{i['id']}](https://github.com/{config['repo']}/issues/{i['issue']}) | "
-                f"{started.strftime('%Y-%m-%d %H:%M')} | {i['fault']} `{i['target']}` | @{i['agent']} | "
-                f"{len(i['blast'])} service{'s' if len(i['blast']) != 1 else ''} | {ttr} |"
-            )
-    else:
-        lines.append("_Nobody has broken it yet._")
-    lines += ["", "</details>", README_END]
-    return "\n".join(lines)
+    )
 
 
 def render(config: dict, state: dict, current: datetime) -> None:
     states = effective_states(config, current_faults(state))
     label, severity = overall_status(config, states)
-    brand.render_live(config, states, label, severity, metrics(config, state, current))
+    brand.render_live(
+        config,
+        states,
+        label,
+        severity,
+        metrics(config, state, current),
+        state["incidents"],
+        next_target(config, state, states),
+    )
     if README_PATH.exists():
         text = README_PATH.read_text(encoding="utf-8")
         start, end = text.find(README_START), text.find(README_END)
