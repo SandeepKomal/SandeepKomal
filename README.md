@@ -1,204 +1,88 @@
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:071A2B,45:0077B5,100:00C9A7&height=230&section=header&text=Sandeep%20Komal%20Pothu&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Senior%20Cloud%20Operations%20Engineer%20%7C%20DevOps%20%7C%20SRE%20%7C%20DevSecOps&descAlignY=60&descSize=18" width="100%" alt="Sandeep Komal header"/>
-
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=900&color=00C9A7&center=true&vCenter=true&multiline=true&width=850&height=120&lines=Automating+the+Cloud%2C+One+Pipeline+at+a+Time;AWS+%7C+Kubernetes+%7C+Terraform+%7C+DevSecOps;Building+Resilient%2C+Scalable+Infrastructure;Always+Shipping.+Always+Learning." alt="Typing SVG"/></a>
-
-<br/>
-
-<a href="https://github.com/SandeepKomal"><img src="https://komarev.com/ghpvc/?username=sandeepkomal&label=PROFILE%20VIEWS&color=0077B5&style=for-the-badge" alt="Profile views"/></a>
-<a href="https://github.com/SandeepKomal?tab=followers"><img src="https://img.shields.io/github/followers/SandeepKomal?label=FOLLOWERS&style=for-the-badge&color=00C9A7" alt="Followers"/></a>
-<a href="https://github.com/SandeepKomal/SandeepKomal/actions"><img src="https://img.shields.io/github/actions/workflow/status/SandeepKomal/SandeepKomal/snake.yml?label=SNAKE%20PIPELINE&style=for-the-badge" alt="Snake workflow status"/></a>
-
-</div>
-
-<div align="center">
-<img src="./assets/futuristic-command-center.svg" width="100%" alt="Futuristic engineering command center"/>
-</div>
-
----
-
-## 🧬 SYSTEM PROFILE
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### IDENTITY
-
-<strong>Sandeep Komal Pothu</strong>
-
-Cloud & DevOps Engineer focused on reliable infrastructure, automation, security, and observability.
-
-<code>AWS</code> <code>Kubernetes</code> <code>Terraform</code><br/>
-<code>CI/CD</code> <code>Docker</code> <code>DevSecOps</code><br/>
-<code>Observability</code> <code>Automation</code>
-
-</td>
-<td width="50%" valign="top">
-
-### MISSION
-
-> Build infrastructure that can <strong>ship itself, defend itself, and tell you when it is unhealthy.</strong>
-
-<code>BUILD</code> → <code>SECURE</code> → <code>DEPLOY</code> → <code>OBSERVE</code> → <code>IMPROVE</code>
-
-</td>
-</tr>
-</table>
-
----
-
-## ⚡ LIVE ENGINEERING FABRIC
-
-<div align="center">
-<img src="https://img.shields.io/github/actions/workflow/status/SandeepKomal/SandeepKomal/ghactivity.yml?label=ACTIVITY%20ENGINE&style=for-the-badge" alt="Activity engine"/>
-<img src="https://img.shields.io/github/actions/workflow/status/SandeepKomal/SandeepKomal/snake.yml?label=CONTRIBUTION%20ENGINE&style=for-the-badge" alt="Contribution engine"/>
-<img src="https://img.shields.io/github/last-commit/SandeepKomal/SandeepKomal?label=LAST%20COMMIT&style=for-the-badge" alt="Last commit"/>
-</div>
-
----
-
-## 🚀 FLAGSHIP SYSTEM — KOMORAPY_V4
-
-<div align="center">
-<img src="./assets/komorapy-pipeline.svg" width="100%" alt="KOMORAPY_V4 delivery pipeline"/>
-</div>
-
-A practical application platform connecting <strong>source control → CI/CD → security → container registry → Kubernetes → observability</strong>.
-
-<strong>Explore:</strong> <a href="https://github.com/SandeepKomal/KOMORAPY_V4">KOMORAPY_V4</a>
-
----
-
-## 🛡️ DEVSECOPS SECURITY FABRIC
-
-<div align="center">
-<img src="./assets/devsecops-pipeline.svg" width="100%" alt="DevSecOps security fabric"/>
-</div>
-
-<strong>Security layers:</strong> <code>SAST</code> · <code>SCA</code> · <code>Container Security</code> · <code>IaC</code> · <code>Kubernetes</code> · <code>Runtime</code>
-
----
-
-## ☁️ CLOUD / PLATFORM STACK
-
-<div align="center">
-<img src="https://skillicons.dev/icons?i=aws,terraform,kubernetes,docker,ansible,githubactions,jenkins,linux,bash,python,prometheus,grafana,nginx,mysql&perline=7" alt="Technology stack"/>
-</div>
-
-<table>
-<tr>
-<td align="center">☁️<br/><b>Cloud</b><br/>AWS</td>
-<td align="center">☸️<br/><b>Platform</b><br/>Kubernetes / EKS</td>
-<td align="center">🏗️<br/><b>IaC</b><br/>Terraform</td>
-<td align="center">🚀<br/><b>Delivery</b><br/>GitHub Actions / Jenkins</td>
-</tr>
-<tr>
-<td align="center">🔐<br/><b>Security</b><br/>DevSecOps</td>
-<td align="center">🐳<br/><b>Containers</b><br/>Docker</td>
-<td align="center">📊<br/><b>Observability</b><br/>Prometheus / Grafana</td>
-<td align="center">🤖<br/><b>Automation</b><br/>Ansible / Python / Shell</td>
-</tr>
-</table>
-
----
-
-## 🛰️ ENGINEERING PORTFOLIO
-
-<div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/portfolio.dark.svg">
-  <img src="./profile-stats/portfolio.light.svg" width="100%" alt="GitHub repository portfolio and project lifelines"/>
+  <source media="(prefers-color-scheme: dark)" srcset="./chaos/cluster-dark.svg">
+  <img src="./chaos/cluster-light.svg" width="100%" alt="Live map of the sandeep-prod cluster: eight services, their health, and the profile's availability against its SLO">
 </picture>
-</div>
 
-> Automatically regenerated from GitHub repository activity.
+# Sandeep Komal Pothu
 
----
+Senior Cloud Operations Engineer. I keep production boring with AWS, Kubernetes, Terraform and DevSecOps.
 
-## 🐍 CONTRIBUTION MATRIX
+**This profile is a running system, and you're allowed to break it.** Pick a service, open the issue, and a GitHub Action injects the fault, works out the blast radius and updates the map above. The cluster heals itself. The downtime is real, measured, and counted against a 99.5% SLO.
 
-<div align="center">
-<img src="https://raw.githubusercontent.com/sandeepkomal/sandeepkomal/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Contribution snake"/>
-</div>
+## Break production
 
----
-<!--
-## ⚡ ENGINEERING CADENCE
+<!-- chaos:start -->
 
-<div align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-stats/cadence.dark.svg">
-  <img src="./profile-stats/cadence.light.svg" width="100%" alt="GitHub commit cadence by weekday and hour"/>
-</picture>
-</div>
+| Service | Role | Status | Break it |
+| --- | --- | --- | --- |
+| [`profile`](https://github.com/SandeepKomal/SandeepKomal) | ingress | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
+| [`komorapy`](https://github.com/SandeepKomal/KOMORAPY_V4) | app platform | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20komorapy&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20komorapy&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20komorapy&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
+| [`blast-radius`](https://github.com/SandeepKomal/blast-radius) | agent guard | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20blast-radius&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20blast-radius&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20blast-radius&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
+| [`neon-arena`](https://github.com/SandeepKomal/neon-arena) | renderer | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20neon-arena&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20neon-arena&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20neon-arena&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
+| [`devsecops`](https://github.com/SandeepKomal/DevSecOps) | pipeline | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20devsecops&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20devsecops&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20devsecops&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
+| [`paranoid-sre`](https://github.com/SandeepKomal/paranoid-sre) | agent skill | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20paranoid-sre&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20paranoid-sre&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20paranoid-sre&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
+| [`git3d`](https://github.com/SandeepKomal/Git3D-Universe) | renderer | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20git3d&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20git3d&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20git3d&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
+| [`kubernetes`](https://github.com/SandeepKomal/kubernetes-k8s) | control plane | running | [kill](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20kubernetes&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [latency](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20kubernetes&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) · [partition](https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20kubernetes&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log.) |
 
-> Automatically regenerated from GitHub commit activity across the trailing year.
+#### Incident log
 
----
--->
-## 🌌 Git3D Universe 🌍🚀
+_No incidents yet. Production has never been this quiet, which is suspicious._
 
-![Git3D Universe](./profile/git3d-universe.svg)
+<!-- chaos:end -->
 
+<details>
+<summary>How it works</summary>
 
-## 🏟️ NEON ARENA
+- Each link opens an issue titled `chaos: <fault> <service>`. Submitting it runs [`chaos.yml`](.github/workflows/chaos.yml).
+- [`chaos/engine.py`](chaos/engine.py) checks the title against a strict pattern, records the incident in [`chaos/state.json`](chaos/state.json), and follows the dependency graph to find everything the fault takes with it. Killing `kubernetes-k8s` takes out the whole cluster.
+- A reconciler runs every 15 minutes and heals faults once their recovery time has passed: 20 minutes for a killed pod, 30 for latency, 45 for a partition.
+- Availability, error budget and mean time to recover come from the incident history, not made-up numbers.
+- Guardrails: at most 3 open incidents at once, one fault per service, and one fault per person every 10 minutes.
 
-<div align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./neon-arena/arena-dark.svg">
-  <img src="./neon-arena/arena-light.svg" width="100%" alt="Neon Arena: a year of contributions as neon 3D bars on a glowing slab, with a scrolling LED ribbon of top repositories and a light trail along the longest streak"/>
-</picture>
-</div>
+</details>
 
-> Generated every 6 hours by [Neon Arena](https://github.com/SandeepKomal/neon-arena).
+## Pending changes
 
----
+```diff
+  # engineer.sandeep will be updated in-place
+  ~ resource "engineer" "sandeep" {
+        role     = "Senior Cloud Operations Engineer"
+  +     focus    = ["AWS", "Kubernetes / EKS", "Terraform", "DevSecOps", "Observability"]
+  +     building = "guardrails that stop AI agents from running destructive infra commands"
+  -     toil     = "manual deploys, snowflake servers, 3am pages"
+  ~     on_call  = "reactive" -> "boring"
+    }
 
-## ⚡ ACTIVITY STREAM
+  Plan: 2 to add, 1 to change, 1 to destroy.
+```
 
-<!--START_SECTION:activity-->
-1. 🎉 Merged PR [#22](https://github.com/SandeepKomal/DevSecOps/pull/22) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-2. 💪 Opened PR [#22](https://github.com/SandeepKomal/DevSecOps/pull/22) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-3. ❌ Closed PR [#18](https://github.com/SandeepKomal/DevSecOps/pull/18) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-4. ❌ Closed PR [#19](https://github.com/SandeepKomal/DevSecOps/pull/19) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-5. ❌ Closed PR [#21](https://github.com/SandeepKomal/DevSecOps/pull/21) in [SandeepKomal/DevSecOps](https://github.com/SandeepKomal/DevSecOps)
-<!--END_SECTION:activity-->
+## Service catalog
 
----
+| Service | What it does |
+| --- | --- |
+| [blast-radius](https://github.com/SandeepKomal/blast-radius) | A hook for coding agents that previews what an infrastructure command would destroy, then asks or blocks before it runs. |
+| [paranoid-sre](https://github.com/SandeepKomal/paranoid-sre) | A skill that makes the agent careful before it ever reaches the hook. |
+| [KOMORAPY_V4](https://github.com/SandeepKomal/KOMORAPY_V4) | An application platform from source control through CI/CD, security scanning and Kubernetes to observability. |
+| [DevSecOps](https://github.com/SandeepKomal/DevSecOps) | Security in the pipeline: SAST, SCA, container, IaC and Kubernetes checks. |
+| [neon-arena](https://github.com/SandeepKomal/neon-arena) | A GitHub Action that renders a year of contributions as an arena. |
+| [Git3D-Universe](https://github.com/SandeepKomal/Git3D-Universe) | A GitHub Action that renders contribution history as a universe, switching day and night by local time. |
+| [kubernetes-k8s](https://github.com/SandeepKomal/kubernetes-k8s) | Kubernetes configuration and experiments. |
 
-## 🏆 ACHIEVEMENTS
+<details>
+<summary>Telemetry</summary>
 
-<div align="center">
-<a href="https://github.com/SandeepKomal?tab=achievements">
-<img src="https://github.githubassets.com/assets/pair-extraordinaire-default-579438a20e01.png" width="82" alt="Pair Extraordinaire"/>
-<img src="https://github.githubassets.com/assets/galaxy-brain-silver-2ce8da282a85.png" width="82" alt="Galaxy Brain"/>
-<img src="https://github.githubassets.com/assets/pull-shark-silver-0643f87ac9fd.png" width="82" alt="Pull Shark"/>
-<img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" width="82" alt="YOLO"/>
-<img src="https://github.githubassets.com/assets/quickdraw-default-39c6aec8ff89.png" width="82" alt="Quickdraw"/>
-</a>
-</div>
+<img src="./neon-arena/arena.svg" width="100%" alt="Neon Arena: a year of contributions as 3D bars">
 
----
+<img src="./profile/git3d-universe.svg" width="100%" alt="Git3D Universe: contribution history as a universe">
 
-## ✍️ ENGINEERING NOTES
+</details>
 
-<code>AWS</code> · <code>Kubernetes</code> · <code>Terraform</code> · <code>CI/CD</code> · <code>DevSecOps</code> · <code>Cloud Security</code> · <code>Observability</code>
+## Escalation policy
 
-> <strong>Learn by building. Build by automating. Improve by observing.</strong>
+| Severity | Channel |
+| --- | --- |
+| Sev 3: say hello | [LinkedIn](https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283/) |
+| Sev 2: work together | [sandeepkomalp@gmail.com](mailto:sandeepkomalp@gmail.com) |
+| Sev 1: production is down | Check the incident log. It was probably you. |
 
----
-
-## 🌐 CONNECT
-
-<div align="center">
-<a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283/"><img src="https://img.shields.io/badge/LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
-<a href="mailto:sandeepkomalp@gmail.com"><img src="https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
-<a href="https://github.com/SandeepKomal"><img src="https://img.shields.io/badge/GITHUB-111827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
-</div>
-
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9A7,55:0077B5,100:071A2B&height=120&section=footer" width="100%" alt="Footer"/>
-<strong>AUTOMATE • SECURE • OBSERVE • SCALE</strong>
-</div>
+<sub>Independent project, not affiliated with GitHub.</sub>
