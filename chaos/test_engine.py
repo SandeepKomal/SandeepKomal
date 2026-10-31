@@ -156,9 +156,10 @@ class ClusterTest(unittest.TestCase):
         states = engine.effective_states(self.config, engine.current_faults(state))
         label, severity = engine.overall_status(self.config, states)
         m = engine.metrics(self.config, state, T0)
+        t = brand.THEMES["dark"]
         for doc in (
-            brand.hero(label, severity),
-            brand.production(self.config, states, label, severity, m),
+            brand.hero(t, label, severity, states, m),
+            brand.production(t, self.config, states, label, severity, m),
         ):
             xml.dom.minidom.parseString(doc)
             self.assertIn("Major outage", doc)
@@ -181,37 +182,134 @@ class ClusterTest(unittest.TestCase):
 
         import brand
 
+        t = brand.THEMES["light"]
         for doc in (
-            brand.marquee(),
-            brand.about(),
-            brand.stack(),
-            brand.contact(),
-            brand.button("kill"),
-            brand.project_card(brand.PROJECTS[0], 0),
+            brand.whoami(t),
+            brand.stack(t),
+            brand.footer(t),
+            brand.button(t, "kill"),
+            brand.project_card(t, brand.PROJECTS[0], 0),
+            brand.link_button(t, "email"),
         ):
             xml.dom.minidom.parseString(doc)
 
 
 class ThemeTest(unittest.TestCase):
-    def test_light_theme_swaps_background_and_stays_wellformed(self):
+    def test_both_themes_are_wellformed_and_differ(self):
         import xml.dom.minidom
 
         import brand
 
-        dark = brand.about()
-        light = brand.to_light(dark)
-        xml.dom.minidom.parseString(light)
-        self.assertIn('<rect width="1200" height="700" fill="#0c0c0c"/>', dark)
-        self.assertIn('<rect width="1200" height="700" fill="#ffffff"/>', light)
+        dark = brand.whoami(brand.THEMES["dark"])
+        light = brand.whoami(brand.THEMES["light"])
+        for doc in (dark, light):
+            xml.dom.minidom.parseString(doc)
+        self.assertIn('fill="#0d1117"', dark)
+        self.assertIn('fill="#ffffff"', light)
 
-    def test_light_theme_leaves_embedded_images_alone(self):
+    def test_failing_services_appear_in_the_hero_stream(self):
         import brand
 
-        card = brand.project_card(brand.PROJECTS[0], 0)
-        start = card.index("base64,")
-        self.assertEqual(
-            card[start : start + 500], brand.to_light(card)[start : start + 500]
-        )
+        config = engine.load_config()
+        states = engine.effective_states(config, {"blast-radius": "kill"})
+        m = engine.metrics(config, fresh_state(), T0)
+        doc = brand.hero(brand.THEMES["dark"], "Partial outage", "bad", states, m)
+        self.assertIn("kubectl get pod blast-radius", doc)
+        self.assertIn("SANDEEP KOMAL POTHU", doc)
+
+
+class StatsTest(unittest.TestCase):
+    def sample(self):
+        days = [
+            {"date": f"2026-10-{d:02d}", "contributionCount": c}
+            for d, c in zip(range(1, 32), [0, 3, 1] + [2] * 28)
+        ]
+        return {
+            "followers": {"totalCount": 21},
+            "contributionsCollection": {
+                "totalCommitContributions": 900,
+                "totalPullRequestContributions": 80,
+                "totalPullRequestReviewContributions": 30,
+                "totalIssueContributions": 12,
+                "contributionCalendar": {
+                    "totalContributions": 61,
+                    "weeks": [{"contributionDays": days}],
+                },
+            },
+            "repositories": {
+                "totalCount": 2,
+                "nodes": [
+                    {
+                        "stargazerCount": 5,
+                        "languages": {
+                            "edges": [
+                                {
+                                    "size": 300,
+                                    "node": {"name": "Python", "color": "#3572A5"},
+                                }
+                            ]
+                        },
+                    },
+                    {
+                        "stargazerCount": 2,
+                        "languages": {
+                            "edges": [
+                                {"size": 100, "node": {"name": "HCL", "color": None}}
+                            ]
+                        },
+                    },
+                ],
+            },
+        }
+
+    def test_summary(self):
+        import stats
+
+        s = stats.summarise(self.sample())
+        self.assertEqual((s["contributions"], s["stars"], s["followers"]), (61, 7, 21))
+        self.assertEqual(s["longest_streak"], 30)
+        self.assertEqual([lang["name"] for lang in s["languages"]], ["Python", "HCL"])
+        self.assertAlmostEqual(s["languages"][0]["share"], 0.75)
+
+    def test_missing_token_fails_without_writing(self):
+        import stats
+
+        before = stats.OUT.read_text()
+        os.environ.pop("GITHUB_TOKEN", None)
+        self.assertEqual(stats.main(["stats.py", "--write"]), 2)
+        self.assertEqual(stats.main(["stats.py", "--bogus"]), 2)
+        self.assertEqual(stats.OUT.read_text(), before)
+
+    def test_panel_renders_partial_and_full_data(self):
+        import xml.dom.minidom
+
+        import stats
+
+        import brand
+
+        xml.dom.minidom.parseString(brand.stats(brand.THEMES["dark"]))
+        original = stats.OUT.read_text()
+        try:
+            stats.OUT.write_text(
+                __import__("json").dumps(stats.summarise(self.sample()))
+            )
+            doc = brand.stats(brand.THEMES["light"])
+            xml.dom.minidom.parseString(doc)
+            self.assertIn("Python", doc)
+        finally:
+            stats.OUT.write_text(original)
+
+
+class ReadmeTest(unittest.TestCase):
+    def test_every_panel_the_readme_uses_exists(self):
+        import re
+
+        root = Path(__file__).resolve().parent.parent
+        readme = (root / "README.md").read_text()
+        paths = set(re.findall(r'(?:src|srcset)="([^"]+\.svg)"', readme))
+        self.assertTrue(paths)
+        for path in paths:
+            self.assertTrue((root / path).exists(), path)
 
 
 class CliTest(unittest.TestCase):

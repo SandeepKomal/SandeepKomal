@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 # Commit the chaos state and rendered files to main, rebasing over other profile jobs.
+# Usage: publish.sh [file...] (defaults to the chaos files); needs GH_TOKEN and MESSAGE.
 # Exit codes: 0 published or nothing to publish, 1 push failed after retries.
 set -euo pipefail
 
-files=(chaos/state.json brand/hero.svg brand/hero-light.svg brand/production.svg brand/production-light.svg README.md)
+files=("$@")
+if [ ${#files[@]} -eq 0 ]; then
+  files=(chaos/state.json brand/hero.svg brand/hero-light.svg brand/production.svg brand/production-light.svg README.md)
+fi
 
 git add "${files[@]}"
 if git diff --cached --quiet; then
@@ -11,6 +15,8 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
+# checkout keeps no credentials; the token is used for this push only
+git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git commit -q -m "$MESSAGE"

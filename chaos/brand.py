@@ -1,92 +1,83 @@
-"""Render the profile README panels in the style of sandeepkomal.github.io.
+"""Render the profile README panels.
 
-Static panels (tools, about, stack, projects, contact, buttons) are rendered by
-``python3 chaos/brand.py``. The hero and the production panel depend on the
-chaos state and are re-rendered by ``engine.py`` after every injection or heal.
+Black (GitHub's dark page colour) or white, GitHub's own typefaces (Hubot Sans
+and Mona Sans, SIL OFL), and a terminal running through every section. Each
+panel is written twice, ``name.svg`` for dark mode and ``name-light.svg`` for
+light mode, and the README picks one with prefers-color-scheme.
 
-Everything a viewer sees is inside the SVGs: images and the Kanit font
-(SIL OFL, see brand/fonts/OFL.txt) are embedded, nothing loads at view time.
+Static panels are rendered by ``python3 chaos/brand.py``. The hero and the
+production panel depend on the chaos state and are re-rendered by engine.py
+after every injection or heal. Images and fonts are embedded, so nothing loads
+at view time. Content that matters is visible without animation; motion only
+decorates.
 """
 
 from __future__ import annotations
 
 import base64
 import json
-import random
-import re
+import sys
 from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent / "brand"
 ASSETS = ROOT / "assets"
 FONTS = ROOT / "fonts"
+MONO = (
+    "ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace"
+)
+ACCENT = "#d63af9"
 
-BG = "#0c0c0c"
-INK = "#0c0c0d"  # text on the white stack panel; inverts separately in the light theme
-MAGENTA, PURPLE = "#b600a8", "#7621b0"
-MONO = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+THEMES = {
+    "dark": {
+        "bg": "#0d1117",
+        "surface": "#151b23",
+        "line": "#30363d",
+        "text": "#f0f6fc",
+        "muted": "#9198a1",
+        "cmd": "#6e7681",
+        "t0": "#ffffff",
+        "t1": "#9198a1",
+        "ok": "#3fb950",
+        "warn": "#d29922",
+        "bad": "#f85149",
+        "cut": "#9198a1",
+        "btn": "#f0f6fc",
+        "btn_text": "#0d1117",
+    },
+    "light": {
+        "bg": "#ffffff",
+        "surface": "#f6f8fa",
+        "line": "#d1d9e0",
+        "text": "#1f2328",
+        "muted": "#59636e",
+        "cmd": "#8c959f",
+        "t0": "#1f2328",
+        "t1": "#59636e",
+        "ok": "#1a7f37",
+        "warn": "#9a6700",
+        "bad": "#cf222e",
+        "cut": "#59636e",
+        "btn": "#1f2328",
+        "btn_text": "#ffffff",
+    },
+}
+STATE_TEXT = {
+    "healthy": "Running",
+    "degraded": "Degraded",
+    "slow": "Slow",
+    "down": "CrashLoopBackOff",
+    "cut": "Unreachable",
+}
+STATE_TONE = {
+    "healthy": "ok",
+    "degraded": "warn",
+    "slow": "warn",
+    "down": "bad",
+    "cut": "cut",
+}
 MOTION = "@media (prefers-reduced-motion:reduce){*{animation:none!important}}"
-STATE_COLOR = {
-    "healthy": "#3df5c0",
-    "degraded": "#ffb02e",
-    "slow": "#ffb02e",
-    "down": "#ff3d5a",
-    "cut": "#a3acc7",
-}
-STATE_WORD = {
-    "healthy": "RUNNING",
-    "degraded": "SLOWED",
-    "slow": "SLOW",
-    "down": "DOWN",
-    "cut": "CUT OFF",
-}
-SEVERITY_COLOR = {"ok": "#3df5c0", "warn": "#ffb02e", "bad": "#ff3d5a"}
-
-
-# --------------------------------------------------------------------------- themes
-
-LIGHT = {
-    "#0c0c0c": "#ffffff",
-    "#141414": "#f6f7f9",
-    "#121212": "#f4f5f7",
-    "#111": "#f6f7f9",
-    "#26282d": "#e3e6ea",
-    "#2c2f35": "#e3e6ea",
-    "#33363c": "#d5d9df",
-    "#f2f5f7": "#0c0c0c",
-    "#eef2f5": "#0c0c0c",
-    "#e9eef2": "#0c0c0c",
-    "#d7e2ea": "#2b3138",
-    "#9aa3ad": "#5b6470",
-    "#a5adb6": "#59616b",
-    "#7d858f": "#7a828c",
-    "#5a5f68": "#b7bdc5",
-    "#4b8f6a": "#2f9e6a",
-    "#646973": "#15171c",
-    "#bbccd7": "#6b7380",
-    "#3df5c0": "#0a9e74",
-    "#ffb02e": "#d27c00",
-    "#ff3d5a": "#e0243a",
-    "#a3acc7": "#6b7698",
-    "#fefefe": "#b600a8",
-    "#fffffe": "#0c0c0c",
-    "#0c0c0d": "#ffffff",
-    "#dcdcdc": "#2a2c31",
-    "#666": "#9aa3ad",
-}
-HEX = re.compile(r"#[0-9a-fA-F]{3,6}\b")
-
-
-def to_light(doc: str) -> str:
-    return HEX.sub(lambda m: LIGHT.get(m.group(0).lower(), m.group(0)), doc)
-
-
-def write(name: str, doc: str) -> list[Path]:
-    """Write the dark panel and its light twin (name-light.svg)."""
-    dark, light = ROOT / f"{name}.svg", ROOT / f"{name}-light.svg"
-    dark.write_text(doc, encoding="utf-8")
-    light.write_text(to_light(doc), encoding="utf-8")
-    return [dark, light]
+FONT_FILES = {"Hubot": "hubot-display", "Mona": "mona-400", "MonaW": "mona-wide-600"}
 
 
 # --------------------------------------------------------------------------- helpers
@@ -98,39 +89,49 @@ def data_uri(path: Path) -> str:
 
 
 def font_faces(body: str) -> str:
-    weights = sorted({int(w) for w in re.findall(r'font-weight="(\d+)"', body)} | {400})
     faces = []
-    for weight in weights:
-        data = base64.b64encode((FONTS / f"kanit-{weight}.woff2").read_bytes()).decode()
-        faces.append(
-            f"@font-face{{font-family:K;font-weight:{weight};"
-            f"src:url(data:font/woff2;base64,{data}) format('woff2')}}"
-        )
+    for family, file in FONT_FILES.items():
+        if f'font-family="{family}"' in body:
+            data = base64.b64encode((FONTS / f"{file}.woff2").read_bytes()).decode()
+            faces.append(
+                f"@font-face{{font-family:{family};src:url(data:font/woff2;base64,{data}) format('woff2')}}"
+            )
     return "".join(faces)
 
 
-DEFS = (
-    '<linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#646973"/>'
-    '<stop offset="1" stop-color="#bbccd7"/></linearGradient>'
-    '<linearGradient id="pill" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a0040"/>'
-    f'<stop offset=".45" stop-color="{MAGENTA}"/><stop offset="1" stop-color="{PURPLE}"/></linearGradient>'
-    '<filter id="pglow" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>'
-)
-
-
-def svg(width: int, height: int, body: str, label: str, css: str = "") -> str:
+def svg(
+    t: dict,
+    width: int,
+    height: int,
+    body: str,
+    label: str,
+    css: str = "",
+    background: bool = True,
+) -> str:
+    title = (
+        f'<linearGradient id="title" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{t["t0"]}"/>'
+        f'<stop offset="1" stop-color="{t["t1"]}"/></linearGradient>'
+    )
+    fill = (
+        f'<rect width="{width}" height="{height}" fill="{t["bg"]}"/>'
+        if background
+        else ""
+    )
     return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}" role="img" aria-label="{escape(label)}">'
-        f"<defs>{DEFS}</defs><style>{font_faces(body)}{css}{MOTION}</style>{body}</svg>\n"
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" '
+        f'role="img" aria-label="{escape(label)}"><defs>{title}</defs><style>{font_faces(body)}{css}{MOTION}</style>'
+        f"{fill}{body}</svg>\n"
     )
 
 
-def title(x, y, text, size, anchor="middle", fill="url(#chrome)") -> str:
-    return (
-        f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-family="K" font-weight="900" '
-        f'font-size="{size}" letter-spacing="-1" fill="{fill}">{escape(text)}</text>'
-    )
+def write(name: str, render) -> list[Path]:
+    """Render a panel for both themes: name.svg (dark) and name-light.svg."""
+    paths = []
+    for theme, suffix in (("dark", ""), ("light", "-light")):
+        path = ROOT / f"{name}{suffix}.svg"
+        path.write_text(render(THEMES[theme]), encoding="utf-8")
+        paths.append(path)
+    return paths
 
 
 def wrap(text: str, width: int) -> list[str]:
@@ -144,185 +145,170 @@ def wrap(text: str, width: int) -> list[str]:
     return lines + [current]
 
 
-def pill(x, y, w, label, size=16) -> str:
+def terminal_frame(t, x, y, w, h, command):
+    """A window with a prompt line, shared by every terminal panel."""
     return (
-        f'<g transform="translate({x} {y})"><rect x="4" y="6" width="{w - 8}" height="48" rx="24" '
-        f'fill="{MAGENTA}" opacity=".5" filter="url(#pglow)"/>'
-        f'<rect width="{w}" height="54" rx="27" fill="url(#pill)" stroke="#f2e6ff" stroke-width="2"/>'
-        f'<text x="{w / 2}" y="34" text-anchor="middle" font-family="K" font-weight="600" font-size="{size}" '
-        f'letter-spacing="2" fill="#fff">{escape(label)}</text></g>'
+        f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="16" fill="{t["surface"]}" stroke="{t["line"]}"/>'
+        f'<line x1="{x}" y1="{y + 52}" x2="{x + w}" y2="{y + 52}" stroke="{t["line"]}"/>'
+        f'<text x="{x + 24}" y="{y + 32}" font-family="{MONO}" font-size="15" fill="{t["muted"]}">'
+        f'<tspan fill="{ACCENT}">❯ </tspan>{escape(command)}</text>'
     )
 
 
-BOB = (
-    ".bob{animation:bob 6s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-14px)}}"
-    ".spin{transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite}"
-    "@keyframes spin{to{transform:rotate(360deg)}}"
+def status_bar(t, y, label, severity, states, metrics) -> str:
+    tone = t[severity if severity != "ok" else "ok"]
+    affected = sum(1 for s in states.values() if s != "healthy")
+    text = "   ·   ".join(
+        [
+            label.upper(),
+            f"UPTIME {metrics['availability']:.2f}%",
+            f"{affected}/{len(states)} AFFECTED",
+            f"{metrics['incidents']} BROKEN",
+        ]
+    )
+    w = len(text) * 8.6 + 70
+    return (
+        f'<g transform="translate({600 - w / 2:.0f} {y})"><rect width="{w:.0f}" height="40" rx="20" '
+        f'fill="{t["surface"]}" stroke="{t["line"]}"/><circle class="pulse" cx="26" cy="20" r="6" fill="{tone}"/>'
+        f'<text x="44" y="25" font-family="MonaW" font-size="13" letter-spacing="1.5" fill="{t["text"]}">'
+        f"{escape(text)}</text></g>"
+    )
+
+
+PULSE = (
+    ".pulse{animation:pulse 1.8s ease-in-out infinite}@keyframes pulse{50%{opacity:.3}}"
 )
-
-
-def floating(shape: str, delay: float) -> str:
-    return f'<g class="bob" style="animation-delay:-{delay}s">{shape}</g>'
-
-
-# --------------------------------------------------------------------------- shapes (from the site's art)
-
-
-def moon(x, y, s):
-    return (
-        f'<g transform="translate({x} {y}) scale({s})"><defs><radialGradient id="mo" cx="35%" cy="30%" r="80%">'
-        '<stop offset="0" stop-color="#FFF4C9"/><stop offset=".55" stop-color="#F2B84B"/>'
-        '<stop offset="1" stop-color="#8A4A00"/></radialGradient><mask id="mc"><rect width="200" height="200" fill="#fff"/>'
-        '<circle cx="135" cy="70" r="70" fill="#000"/></mask></defs>'
-        '<circle cx="95" cy="105" r="80" fill="url(#mo)" mask="url(#mc)"/>'
-        '<circle cx="55" cy="130" r="9" fill="#8A4A00" opacity=".35" mask="url(#mc)"/>'
-        '<circle cx="160" cy="150" r="5" fill="#FFF4C9"/><circle cx="175" cy="120" r="3" fill="#FFF4C9" opacity=".7"/></g>'
-    )
-
-
-def brick(x, y, s):
-    studs = "".join(
-        f'<rect x="{a - 14}" y="{b + 2}" width="28" height="12" fill="#C9372A"/>'
-        f'<ellipse cx="{a}" cy="{b + 14}" rx="14" ry="7" fill="#C9372A"/>'
-        f'<ellipse cx="{a}" cy="{b + 2}" rx="14" ry="7" fill="#FF8A7B"/>'
-        for a, b in ((70, 58), (110, 78), (110, 38), (150, 58))
-    )
-    return (
-        f'<g transform="translate({x} {y}) scale({s})"><polygon points="110,40 190,80 110,120 30,80" fill="#FF6B5A"/>'
-        '<polygon points="30,80 110,120 110,180 30,140" fill="#C9372A"/>'
-        f'<polygon points="110,120 190,80 190,140 110,180" fill="#E14B3B"/>{studs}</g>'
-    )
-
-
-def spheres(x, y, s):
-    balls = (
-        (70, 130, 52, ("#9AF5FF", "#1E7FBF", "#08223F")),
-        (140, 120, 40, ("#FFC7F4", "#B600A8", "#3A0036")),
-        (108, 62, 34, ("#E8FFB5", "#6DBE2E", "#1D3D06")),
-    )
-    defs = "".join(
-        f'<radialGradient id="sb{i}" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="{c[0]}"/>'
-        f'<stop offset=".55" stop-color="{c[1]}"/><stop offset="1" stop-color="{c[2]}"/></radialGradient>'
-        for i, (_, _, _, c) in enumerate(balls)
-    )
-    body = "".join(
-        f'<circle cx="{a}" cy="{b}" r="{r}" fill="url(#sb{i})"/>'
-        for i, (a, b, r, _) in enumerate(balls)
-    )
-    return f'<g transform="translate({x} {y}) scale({s})"><defs>{defs}</defs>{body}</g>'
-
-
-def torus(x, y, s):
-    ring = 'fill="none" stroke="url(#tg)" transform="rotate(-30 110 110)"'
-    return (
-        f'<g transform="translate({x} {y}) scale({s})"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">'
-        '<stop offset="0" stop-color="#FFE29A"/><stop offset=".45" stop-color="#BE4C00"/>'
-        '<stop offset="1" stop-color="#7621B0"/></linearGradient></defs>'
-        f'<ellipse cx="110" cy="110" rx="80" ry="42" {ring} stroke-width="30"/>'
-        '<ellipse cx="110" cy="110" rx="80" ry="42" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="4" '
-        'transform="rotate(-30 110 110) translate(0 -10)"/>'
-        f'<ellipse cx="110" cy="110" rx="42" ry="80" {ring} stroke-width="22" opacity=".85"/></g>'
-    )
-
-
-def orb(x, y, s):
-    ring = 'cx="260" cy="280" rx="235" ry="62" fill="none" stroke="url(#or)" stroke-width="18" transform="rotate(-14 260 280)"'
-    return (
-        f'<g transform="translate({x} {y}) scale({s})"><defs><radialGradient id="ob" cx="35%" cy="30%" r="75%">'
-        '<stop offset="0" stop-color="#F4D9FF"/><stop offset=".25" stop-color="#C04BE0"/>'
-        '<stop offset=".6" stop-color="#5B1B8F"/><stop offset="1" stop-color="#12031F"/></radialGradient>'
-        '<linearGradient id="or" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#BE4C00"/>'
-        '<stop offset=".5" stop-color="#FFB070"/><stop offset="1" stop-color="#7621B0"/></linearGradient>'
-        '<clipPath id="of"><rect x="-100" y="280" width="720" height="400" transform="rotate(-14 260 280)"/></clipPath></defs>'
-        f'<ellipse {ring} opacity=".55"/><circle cx="260" cy="280" r="175" fill="url(#ob)"/>'
-        '<ellipse cx="200" cy="200" rx="62" ry="38" fill="#fff" opacity=".35" transform="rotate(-30 200 200)"/>'
-        '<ellipse cx="185" cy="188" rx="20" ry="12" fill="#fff" opacity=".8" transform="rotate(-30 185 188)"/>'
-        f'<ellipse {ring} clip-path="url(#of)"/></g>'
-    )
+NUDGE = ".nudge{animation:nudge 2.4s ease-in-out infinite}@keyframes nudge{50%{transform:translateX(4px)}}"
 
 
 # --------------------------------------------------------------------------- hero
 
 COMMANDS = [
-    "aws eks update-kubeconfig",
-    "kubectl rollout status deploy/api",
-    "argocd app sync api",
+    "terraform plan -out tfplan",
     "terraform apply tfplan",
+    "aws eks update-kubeconfig",
+    "kubectl get pods -n prod",
+    "kubectl rollout status api",
+    "helm upgrade --install api",
+    "argocd app sync api",
     "gh workflow run deploy.yml",
     "codeql database analyze",
-    "helm upgrade --install api ./chart",
-    "trivy image komora:1.4.2",
-    "kubectl get pods -n prod",
+    "trivy image komora:1.4",
     "checkov -d infra/",
-    "kubectl apply -f deploy.yaml",
-    "terraform plan -out tfplan",
+    "kyverno apply policies/",
+    "vault kv get secret/api",
+    "kubectl top nodes",
+    "promtool check rules",
+    "ansible-playbook site.yml",
+    "docker buildx build .",
+    "kubectl describe hpa api",
+    "aws s3 sync ./dist",
+    "terraform fmt -check",
+    "gh pr checks",
+    "falco --list",
+    "kubectl logs deploy/api",
+    "sonar-scanner",
 ]
 
 
-def drifting_commands(width, height, count=16) -> str:
-    # a fixed seed keeps the layout stable between renders
-    rnd = random.Random(4)  # nosec B311
-    out = []
-    for _ in range(count):
-        x, y = rnd.uniform(10, width - 300), rnd.uniform(40, height - 30)
-        cmd = rnd.choice(COMMANDS)
-        duration, delay = rnd.uniform(9, 16), rnd.uniform(0, 16)
-        out.append(
-            f'<g class="cmd" style="animation-duration:{duration:.1f}s;animation-delay:-{delay:.1f}s">'
-            f'<text x="{x:.0f}" y="{y:.0f}" font-family="{MONO}" font-size="15" fill="#5a5f68">'
-            f'<tspan fill="{MAGENTA}">$ </tspan>{escape(cmd)}<tspan fill="#4b8f6a">  ✓</tspan></text></g>'
+PROMPTS = ("#b600a8", "#7621b0", "#be4c00")
+
+
+def command_stream(t, failing: list[str], top: int, bottom: int) -> str:
+    """Faint terminal lines drifting slowly upward behind the portrait.
+
+    One command per row at a scattered position and brightness, rows evenly
+    spaced so they never overlap. Failing services surface as red checks.
+    """
+    gap, speed = 40, 18  # px between rows, px per second
+    count = (bottom - top) // gap + 2
+    seed = 7
+    rows = []
+    fail_rows = {3 + i * 6: sid for i, sid in enumerate(failing)}
+    for i in range(count):
+        seed = (seed * 1103515245 + 12345) & 0x7FFFFFFF
+        x = 20 + seed % 840
+        seed = (seed * 1103515245 + 12345) & 0x7FFFFFFF
+        alpha = 0.3 + (seed % 100) / 100 * 0.32
+        y = top + 20 + i * gap
+        if i in fail_rows:
+            rows.append(
+                f'<text x="{x}" y="{y}" font-family="{MONO}" font-size="15" fill="{t["bad"]}" opacity=".85">'
+                f"$ kubectl get pod {escape(fail_rows[i])}  ✗</text>"
+            )
+            continue
+        cmd = COMMANDS[seed % len(COMMANDS)]
+        prompt = PROMPTS[(seed >> 3) % len(PROMPTS)]
+        rows.append(
+            f'<text x="{x}" y="{y}" font-family="{MONO}" font-size="15" fill="{t["cmd"]}" opacity="{alpha:.2f}">'
+            f'<tspan fill="{prompt}">$ </tspan>{escape(cmd)}<tspan fill="{t["ok"]}">  ✓</tspan></text>'
         )
+    block = count * gap
+    rows = "".join(rows)
+    out = [
+        (
+            f'<g class="up" style="animation-duration:{block / speed:.0f}s;--h:-{block}px">'
+            f'{rows}<g transform="translate(0 {block})">{rows}</g></g>'
+        )
+    ]
+    # bg-coloured gradients fade the stream at both ends; cheaper to animate under than a mask
+    band = 110
+    out.append(
+        f'<linearGradient id="fadein" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{t["bg"]}"/>'
+        f'<stop offset="1" stop-color="{t["bg"]}" stop-opacity="0"/></linearGradient>'
+        f'<rect y="0" width="1200" height="{top}" fill="{t["bg"]}"/>'
+        f'<rect y="{top}" width="1200" height="{band}" fill="url(#fadein)"/>'
+        f'<rect y="{bottom - band}" width="1200" height="{band}" fill="url(#fadein)" transform="rotate(180 600 {bottom - band / 2})"/>'
+        f'<rect y="{bottom}" width="1200" height="200" fill="{t["bg"]}"/>'
+    )
     return "".join(out)
 
 
 def portrait(x, y, scale, alarm: bool) -> str:
-    """The site's layered 3D portrait: the irises glance around and the eyes blink."""
+    """The layered 3D portrait: the irises glance around and the eyes blink."""
     path = ASSETS / "portrait"
     geo = json.loads((path / "geometry.json").read_text())
-    width, height = geo["width"], geo["height"]
     if alarm:
-        gaze = [
-            (0, 0),
-            (0.9, 0.5),
-            (0.9, 0.5),
-            (-0.9, 0.4),
-            (-0.9, 0.4),
-            (0.9, 0.5),
-            (0, 0.6),
-            (0, 0.6),
-            (-0.7, 0.2),
-            (0.6, 0.5),
-            (0, 0),
-        ]
-        duration = 6
+        gaze, duration = (
+            [
+                (0, 0),
+                (0.9, 0.5),
+                (0.9, 0.5),
+                (-0.9, 0.4),
+                (-0.9, 0.4),
+                (0, 0.6),
+                (0, 0),
+            ],
+            5,
+        )
     else:
-        gaze = [
-            (0, 0),
-            (0, 0),
-            (-0.85, 0.1),
-            (-0.85, 0.1),
-            (0, 0),
-            (0, 0),
-            (0.8, 0.35),
-            (0.8, 0.35),
-            (0.2, -0.3),
-            (0.2, -0.3),
-            (0, 0),
-        ]
-        duration = 11
+        gaze, duration = (
+            [
+                (0, 0),
+                (0, 0),
+                (-0.85, 0.15),
+                (-0.85, 0.15),
+                (0, 0),
+                (0.85, 0.3),
+                (0.85, 0.3),
+                (0, 0),
+            ],
+            10,
+        )
     times = ";".join(f"{i / (len(gaze) - 1):.3f}" for i in range(len(gaze)))
     splines = ";".join(["0.3 0 0.2 1"] * (len(gaze) - 1))
-    parts = [
+    out = [
         f'<g transform="translate({x} {y}) scale({scale})"><g class="breathe">',
-        f'<image href="{data_uri(path / "base.webp")}" width="{width}" height="{height}"/>',
+        f'<image href="{data_uri(path / "base.webp")}" width="{geo["width"]}" height="{geo["height"]}"/>',
     ]
     for key in ("l", "r"):
         eye = geo["eyes"][key]
         bx, by, bw, bh = eye["box"]
         ix, iy, iw, ih = eye["irisBox"]
-        dx, dy = eye["r"] * 0.3, eye["r"] * 0.16
-        values = ";".join(f"{gx * dx:.1f} {gy * dy:.1f}" for gx, gy in gaze)
-        parts.append(
+        values = ";".join(
+            f"{gx * eye['r'] * 0.3:.1f} {gy * eye['r'] * 0.16:.1f}" for gx, gy in gaze
+        )
+        out.append(
             f'<mask id="m{key}" maskUnits="userSpaceOnUse" x="{bx}" y="{by}" width="{bw}" height="{bh}" '
             f'style="mask-type:alpha"><image href="{data_uri(path / f"mask-{key}.png")}" x="{bx}" y="{by}" '
             f'width="{bw}" height="{bh}" preserveAspectRatio="none"/></mask>'
@@ -332,365 +318,225 @@ def portrait(x, y, scale, alarm: bool) -> str:
             f'calcMode="spline" keySplines="{splines}"/></image></g>'
         )
     hx0, hy0, hx1, hy1 = geo["hair"]
-    parts.append(
+    out.append(
         f'<image href="{data_uri(path / "hair.webp")}" x="{hx0}" y="{hy0}" width="{hx1 - hx0}" height="{hy1 - hy0}"/>'
     )
     cx0, cy0, cx1, cy1 = geo["closed"]
-    parts.append(
+    out.append(
         f'<image href="{data_uri(path / "closed.webp")}" x="{cx0}" y="{cy0}" width="{cx1 - cx0}" '
         f'height="{cy1 - cy0}" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0;1;0;1;0;0" '
-        'keyTimes="0;0.40;0.412;0.425;0.437;0.86;0.872;0.884;0.896;0.908;1" dur="9s" '
-        'repeatCount="indefinite" calcMode="discrete"/></image></g></g>'
+        'keyTimes="0;.40;.412;.425;.437;.86;.872;.884;.896;.908;1" dur="9s" repeatCount="indefinite" '
+        'calcMode="discrete"/></image></g></g>'
     )
-    return "".join(parts)
+    return "".join(out)
 
 
-def hero(label: str, severity: str) -> str:
+def hero(t, label, severity, states, metrics) -> str:
     width, height = 1200, 860
-    alarm = severity != "ok"
-    color = SEVERITY_COLOR[severity]
+    failing = [sid for sid, st in states.items() if st in ("down", "cut")]
     body = [
         (
-            '<radialGradient id="spot" cx="50%" cy="55%" r="50%">'
-            f'<stop offset="0" stop-color="{MAGENTA}" stop-opacity=".22"/><stop offset="1" stop-color="{MAGENTA}" stop-opacity="0"/>'
-            '</radialGradient><radialGradient id="alarm" cx="50%" cy="50%" r="50%">'
-            '<stop offset="0" stop-color="#ff2440" stop-opacity=".45"/><stop offset="1" stop-color="#ff2440" stop-opacity="0"/>'
-            '</radialGradient><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">'
-            f'<stop offset=".72" stop-color="{BG}" stop-opacity="0"/><stop offset="1" stop-color="{BG}"/></linearGradient>'
+            f'<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{t["bg"]}" '
+            f'stop-opacity="0"/><stop offset="1" stop-color="{t["bg"]}"/></linearGradient>'
         ),
-        f'<rect width="{width}" height="{height}" fill="{BG}"/>',
-        drifting_commands(width, height),
-        '<ellipse cx="600" cy="560" rx="460" ry="360" fill="url(#spot)"/>',
+        command_stream(t, failing, 220, 790),
+        (
+            f'<text x="600" y="62" text-anchor="middle" font-family="MonaW" font-size="13" letter-spacing="4" '
+            f'fill="{t["muted"]}">SENIOR CLOUD OPERATIONS ENGINEER</text>'
+        ),
+        (
+            '<text x="600" y="146" text-anchor="middle" font-family="Hubot" font-size="70" fill="url(#title)">'
+            "SANDEEP KOMAL POTHU</text>"
+        ),
+        (
+            f'<text x="600" y="190" text-anchor="middle" font-family="Mona" font-size="21" fill="{t["muted"]}">'
+            "I keep production boring. You're welcome to try and break it.</text>"
+        ),
+        portrait(600 - 1120 * 0.36 / 2, 250, 0.36, severity != "ok"),
+        f'<rect y="700" width="{width}" height="80" fill="url(#fade)"/>',
+        f'<rect y="780" width="{width}" height="80" fill="{t["bg"]}"/>',
+        status_bar(t, 800, label, severity, states, metrics),
     ]
-    if alarm:
-        body.append(
-            '<g class="sweep"><path d="M600 520 L1500 300 L1500 740 Z" fill="url(#alarm)"/></g>'
-        )
-    for x, word, anchor in (
-        (40, "ABOUT", "start"),
-        (450, "STACK", "start"),
-        (853, "PROJECTS", "start"),
-        (1160, "CONTACT", "end"),
-    ):
-        body.append(
-            f'<text x="{x}" y="54" text-anchor="{anchor}" font-family="K" font-weight="600" font-size="20" '
-            f'letter-spacing=".5" fill="#e9eef2">{word}</text>'
-        )
-    heading = (
-        'x="40" y="208" font-family="K" font-weight="900" font-size="178" textLength="1120" '
-        'lengthAdjust="spacingAndGlyphs" letter-spacing="-2">HI, I\'M SANDEEP</text>'
-    )
-    body.append(
-        f'<clipPath id="hl"><text {heading}</clipPath><g class="rise"><text fill="url(#chrome)" {heading}'
-        '<g clip-path="url(#hl)"><rect class="shine" x="0" y="40" width="160" height="200" fill="#fff" opacity=".28"/></g></g>'
-    )
-    body.append(portrait(320, 268, 0.5, alarm))
-    body.append(f'<rect width="{width}" height="{height}" fill="url(#fade)"/>')
-    tagline = (
-        "CLOUD, DEVOPS &amp;",
-        "DEVSECOPS ENGINEER",
-        "BUILDING AUTOMATED,",
-        "SECURE AND OBSERVABLE",
-        "SYSTEMS",
-    )
-    for i, line in enumerate(tagline):
-        body.append(
-            f'<text x="40" y="{690 + i * 28}" font-family="K" font-size="19" fill="#e9eef2">{line}</text>'
-        )
-    body.append(
-        f'<g transform="translate(40 640)"><circle class="pulse" cx="6" cy="-6" r="5" fill="{color}"/>'
-        f'<text x="20" y="0" font-family="{MONO}" font-size="13" letter-spacing="1" fill="{color}">'
-        f"PRODUCTION · {escape(label.upper())}</text></g>"
-    )
-    body.append(pill(958, 788, 202, "CONTACT ME"))
     css = (
-        ".cmd{opacity:0;animation-name:cmd;animation-timing-function:ease-in-out;animation-iteration-count:infinite}"
-        "@keyframes cmd{0%{opacity:0;transform:translateY(14px)}20%{opacity:.55}75%{opacity:.4}"
-        "100%{opacity:0;transform:translateY(-26px)}}"
-        ".breathe{animation:breathe 6s ease-in-out infinite}@keyframes breathe{50%{transform:translateY(-8px)}}"
-        ".rise{animation:rise 1.4s cubic-bezier(.2,.7,.1,1) both}@keyframes rise{from{opacity:0;transform:translateY(40px)}}"
-        ".shine{animation:shine 6s ease-in-out infinite}"
-        "@keyframes shine{0%,60%{transform:skewX(-20deg) translateX(-1400px)}100%{transform:skewX(-20deg) translateX(1400px)}}"
-        ".pulse{animation:pulse 2s ease-in-out infinite}@keyframes pulse{50%{opacity:.25}}"
-        ".sweep{transform-origin:600px 520px;animation:sweep 3s linear infinite}@keyframes sweep{to{transform:rotate(360deg)}}"
+        ".up{animation:up linear infinite}@keyframes up{to{transform:translateY(var(--h))}}"
+        ".breathe{animation:breathe 7s ease-in-out infinite}@keyframes breathe{50%{transform:translateY(-6px)}}"
+        + PULSE
     )
-    return svg(
-        width,
-        height,
-        "".join(body),
-        f"Hi, I'm Sandeep. Cloud, DevOps and DevSecOps engineer. Production: {label}.",
-        css,
+    label_text = (
+        f"Sandeep Komal Pothu, Senior Cloud Operations Engineer. Production: {label}."
     )
+    return svg(t, width, height, "".join(body), label_text, css)
 
 
-# --------------------------------------------------------------------------- production panel
+# --------------------------------------------------------------------------- sections
 
 
-def production(
-    config: dict, states: dict, label: str, severity: str, metrics: dict
-) -> str:
-    width, height = 1200, 860
-    body = [
-        f'<rect width="{width}" height="{height}" fill="{BG}"/>',
-        title(600, 150, "BREAK MY", 130),
-        title(600, 270, "PRODUCTION", 130),
-        (
-            '<text x="600" y="318" text-anchor="middle" font-family="K" font-size="20" fill="#9aa3ad">'
-            "Eight of my projects run as one system. Pick one, open the issue, watch it fall. It heals itself.</text>"
-        ),
-        (
-            '<g transform="translate(150 360)"><rect width="900" height="86" rx="43" fill="#121212" stroke="#26282d"/>'
-            f'<circle class="pulse" cx="44" cy="43" r="9" fill="{SEVERITY_COLOR[severity]}"/>'
-            f'<text x="66" y="51" font-family="K" font-weight="800" font-size="24" fill="#f2f5f7">{escape(label.upper())}</text>'
-        ),
-    ]
-    affected = sum(1 for st in states.values() if st != "healthy")
-    stats = [
-        (f"{metrics['availability']:.2f}%", "UPTIME 30D"),
-        (f"{affected}/{len(states)}", "AFFECTED"),
-        (str(metrics["incidents"]), "TIMES BROKEN"),
-    ]
-    for i, (value, key) in enumerate(stats):
-        x = 520 + i * 130
-        body.append(
-            f'<text x="{x}" y="44" font-family="K" font-weight="800" font-size="24" fill="url(#chrome)">{value}</text>'
-            f'<text x="{x}" y="64" font-family="K" font-size="11" letter-spacing="1.5" fill="#7d858f">{key}</text>'
-        )
-    body.append("</g>")
-
-    columns, spacing, top = 4, 225, 545
-    position = {
-        s["id"]: (
-            600 - 1.5 * spacing + (i % columns) * spacing,
-            top + (i // columns) * 150,
-        )
-        for i, s in enumerate(config["services"])
-    }
-    for s in config["services"]:
-        for dep in s["deps"]:
-            (x1, y1), (x2, y2) = position[s["id"]], position[dep]
-            line = MAGENTA if states[dep] == "healthy" else STATE_COLOR[states[dep]]
-            body.append(
-                f'<path d="M{x1} {y1}L{x2} {y2}" stroke="{line}" stroke-width="1.4" opacity=".35"/>'
-            )
-            if states[dep] in ("healthy", "slow", "degraded"):
-                duration = 2.2 if states[dep] == "healthy" else 6
-                body.append(
-                    f'<circle r="3.5" fill="#fefefe"><animateMotion dur="{duration}s" repeatCount="indefinite" '
-                    f'path="M{x1} {y1}L{x2} {y2}"/></circle>'
-                )
-    gradients = {
-        "healthy": ("#F4D9FF", "#C04BE0", "#2a0b45"),
-        "degraded": ("#FFE29A", "#E08A1E", "#3d1d00"),
-        "slow": ("#FFE29A", "#E08A1E", "#3d1d00"),
-        "down": ("#FFB3BD", "#E0243A", "#3a0008"),
-        "cut": ("#E6E9F2", "#7B8399", "#1c1f29"),
-    }
-    for i, s in enumerate(config["services"]):
-        cx, cy = position[s["id"]]
-        st = states[s["id"]]
-        g = gradients[st]
-        motion = {"down": "shake", "cut": "flick"}.get(st, "bob")
-        body.append(
-            f'<radialGradient id="g{i}" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="{g[0]}"/>'
-            f'<stop offset=".55" stop-color="{g[1]}"/><stop offset="1" stop-color="{g[2]}"/></radialGradient>'
-            f'<g class="{motion}" style="animation-delay:-{i * 0.7:.1f}s">'
-        )
-        if st != "healthy":
-            body.append(
-                f'<circle class="ring" cx="{cx}" cy="{cy}" r="34" fill="none" stroke="{STATE_COLOR[st]}" stroke-width="2"/>'
-            )
-        body.append(
-            f'<circle cx="{cx}" cy="{cy}" r="32" fill="url(#g{i})"/>'
-            f'<ellipse cx="{cx - 10}" cy="{cy - 12}" rx="11" ry="6" fill="#fff" opacity=".55" '
-            f'transform="rotate(-30 {cx - 10} {cy - 12})"/>'
-        )
-        if st == "down":
-            body.append(
-                f'<path d="M{cx - 8} {cy - 30}l6 14-7 6 9 12-4 10" stroke="#2a0008" stroke-width="2.4" fill="none"/>'
-            )
-        body.append(
-            "</g>"
-            f'<text x="{cx}" y="{cy + 60}" text-anchor="middle" font-family="K" font-weight="600" font-size="17" '
-            f'fill="#eef2f5">{escape(s["name"])}</text>'
-            f'<text x="{cx}" y="{cy + 80}" text-anchor="middle" font-family="K" font-size="12" letter-spacing="1.5" '
-            f'fill="{STATE_COLOR[st]}">{STATE_WORD[st]}</text>'
-        )
-    css = BOB + (
-        ".pulse{animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{50%{opacity:.25}}"
-        ".shake{animation:shake .5s steps(2) infinite}@keyframes shake{50%{transform:translate(2px,-1px)}}"
-        ".flick{animation:flick 1.2s steps(3) infinite}@keyframes flick{40%{opacity:.4}}"
-        ".ring{transform-box:fill-box;transform-origin:center;animation:ring 1.8s ease-out infinite}"
-        "@keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(1.9);opacity:0}}"
+def section(t, kicker: str, title: str, sub: str) -> str:
+    body = (
+        '<linearGradient id="rule" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7c6cff" stop-opacity="0"/>'
+        f'<stop offset=".5" stop-color="{ACCENT}"/><stop offset="1" stop-color="#1fc8e3" stop-opacity="0"/></linearGradient>'
+        f'<text x="600" y="58" text-anchor="middle" font-family="MonaW" font-size="13" letter-spacing="4" '
+        f'fill="{t["muted"]}">{escape(kicker)}</text>'
+        f'<text x="600" y="128" text-anchor="middle" font-family="Hubot" font-size="58" fill="url(#title)">{escape(title)}</text>'
+        f'<text x="600" y="170" text-anchor="middle" font-family="Mona" font-size="19" fill="{t["muted"]}">{escape(sub)}</text>'
+        f'<line x1="420" y1="204" x2="780" y2="204" stroke="{t["line"]}"/>'
+        '<g class="scan"><rect x="540" y="203" width="120" height="2" fill="url(#rule)"/></g>'
     )
-    return svg(
-        width, height, "".join(body), f"Break my production. Status: {label}.", css
+    css = (
+        ".scan{animation:scan 5s ease-in-out infinite}"
+        "@keyframes scan{0%,100%{transform:translateX(-240px)}50%{transform:translateX(240px)}}"
     )
-
-
-def render_live(
-    config: dict, states: dict, label: str, severity: str, metrics: dict
-) -> None:
-    write("hero", hero(label, severity))
-    write("production", production(config, states, label, severity, metrics))
-
-
-# --------------------------------------------------------------------------- static panels
-
-TOOLS = [
-    "AWS",
-    "EKS",
-    "Terraform",
-    "Docker",
-    "Kubernetes",
-    "Helm",
-    "Ansible",
-    "Python",
-    "GitHub Actions",
-    "Jenkins",
-    "Harness",
-    "CodeQL",
-    "SonarQube",
-    "Trivy",
-    "Checkov",
-    "Kyverno",
-    "Falco",
-    "Prometheus",
-    "Grafana",
-    "Vault",
-    "Splunk",
-]
-
-
-def marquee() -> str:
-    width, height, size = 1200, 200, 52
-    body = [f'<rect width="{width}" height="{height}" fill="{BG}"/>']
-    css = ""
-    for row, items in enumerate((TOOLS[:11], TOOLS[11:])):
-        x, parts = 0.0, []
-        for name in items:
-            parts.append(
-                f'<text x="{x:.0f}" y="0" font-family="K" font-weight="900" font-size="{size}" '
-                f'fill="url(#chrome)">{escape(name.upper())}</text>'
-            )
-            x += len(name) * size * 0.66 + 40
-            parts.append(
-                f'<path transform="translate({x - 26:.0f} -18)" d="M0-11L3-3 11 0 3 3 0 11-3 3-11 0-3-3Z" fill="{MAGENTA}"/>'
-            )
-            x += 14
-        group = "".join(parts)
-        start, end = (f"-{x:.0f}px", "0") if row == 0 else ("0", f"-{x:.0f}px")
-        css += (
-            f".r{row}{{animation:m{row} {x / 60:.1f}s linear infinite}}"
-            f"@keyframes m{row}{{from{{transform:translateX({start})}}to{{transform:translateX({end})}}}}"
-        )
-        copies = "".join(
-            f'<g transform="translate({k * x:.0f} 0)">{group}</g>' for k in range(3)
-        )
-        body.append(
-            f'<g transform="translate(0 {80 + row * 82})"><g class="r{row}">{copies}</g></g>'
-        )
-    body.append(
-        '<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0c0c0c"/>'
-        '<stop offset=".08" stop-color="#0c0c0c" stop-opacity="0"/><stop offset=".92" stop-color="#0c0c0c" stop-opacity="0"/>'
-        f'<stop offset="1" stop-color="#0c0c0c"/></linearGradient><rect width="{width}" height="{height}" fill="url(#edge)"/>'
-    )
-    return svg(width, height, "".join(body), "Tools: " + ", ".join(TOOLS), css)
+    return svg(t, 1200, 230, body, f"{title}. {sub}", css)
 
 
 ABOUT = (
-    "Automate the repeatable. Secure the critical. Observe the whole system. I'm Sandeep Komal, and I enjoy turning "
-    "infrastructure and delivery problems into repeatable engineering systems across AWS, Kubernetes, Terraform, CI/CD, "
+    "Automate the repeatable. Secure the critical. Observe the whole system. I turn infrastructure and "
+    "delivery problems into repeatable engineering systems across AWS, Kubernetes, Terraform, CI/CD, "
     "security automation and observability."
 )
-ABOUT_STATS = [
-    ("CLOUD", "AWS-first infrastructure"),
-    ("PLATFORM", "Kubernetes & containers"),
-    ("DELIVERY", "CI/CD automation"),
-    ("SECURITY", "Shift-left controls"),
-]
 
 
-def about() -> str:
-    width, height = 1200, 700
-    body = [
-        f'<rect width="{width}" height="{height}" fill="{BG}"/>',
-        title(600, 175, "ABOUT ME", 160),
-        floating(moon(20, 200, 0.6), 0),
-        floating(brick(1020, 210, 0.7), 2),
-        floating(spheres(90, 440, 1.0), 3.5),
-        floating(f'<g class="spin">{torus(950, 430, 0.95)}</g>', 1.2),
-    ]
-    for i, line in enumerate(wrap(ABOUT, 52)):
+def whoami(t) -> str:
+    lines = wrap(ABOUT, 84)
+    height = 120 + len(lines) * 34 + 40
+    body = [terminal_frame(t, 40, 10, 1120, height - 20, "whoami")]
+    for i, line in enumerate(lines):
         body.append(
-            f'<text class="rev" style="animation-delay:{i * 0.25:.2f}s" x="600" y="{262 + i * 36}" text-anchor="middle" '
-            f'font-family="K" font-weight="600" font-size="23" fill="#d7e2ea">{escape(line)}</text>'
+            f'<text x="72" y="{110 + i * 34}" font-family="Mona" font-size="21" fill="{t["text"]}">{escape(line)}</text>'
         )
-    for i, (name, text) in enumerate(ABOUT_STATS):
-        x = 600 - 2 * 168 + i * 168
-        body.append(
-            f'<rect x="{x}" y="490" width="156" height="104" rx="18" fill="#111" stroke="#2c2f35"/>'
-            f'<text x="{x + 78}" y="532" text-anchor="middle" font-family="K" font-weight="600" font-size="17" '
-            f'fill="#eef2f5">{name}</text><text x="{x + 78}" y="560" text-anchor="middle" font-family="K" '
-            f'font-size="14" fill="#9aa3ad">{escape(text)}</text>'
-        )
-    css = BOB + (
-        ".rev{opacity:.45;animation:rev 6s ease-in-out infinite}"
-        "@keyframes rev{0%,10%{opacity:.45}25%,85%{opacity:1}100%{opacity:.45}}"
+    y = 110 + len(lines) * 34
+    body.append(
+        f'<text x="72" y="{y}" font-family="{MONO}" font-size="16" fill="{ACCENT}">❯ '
+        f'<tspan class="caret" fill="{t["muted"]}">▌</tspan></text>'
     )
-    return svg(width, height, "".join(body), "About me. " + ABOUT, css)
+    css = ".caret{animation:caret 1s steps(2,jump-none) infinite}@keyframes caret{50%{opacity:0}}"
+    return svg(t, 1200, height, "".join(body), "whoami: " + ABOUT, css)
+
+
+def production(t, config, states, label, severity, metrics) -> str:
+    services = config["services"]
+    row_h, top = 46, 128
+    height = top + len(services) * row_h + 130
+    body = [
+        terminal_frame(
+            t, 40, 10, 1120, height - 20, "kubectl get pods -n production --watch"
+        )
+    ]
+    for x, name in (
+        (72, "NAME"),
+        (380, "READY"),
+        (500, "STATUS"),
+        (810, "ROLE"),
+        (975, "REPO"),
+    ):
+        body.append(
+            f'<text x="{x}" y="{top - 20}" font-family="{MONO}" font-size="13" letter-spacing="1" '
+            f'fill="{t["muted"]}">{name}</text>'
+        )
+    for i, s in enumerate(services):
+        y = top + 14 + i * row_h
+        st = states[s["id"]]
+        tone = t[STATE_TONE[st]]
+        status = STATE_TEXT[st]
+        if st == "degraded":
+            dep = next((d for d in s["deps"] if states[d] != "healthy"), "")
+            status = f"Degraded · via {dep}" if dep else status
+        ready = "0/1" if st in ("down", "cut") else "1/1"
+        blink = ' class="blink"' if st in ("down", "cut") else ""
+        if i % 2 == 0:
+            body.append(
+                f'<rect x="56" y="{y - 30}" width="1088" height="{row_h}" rx="8" fill="{t["bg"]}" fill-opacity=".55"/>'
+            )
+        body.append(
+            f'<circle{blink} cx="484" cy="{y - 5}" r="5" fill="{tone}"/>'
+            f'<text x="72" y="{y}" font-family="{MONO}" font-size="17" fill="{t["text"]}">{escape(s["name"])}</text>'
+            f'<text x="380" y="{y}" font-family="{MONO}" font-size="17" fill="{t["muted"]}">{ready}</text>'
+            f'<text{blink} x="500" y="{y}" font-family="{MONO}" font-size="17" fill="{tone}">{escape(status)}</text>'
+            f'<text x="810" y="{y}" font-family="{MONO}" font-size="17" fill="{t["muted"]}">{escape(s["role"])}</text>'
+            f'<text x="975" y="{y}" font-family="{MONO}" font-size="15" fill="{t["muted"]}">'
+            f"{escape(s['repo'].split('/')[1])}</text>"
+        )
+    body.append(
+        f'<rect class="sweep" x="56" y="{top - 16}" width="1088" height="{row_h}" rx="8" fill="{ACCENT}" fill-opacity=".07"/>'
+    )
+    body.append(status_bar(t, height - 92, label, severity, states, metrics))
+    css = (
+        ".blink{animation:blink 1.2s steps(2,jump-none) infinite}@keyframes blink{50%{opacity:.35}}"
+        f".sweep{{animation:sweep 8s ease-in-out infinite alternate}}"
+        f"@keyframes sweep{{to{{transform:translateY({(len(services) - 1) * row_h}px)}}}}"
+        + PULSE
+    )
+    return svg(
+        t, 1200, height, "".join(body), f"kubectl get pods: production is {label}.", css
+    )
+
+
+FAULT_BUTTONS = {
+    "kill": ("KILL A POD", "✕"),
+    "latency": ("INJECT LATENCY", "◷"),
+    "partition": ("CUT THE NETWORK", "⌁"),
+}
+
+
+def button(t, fault: str) -> str:
+    label, glyph = FAULT_BUTTONS[fault]
+    w, h = 380, 76
+    mid = h / 2
+    body = (
+        f'<rect x="2" y="2" width="{w - 4}" height="{h - 4}" rx="{(h - 4) / 2}" fill="{t["btn"]}"/>'
+        f'<circle cx="40" cy="{mid}" r="19" fill="{t["btn_text"]}" fill-opacity=".12"/>'
+        f'<text x="40" y="{mid + 6}" text-anchor="middle" font-family="{MONO}" font-size="17" fill="{t["btn_text"]}">{glyph}</text>'
+        f'<text x="74" y="{mid + 6}" font-family="MonaW" font-size="16" letter-spacing="2" fill="{t["btn_text"]}">{label}</text>'
+        f'<g class="nudge"><text x="{w - 34}" y="{mid + 7}" text-anchor="middle" font-family="MonaW" font-size="20" '
+        f'fill="{t["btn_text"]}">→</text></g>'
+    )
+    return svg(t, w, h, body, label, NUDGE, background=False)
 
 
 STACK = [
-    ("CLOUD", "AWS · EC2 · EKS · ECS · ECR · S3 · RDS · IAM · VPC · Route 53"),
+    ("cloud", "AWS · EC2 · EKS · ECS · ECR · S3 · RDS · IAM · VPC · Route 53"),
+    ("platform", "Kubernetes · Docker · Helm · kind · RBAC · NetworkPolicies · HPA"),
     (
-        "PLATFORM",
-        "Kubernetes · Docker · Helm · kind · RBAC · Network Policies · HPA · StatefulSets",
-    ),
-    (
-        "AUTOMATION",
+        "automation",
         "Terraform · Ansible · Python · Shell · GitHub Actions · Jenkins · Harness",
     ),
-    ("SECURITY", "CodeQL · SonarQube · Trivy · Checkov · Kyverno · Falco · OWASP ZAP"),
+    ("security", "CodeQL · SonarQube · Trivy · Checkov · Kyverno · Falco · OWASP ZAP"),
     (
-        "OBSERVABILITY",
-        "Prometheus · Grafana · Alertmanager · Node Exporter · Blackbox Exporter · Splunk",
+        "observability",
+        "Prometheus · Grafana · Alertmanager · Blackbox Exporter · Splunk",
     ),
-    ("SECRETS", "AWS Secrets Manager · External Secrets Operator · Vault"),
+    ("secrets", "AWS Secrets Manager · External Secrets Operator · Vault"),
 ]
 
 
-def stack() -> str:
-    width, row = 1200, 150
-    height = 230 + row * len(STACK) + 40
+def stack(t) -> str:
+    row = 52
+    height = 120 + len(STACK) * row + 60
+    tools = sum(len(x.split(" · ")) for _, x in STACK)
     body = [
-        f'<rect width="{width}" height="{height}" fill="{BG}"/>',
-        f'<rect width="{width}" height="{height}" rx="56" fill="#fffffe"/>',
-        title(600, 170, "MY STACK", 150, fill=INK),
+        terminal_frame(t, 40, 10, 1120, height - 20, "tree ~/stack"),
+        f'<text x="72" y="102" font-family="{MONO}" font-size="17" fill="{t["muted"]}">~/stack</text>',
     ]
-    for i, (name, tools) in enumerate(STACK):
-        y = 230 + i * row
+    for i, (name, items) in enumerate(STACK):
+        y = 150 + i * row
+        branch = "└──" if i == len(STACK) - 1 else "├──"
         body.append(
-            f'<line x1="150" y1="{y}" x2="1050" y2="{y}" stroke="#dcdcdc"/>'
-            f'<g class="slide" style="animation-delay:-{i * 0.9:.1f}s"><text x="150" y="{y + 112}" font-family="K" '
-            f'font-weight="900" font-size="118" fill="{INK}">0{i + 1}</text></g>'
-            f'<text x="390" y="{y + 66}" font-family="K" font-weight="600" font-size="30" fill="{INK}">{name}</text>'
+            f'<g class="row" style="animation-delay:{i * 0.6:.1f}s">'
+            f'<text x="72" y="{y}" font-family="{MONO}" font-size="17" fill="{t["muted"]}">{branch}</text>'
+            f'<text x="118" y="{y}" font-family="{MONO}" font-size="17" fill="{t["text"]}">{name}/</text>'
+            f'<text x="330" y="{y}" font-family="Mona" font-size="18" fill="{t["muted"]}">{escape(items)}</text></g>'
         )
-        for j, line in enumerate(wrap(tools, 62)):
-            body.append(
-                f'<text x="390" y="{y + 102 + j * 26}" font-family="K" font-size="19" fill="#666">{escape(line)}</text>'
-            )
-    end = 230 + row * len(STACK)
-    body.append(f'<line x1="150" y1="{end}" x2="1050" y2="{end}" stroke="#dcdcdc"/>')
-    css = (
-        ".slide{animation:slide 5.4s ease-in-out infinite}"
-        "@keyframes slide{0%,70%,100%{transform:none}80%{transform:translateX(10px)}}"
+    body.append(
+        f'<text x="72" y="{150 + len(STACK) * row}" font-family="{MONO}" font-size="15" fill="{t["muted"]}">'
+        f"{len(STACK)} directories, {tools} tools</text>"
     )
+    css = ".row{animation:row 7.2s ease-in-out infinite}@keyframes row{0%,12%{opacity:1}6%{opacity:.4}}"
     return svg(
-        width,
+        t,
+        1200,
         height,
         "".join(body),
-        "My stack. " + ". ".join(f"{n}: {t}" for n, t in STACK),
+        "Stack: " + "; ".join(f"{n}: {x}" for n, x in STACK),
         css,
     )
 
@@ -698,20 +544,20 @@ def stack() -> str:
 PROJECTS = [
     (
         "KOMORA",
-        "Cloud Native",
+        "Cloud native",
         "Flask storefront on Kubernetes: restricted pods, default-deny networking, Kyverno, scanned CI/CD.",
         ("Flask", "Kubernetes", "Kyverno", "Trivy"),
         "komora",
-        "#D9FF3A",
+        "#9bd300",
         "https://github.com/SandeepKomal/komorapy_v4",
     ),
     (
         "Paste-Safe",
-        "Security Tool",
+        "Security tool",
         "Strips secrets from logs before you paste them into an AI, then restores them. Runs in your browser.",
         ("JavaScript", "PWA", "CodeQL"),
         "paste-safe",
-        "#FFB000",
+        "#ffb000",
         "https://github.com/SandeepKomal/paste-safe",
     ),
     (
@@ -720,7 +566,7 @@ PROJECTS = [
         "A year of GitHub activity as a living 3D universe, with top repositories orbiting as planets.",
         ("Actions", "SVG", "Automation"),
         "git3d-universe",
-        "#B600A8",
+        "#d63af9",
         "https://github.com/SandeepKomal/Git3D-Universe",
     ),
     (
@@ -729,16 +575,16 @@ PROJECTS = [
         "A year of contributions as a neon 3D stadium: lit bars, an LED ribbon and a streak light-cycle.",
         ("Actions", "SVG", "Marketplace"),
         "neon-arena",
-        "#3FD0E0",
+        "#1fc8e3",
         "https://github.com/SandeepKomal/Neon-Arena",
     ),
     (
         "README-Glassfolio",
-        "Profile Tooling",
+        "Profile tooling",
         "Turns any GitHub username into a live, themed, self-updating profile README.",
         ("JavaScript", "GitHub API"),
         "glassfolio",
-        "#8C8CFF",
+        "#8c8cff",
         "https://github.com/SandeepKomal/README-Glassfolio",
     ),
     (
@@ -747,132 +593,250 @@ PROJECTS = [
         "Defense-in-depth lab: secrets, SAST, SCA, IaC, container and DAST scanning with SBOMs.",
         ("CodeQL", "Semgrep", "Trivy", "ZAP"),
         "devsecops",
-        "#FF8A3D",
+        "#ff9f1c",
         "https://github.com/SandeepKomal/DevSecOps",
     ),
 ]
 
 
-def project_card(project, index: int) -> str:
+def project_card(t, project, index: int) -> str:
     name, category, text, chips, image, accent, _ = project
-    width, height = 580, 520
-    lag = index * 1.3
+    w, h = 580, 500
+    lag = index * 1.4
     body = [
-        f'<clipPath id="c"><rect width="{width}" height="{height}" rx="28"/></clipPath><g clip-path="url(#c)">',
-        f'<rect width="{width}" height="{height}" fill="#141414"/>',
+        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="20" fill="{t["surface"]}"/>',
+        f'<clipPath id="shot"><rect x="16" y="16" width="{w - 32}" height="300" rx="12"/></clipPath>',
         (
-            f'<g class="zoom"><image href="{data_uri(ASSETS / "projects" / f"{image}.webp")}" width="{width}" height="345" '
-            'preserveAspectRatio="xMidYMid slice"/></g>'
+            f'<g clip-path="url(#shot)"><g class="zoom"><image href="{data_uri(ASSETS / "projects" / f"{image}.webp")}" '
+            f'x="16" y="16" width="{w - 32}" height="300" preserveAspectRatio="xMidYMid slice"/></g></g>'
         ),
+        f'<rect x="16" y="16" width="{w - 32}" height="300" rx="12" fill="none" stroke="{t["line"]}"/>',
         (
-            '<linearGradient id="pf" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#141414" stop-opacity="0"/>'
-            f'<stop offset="1" stop-color="#141414"/></linearGradient><rect width="{width}" height="345" fill="url(#pf)"/>'
+            f'<circle cx="34" cy="352" r="5" fill="{accent}"/>'
+            f'<text x="48" y="357" font-family="MonaW" font-size="12" letter-spacing="2" fill="{t["muted"]}">'
+            f"{escape(category.upper())}</text>"
         ),
-        (
-            f'<rect x="28" y="24" width="{len(category) * 9 + 30}" height="30" rx="15" fill="{BG}" fill-opacity=".75" stroke="{accent}"/>'
-            f'<text x="43" y="44" font-family="K" font-weight="600" font-size="13" letter-spacing="1" '
-            f'fill="{accent}">{escape(category.upper())}</text>'
-        ),
-        f'<text x="28" y="388" font-family="K" font-weight="800" font-size="34" fill="#f2f5f7">{escape(name)}</text>',
+        f'<text x="28" y="396" font-family="Hubot" font-size="28" fill="{t["text"]}">{escape(name.upper())}</text>',
     ]
-    for i, line in enumerate(wrap(text, 58)):
+    for i, line in enumerate(wrap(text, 62)):
         body.append(
-            f'<text x="28" y="{420 + i * 23}" font-family="K" font-size="16" fill="#a5adb6">{escape(line)}</text>'
+            f'<text x="28" y="{426 + i * 22}" font-family="Mona" font-size="16" fill="{t["muted"]}">{escape(line)}</text>'
         )
     x = 28
     for chip in chips:
-        w = len(chip) * 8 + 24
+        cw = len(chip) * 8.4 + 20
         body.append(
-            f'<rect x="{x}" y="470" width="{w}" height="28" rx="14" fill="none" stroke="#33363c"/>'
-            f'<text x="{x + w / 2}" y="489" text-anchor="middle" font-family="K" font-size="13" fill="#d7e2ea">{escape(chip)}</text>'
+            f'<rect x="{x:.0f}" y="462" width="{cw:.0f}" height="24" rx="12" fill="none" stroke="{t["line"]}"/>'
+            f'<text x="{x + cw / 2:.0f}" y="478" text-anchor="middle" font-family="{MONO}" font-size="12" '
+            f'fill="{t["muted"]}">{escape(chip)}</text>'
         )
-        x += w + 8
+        x += cw + 8
     body.append(
-        '<linearGradient id="sh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
-        '<stop offset=".5" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>'
-        f'</linearGradient><rect class="sheen" style="animation-delay:-{lag:.1f}s" x="-260" y="-80" width="200" '
-        f'height="{height + 160}" fill="url(#sh)"/>'
-        f'<circle class="halo" style="animation-delay:-{lag:.1f}s" cx="{width - 48}" cy="484" r="22" fill="{accent}"/>'
-        f'<circle cx="{width - 48}" cy="484" r="22" fill="{accent}"/>'
-        f'<g class="nudge" style="animation-delay:-{lag:.1f}s"><path d="M{width - 57} 484h17m-7-7 7 7-7 7" stroke="{BG}" '
-        'stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g>'
-        f'<rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="28" fill="none" stroke="#26282d"/>'
+        f'<g class="nudge" style="animation-delay:-{lag:.1f}s"><text x="{w - 30}" y="480" text-anchor="end" '
+        f'font-family="MonaW" font-size="13" letter-spacing="1.5" fill="{t["text"]}">REPO →</text></g>'
+        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="20" fill="none" stroke="{t["line"]}"/>'
+        f'<rect class="trace" style="animation-delay:-{lag:.1f}s" x="1" y="1" width="{w - 2}" height="{h - 2}" rx="20" '
+        f'fill="none" stroke="{accent}" stroke-width="2" stroke-linecap="round" pathLength="1000"/>'
     )
-    for delay, stroke, extra in (
-        (lag, 2.5, ""),
-        (lag + 3, 8, ' opacity=".25" filter="url(#pglow)"'),
-    ):
-        body.append(
-            f'<rect class="trace" style="animation-delay:-{delay:.1f}s" x="1" y="1" width="{width - 2}" height="{height - 2}" '
-            f'rx="27" fill="none" stroke="{accent}" stroke-width="{stroke}" stroke-linecap="round" pathLength="1000"{extra}/>'
-        )
     css = (
-        ".zoom{transform-origin:290px 170px;animation:zoom 14s ease-in-out infinite alternate}"
-        "@keyframes zoom{to{transform:scale(1.07) translate(-8px,-4px)}}"
-        ".sheen{animation:sheen 6s ease-in-out infinite}"
-        "@keyframes sheen{0%,55%{transform:skewX(-18deg) translateX(0)}100%{transform:skewX(-18deg) translateX(1100px)}}"
-        ".trace{stroke-dasharray:110 890;animation:trace 6s linear infinite}@keyframes trace{to{stroke-dashoffset:-1000}}"
-        ".halo{transform-box:fill-box;transform-origin:center;animation:halo 2.4s ease-out infinite}"
-        "@keyframes halo{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.9);opacity:0}}"
-        ".nudge{animation:nudge 2.4s ease-in-out infinite}@keyframes nudge{50%{transform:translateX(5px)}}"
+        ".zoom{transform-origin:290px 166px;animation:zoom 14s ease-in-out infinite alternate}"
+        "@keyframes zoom{to{transform:scale(1.06)}}"
+        ".trace{stroke-dasharray:90 910;animation:trace 7s linear infinite}@keyframes trace{to{stroke-dashoffset:-1000}}"
+        + NUDGE
     )
-    return svg(width, height, "".join(body), f"{name}: {text}", css)
+    return svg(t, w, h, "".join(body), f"{name}: {text}", css, background=False)
 
 
-def heading(text: str, sub: str) -> str:
-    width, height = 1200, 230
+LINKS = [
+    ("linkedin", "LINKEDIN", "Say hello", "M-8-4h16v12h-16z M-3-4v-3h6v3 M-8 1h16"),
+    ("email", "EMAIL", "sandeepkomalp@gmail.com", "M-9-6h18v12h-18z M-9-6l9 7 9-7"),
+    ("medium", "MEDIUM", "Articles and write-ups", "M-6 8l2-6 9-9 4 4-9 9z M-4 2l4 4"),
+    (
+        "website",
+        "WEBSITE",
+        "sandeepkomal.github.io",
+        "M0-9a9 9 0 1 0 .01 0z M-9 0h18 M0-9c-5 5-5 13 0 18 M0-9c5 5 5 13 0 18",
+    ),
+]
+
+
+def link_button(t, key) -> str:
+    _, label, sub, icon = next(item for item in LINKS if item[0] == key)
+    w, h = 580, 96
+    mid = h / 2
     body = (
-        f'<rect width="{width}" height="{height}" fill="{BG}"/>{title(600, 160, text, 150)}'
-        f'<text x="600" y="210" text-anchor="middle" font-family="K" font-size="20" fill="#9aa3ad">{escape(sub)}</text>'
+        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="20" fill="{t["surface"]}" stroke="{t["line"]}"/>'
+        f'<circle cx="52" cy="{mid}" r="26" fill="{t["btn"]}"/>'
+        f'<path transform="translate(52 {mid})" d="{icon}" fill="none" stroke="{t["btn_text"]}" stroke-width="2" '
+        'stroke-linejoin="round" stroke-linecap="round"/>'
+        f'<text x="96" y="{mid - 4}" font-family="MonaW" font-size="16" letter-spacing="2" fill="{t["text"]}">{label}</text>'
+        f'<text x="96" y="{mid + 20}" font-family="Mona" font-size="16" fill="{t["muted"]}">{escape(sub)}</text>'
+        f'<g class="nudge"><text x="{w - 36}" y="{mid + 8}" text-anchor="middle" font-family="MonaW" font-size="22" '
+        f'fill="{t["text"]}">↗</text></g>'
     )
-    return svg(width, height, body, text)
+    return svg(t, w, h, body, f"{label}: {sub}", NUDGE, background=False)
 
 
-FAULT_BUTTONS = {
-    "kill": "KILL A POD",
-    "latency": "INJECT LATENCY",
-    "partition": "CUT THE NETWORK",
+def footer(t) -> str:
+    body = (
+        f'<line x1="300" y1="20" x2="900" y2="20" stroke="{t["line"]}"/>'
+        f'<text x="600" y="62" text-anchor="middle" font-family="{MONO}" font-size="14" fill="{t["muted"]}">'
+        f'<tspan fill="{ACCENT}">❯ </tspan>exit 0</text>'
+        f'<text x="600" y="96" text-anchor="middle" font-family="Mona" font-size="14" fill="{t["muted"]}">'
+        "Independent project, not affiliated with GitHub. Rendered by GitHub Actions with Python's standard library.</text>"
+    )
+    return svg(t, 1200, 120, body, "Independent project, not affiliated with GitHub.")
+
+
+STAT_FIELDS = [
+    ("contributions", "CONTRIBUTIONS"),
+    ("commits", "COMMITS"),
+    ("pull_requests", "PULL REQUESTS"),
+    ("reviews", "REVIEWS"),
+    ("current_streak", "DAY STREAK"),
+    ("longest_streak", "LONGEST STREAK"),
+    ("active_days", "ACTIVE DAYS"),
+    ("stars", "STARS EARNED"),
+    ("repos", "REPOSITORIES"),
+    ("followers", "FOLLOWERS"),
+]
+
+
+def stats(t) -> str:
+    """Twelve months of GitHub activity from brand/stats.json; fields not collected yet are left out."""
+    data = json.loads((ROOT / "stats.json").read_text())
+    shown = [
+        (label, data[key]) for key, label in STAT_FIELDS if data.get(key) is not None
+    ][:8]
+    per_row, cell = 4, 1056 / 4
+    rows = (len(shown) + per_row - 1) // per_row
+    y = 100
+    body = []
+    for i, (label, value) in enumerate(shown):
+        x = 72 + (i % per_row) * cell
+        top = y + (i // per_row) * 104
+        body.append(
+            f'<text x="{x:.0f}" y="{top + 44}" font-family="Hubot" font-size="44" fill="url(#title)">{value:,}</text>'
+            f'<text x="{x:.0f}" y="{top + 72}" font-family="MonaW" font-size="12" letter-spacing="2" '
+            f'fill="{t["muted"]}">{label}</text>'
+        )
+    y += rows * 104 + 10
+    weeks = data.get("weeks") or []
+    if weeks:
+        body.append(
+            f'<text x="72" y="{y + 10}" font-family="{MONO}" font-size="13" fill="{t["muted"]}">weekly activity · 52 weeks</text>'
+        )
+        peak, width = max(weeks) or 1, 1056 / len(weeks)
+        for i, count in enumerate(weeks):
+            h = 4 + 86 * count / peak
+            last = ' class="pulse"' if i == len(weeks) - 1 else ""
+            body.append(
+                f'<rect{last} x="{72 + i * width:.1f}" y="{y + 116 - h:.1f}" width="{width - 4:.1f}" height="{h:.1f}" '
+                f'rx="2" fill="{ACCENT}" fill-opacity="{0.25 + 0.75 * count / peak:.2f}"/>'
+            )
+        y += 140
+    languages = data.get("languages") or []
+    if languages:
+        body.append(
+            f'<text x="72" y="{y + 10}" font-family="{MONO}" font-size="13" fill="{t["muted"]}">languages</text>'
+        )
+        x, total = 72.0, sum(lang["share"] for lang in languages) or 1
+        legend = []
+        for lang in languages:
+            w = 1056 * lang["share"] / total
+            body.append(
+                f'<rect x="{x:.1f}" y="{y + 26}" width="{max(w - 3, 2):.1f}" height="12" rx="6" fill="{lang["color"]}"/>'
+            )
+            x += w
+            legend.append(lang)
+        lx = 72
+        for lang in legend:
+            text = f"{lang['name']} {lang['share'] / total:.0%}"
+            body.append(
+                f'<circle cx="{lx + 5}" cy="{y + 64}" r="5" fill="{lang["color"]}"/>'
+                f'<text x="{lx + 16}" y="{y + 69}" font-family="Mona" font-size="15" fill="{t["muted"]}">{escape(text)}</text>'
+            )
+            lx += len(text) * 8.5 + 44
+        y += 90
+    body.append(
+        f'<text x="72" y="{y + 20}" font-family="{MONO}" font-size="13" fill="{t["muted"]}">'
+        f"last 12 months · updated {escape(data.get('updated', ''))}</text>"
+    )
+    height = y + 60
+    frame = terminal_frame(
+        t, 40, 10, 1120, height - 20, "gh stats SandeepKomal --last 12m"
+    )
+    label = "GitHub stats: " + ", ".join(f"{v:,} {k.lower()}" for k, v in shown)
+    return svg(t, 1200, height, frame + "".join(body), label, PULSE)
+
+
+# --------------------------------------------------------------------------- entry points
+
+
+def render_live(config, states, label, severity, metrics) -> list[Path]:
+    return write("hero", lambda t: hero(t, label, severity, states, metrics)) + write(
+        "production", lambda t: production(t, config, states, label, severity, metrics)
+    )
+
+
+SECTIONS = {
+    "sec-production": (
+        "01 · PRODUCTION",
+        "BREAK MY PRODUCTION",
+        "Eight of my projects run as one system. Pick a fault, open the issue, watch it fail. It heals itself.",
+    ),
+    "sec-3d": (
+        "02 · CONTRIBUTIONS",
+        "MY YEAR IN 3D",
+        "Rendered every hour by two GitHub Actions I wrote.",
+    ),
+    "sec-stack": (
+        "03 · STACK",
+        "WHAT I RUN",
+        "The tools behind the systems I build and operate.",
+    ),
+    "sec-stats": (
+        "04 · STATS",
+        "BY THE NUMBERS",
+        "Twelve months on GitHub, refreshed daily.",
+    ),
+    "sec-projects": (
+        "05 · PROJECTS",
+        "THINGS I SHIPPED",
+        "Built, secured and running in public.",
+    ),
+    "sec-contact": (
+        "06 · CONTACT",
+        "LET'S TALK",
+        "Sev 3: say hello. Sev 2: email me. Sev 1: production is down, and it was probably you.",
+    ),
 }
 
 
-def button(fault: str) -> str:
-    return svg(264, 66, pill(4, 4, 256, FAULT_BUTTONS[fault]), FAULT_BUTTONS[fault])
-
-
-def contact() -> str:
-    width, height = 1200, 560
-    body = [
-        f'<rect width="{width}" height="{height}" fill="{BG}"/>',
-        floating(orb(840, 90, 0.62), 0),
-        title(80, 230, "LET'S", 190, "start"),
-        title(80, 400, "TALK", 190, "start"),
-        (
-            '<text x="84" y="460" font-family="K" font-size="21" fill="#9aa3ad">Sev 3: say hello on LinkedIn · '
-            "Sev 2: email me · Sev 1: production is down, it was probably you.</text>"
-        ),
-        pill(84, 490, 300, "SANDEEPKOMAL.GITHUB.IO"),
-    ]
-    return svg(width, height, "".join(body), "Let's talk", BOB)
-
-
 def render_static() -> list[Path]:
-    panels = {
-        "marquee": marquee(),
-        "about": about(),
-        "stack": stack(),
-        "projects": heading("PROJECTS", "Things I built, shipped and secured"),
-        "contact": contact(),
-    }
-    panels.update({f"card-{p[4]}": project_card(p, i) for i, p in enumerate(PROJECTS)})
-    written = [path for name, doc in panels.items() for path in write(name, doc)]
-    # the magenta buttons read the same on both themes, so they have no light twin
+    paths = (
+        write("whoami", whoami)
+        + write("stack", stack)
+        + write("stats", stats)
+        + write("footer", footer)
+    )
+    for name, (kicker, title, sub) in SECTIONS.items():
+        paths += write(name, lambda t, k=kicker, ti=title, s=sub: section(t, k, ti, s))
     for fault in FAULT_BUTTONS:
-        path = ROOT / f"btn-{fault}.svg"
-        path.write_text(button(fault), encoding="utf-8")
-        written.append(path)
-    return written
+        paths += write(f"btn-{fault}", lambda t, f=fault: button(t, f))
+    for i, project in enumerate(PROJECTS):
+        paths += write(
+            f"card-{project[4]}", lambda t, p=project, n=i: project_card(t, p, n)
+        )
+    for key, *_ in LINKS:
+        paths += write(f"link-{key}", lambda t, k=key: link_button(t, k))
+    return paths
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["stats"]:
+        for written in write("stats", stats):
+            print(written.relative_to(ROOT.parent))
+        sys.exit(0)
     for written in render_static():
         print(written.relative_to(ROOT.parent))

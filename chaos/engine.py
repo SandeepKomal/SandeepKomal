@@ -342,22 +342,26 @@ def next_target(config: dict, state: dict, states: dict[str, str]) -> str:
     return ids[start]
 
 
+def picture(name: str, alt: str, width: str = "100%") -> str:
+    """A brand panel that follows the viewer's GitHub theme."""
+    return (
+        f'<picture><source media="(prefers-color-scheme: dark)" srcset="brand/{name}.svg">'
+        f'<img src="brand/{name}-light.svg" width="{width}" alt="{alt}"></picture>'
+    )
+
+
 def render_readme_block(config: dict, state: dict, current: datetime) -> str:
     faults = current_faults(state)
     states = effective_states(config, faults)
     label, _ = overall_status(config, states)
     target = next_target(config, state, states)
     buttons = "\n".join(
-        f'<a href="{issue_url(config, fault, target)}"><img src="brand/btn-{fault}.svg" width="32%" '
-        f'alt="{alt} on {target}"></a>'
+        f'<a href="{issue_url(config, fault, target)}">{picture(f"btn-{fault}", f"{alt} on {target}", "32%")}</a>'
         for fault, alt in FAULT_ALT.items()
     )
     lines = [
         README_START,
-        (
-            '<picture><source media="(prefers-color-scheme: dark)" srcset="brand/production.svg">'
-            f'<img src="brand/production-light.svg" width="100%" alt="Break my production. Status: {label}."></picture>'
-        ),
+        picture("production", f"kubectl get pods: production is {label}."),
         "",
         f'<p align="center">\n{buttons}\n</p>',
         "",
