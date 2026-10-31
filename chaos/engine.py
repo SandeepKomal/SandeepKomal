@@ -354,7 +354,10 @@ def render_readme_block(config: dict, state: dict, current: datetime) -> str:
     )
     lines = [
         README_START,
-        f'<img src="brand/production.svg" width="100%" alt="Break my production. Status: {label}.">',
+        (
+            '<picture><source media="(prefers-color-scheme: dark)" srcset="brand/production.svg">'
+            f'<img src="brand/production-light.svg" width="100%" alt="Break my production. Status: {label}."></picture>'
+        ),
         "",
         f'<p align="center">\n{buttons}\n</p>',
         "",

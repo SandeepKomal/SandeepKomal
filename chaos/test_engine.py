@@ -192,6 +192,28 @@ class ClusterTest(unittest.TestCase):
             xml.dom.minidom.parseString(doc)
 
 
+class ThemeTest(unittest.TestCase):
+    def test_light_theme_swaps_background_and_stays_wellformed(self):
+        import xml.dom.minidom
+
+        import brand
+
+        dark = brand.about()
+        light = brand.to_light(dark)
+        xml.dom.minidom.parseString(light)
+        self.assertIn('<rect width="1200" height="700" fill="#0c0c0c"/>', dark)
+        self.assertIn('<rect width="1200" height="700" fill="#ffffff"/>', light)
+
+    def test_light_theme_leaves_embedded_images_alone(self):
+        import brand
+
+        card = brand.project_card(brand.PROJECTS[0], 0)
+        start = card.index("base64,")
+        self.assertEqual(
+            card[start : start + 500], brand.to_light(card)[start : start + 500]
+        )
+
+
 class CliTest(unittest.TestCase):
     def test_unknown_command_fails(self):
         self.assertEqual(engine.main(["engine.py", "explode"]), 2)

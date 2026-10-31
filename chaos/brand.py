@@ -22,6 +22,7 @@ ASSETS = ROOT / "assets"
 FONTS = ROOT / "fonts"
 
 BG = "#0c0c0c"
+INK = "#0c0c0d"  # text on the white stack panel; inverts separately in the light theme
 MAGENTA, PURPLE = "#b600a8", "#7621b0"
 MONO = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
 MOTION = "@media (prefers-reduced-motion:reduce){*{animation:none!important}}"
@@ -40,6 +41,52 @@ STATE_WORD = {
     "cut": "CUT OFF",
 }
 SEVERITY_COLOR = {"ok": "#3df5c0", "warn": "#ffb02e", "bad": "#ff3d5a"}
+
+
+# --------------------------------------------------------------------------- themes
+
+LIGHT = {
+    "#0c0c0c": "#ffffff",
+    "#141414": "#f6f7f9",
+    "#121212": "#f4f5f7",
+    "#111": "#f6f7f9",
+    "#26282d": "#e3e6ea",
+    "#2c2f35": "#e3e6ea",
+    "#33363c": "#d5d9df",
+    "#f2f5f7": "#0c0c0c",
+    "#eef2f5": "#0c0c0c",
+    "#e9eef2": "#0c0c0c",
+    "#d7e2ea": "#2b3138",
+    "#9aa3ad": "#5b6470",
+    "#a5adb6": "#59616b",
+    "#7d858f": "#7a828c",
+    "#5a5f68": "#b7bdc5",
+    "#4b8f6a": "#2f9e6a",
+    "#646973": "#15171c",
+    "#bbccd7": "#6b7380",
+    "#3df5c0": "#0a9e74",
+    "#ffb02e": "#d27c00",
+    "#ff3d5a": "#e0243a",
+    "#a3acc7": "#6b7698",
+    "#fefefe": "#b600a8",
+    "#fffffe": "#0c0c0c",
+    "#0c0c0d": "#ffffff",
+    "#dcdcdc": "#2a2c31",
+    "#666": "#9aa3ad",
+}
+HEX = re.compile(r"#[0-9a-fA-F]{3,6}\b")
+
+
+def to_light(doc: str) -> str:
+    return HEX.sub(lambda m: LIGHT.get(m.group(0).lower(), m.group(0)), doc)
+
+
+def write(name: str, doc: str) -> list[Path]:
+    """Write the dark panel and its light twin (name-light.svg)."""
+    dark, light = ROOT / f"{name}.svg", ROOT / f"{name}-light.svg"
+    dark.write_text(doc, encoding="utf-8")
+    light.write_text(to_light(doc), encoding="utf-8")
+    return [dark, light]
 
 
 # --------------------------------------------------------------------------- helpers
@@ -429,7 +476,7 @@ def production(
             if states[dep] in ("healthy", "slow", "degraded"):
                 duration = 2.2 if states[dep] == "healthy" else 6
                 body.append(
-                    f'<circle r="3.5" fill="#fff"><animateMotion dur="{duration}s" repeatCount="indefinite" '
+                    f'<circle r="3.5" fill="#fefefe"><animateMotion dur="{duration}s" repeatCount="indefinite" '
                     f'path="M{x1} {y1}L{x2} {y2}"/></circle>'
                 )
     gradients = {
@@ -484,10 +531,8 @@ def production(
 def render_live(
     config: dict, states: dict, label: str, severity: str, metrics: dict
 ) -> None:
-    (ROOT / "hero.svg").write_text(hero(label, severity), encoding="utf-8")
-    (ROOT / "production.svg").write_text(
-        production(config, states, label, severity, metrics), encoding="utf-8"
-    )
+    write("hero", hero(label, severity))
+    write("production", production(config, states, label, severity, metrics))
 
 
 # --------------------------------------------------------------------------- static panels
@@ -620,16 +665,16 @@ def stack() -> str:
     height = 230 + row * len(STACK) + 40
     body = [
         f'<rect width="{width}" height="{height}" fill="{BG}"/>',
-        f'<rect width="{width}" height="{height}" rx="56" fill="#fff"/>',
-        title(600, 170, "MY STACK", 150, fill=BG),
+        f'<rect width="{width}" height="{height}" rx="56" fill="#fffffe"/>',
+        title(600, 170, "MY STACK", 150, fill=INK),
     ]
     for i, (name, tools) in enumerate(STACK):
         y = 230 + i * row
         body.append(
             f'<line x1="150" y1="{y}" x2="1050" y2="{y}" stroke="#dcdcdc"/>'
             f'<g class="slide" style="animation-delay:-{i * 0.9:.1f}s"><text x="150" y="{y + 112}" font-family="K" '
-            f'font-weight="900" font-size="118" fill="{BG}">0{i + 1}</text></g>'
-            f'<text x="390" y="{y + 66}" font-family="K" font-weight="600" font-size="30" fill="{BG}">{name}</text>'
+            f'font-weight="900" font-size="118" fill="{INK}">0{i + 1}</text></g>'
+            f'<text x="390" y="{y + 66}" font-family="K" font-weight="600" font-size="30" fill="{INK}">{name}</text>'
         )
         for j, line in enumerate(wrap(tools, 62)):
             body.append(
@@ -811,21 +856,19 @@ def contact() -> str:
 
 
 def render_static() -> list[Path]:
-    files = {
-        "marquee.svg": marquee(),
-        "about.svg": about(),
-        "stack.svg": stack(),
-        "projects.svg": heading("PROJECTS", "Things I built, shipped and secured"),
-        "contact.svg": contact(),
+    panels = {
+        "marquee": marquee(),
+        "about": about(),
+        "stack": stack(),
+        "projects": heading("PROJECTS", "Things I built, shipped and secured"),
+        "contact": contact(),
     }
-    files.update({f"btn-{fault}.svg": button(fault) for fault in FAULT_BUTTONS})
-    files.update(
-        {f"card-{p[4]}.svg": project_card(p, i) for i, p in enumerate(PROJECTS)}
-    )
-    written = []
-    for name, content in files.items():
-        path = ROOT / name
-        path.write_text(content, encoding="utf-8")
+    panels.update({f"card-{p[4]}": project_card(p, i) for i, p in enumerate(PROJECTS)})
+    written = [path for name, doc in panels.items() for path in write(name, doc)]
+    # the magenta buttons read the same on both themes, so they have no light twin
+    for fault in FAULT_BUTTONS:
+        path = ROOT / f"btn-{fault}.svg"
+        path.write_text(button(fault), encoding="utf-8")
         written.append(path)
     return written
 
