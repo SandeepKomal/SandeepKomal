@@ -1,0 +1,25 @@
+{
+  "cluster": "sandeep-prod",
+  "region": "github-east-1",
+  "repo": "SandeepKomal/SandeepKomal",
+  "owner": "SandeepKomal",
+  "slo": 99.5,
+  "window_days": 30,
+  "max_active_incidents": 3,
+  "agent_cooldown_minutes": 10,
+  "faults": {
+    "kill": {"label": "kill pod", "heal_minutes": 20, "state": "down", "detail": "CrashLoopBackOff · 0/3"},
+    "latency": {"label": "inject latency", "heal_minutes": 30, "state": "slow", "detail": "p99 1.8s · +1.6s"},
+    "partition": {"label": "partition network", "heal_minutes": 45, "state": "cut", "detail": "unreachable · netpol"}
+  },
+  "services": [
+    {"id": "profile", "name": "profile", "repo": "SandeepKomal/SandeepKomal", "tier": 0, "row": 1.5, "role": "ingress", "deps": ["komorapy", "blast-radius", "neon-arena"]},
+    {"id": "komorapy", "name": "komorapy-v4", "repo": "SandeepKomal/KOMORAPY_V4", "tier": 1, "row": 0, "role": "app platform", "deps": ["devsecops"]},
+    {"id": "blast-radius", "name": "blast-radius", "repo": "SandeepKomal/blast-radius", "tier": 1, "row": 1.5, "role": "agent guard", "deps": ["paranoid-sre"]},
+    {"id": "neon-arena", "name": "neon-arena", "repo": "SandeepKomal/neon-arena", "tier": 1, "row": 3, "role": "renderer", "deps": ["git3d"]},
+    {"id": "devsecops", "name": "devsecops", "repo": "SandeepKomal/DevSecOps", "tier": 2, "row": 0, "role": "pipeline", "deps": ["kubernetes"]},
+    {"id": "paranoid-sre", "name": "paranoid-sre", "repo": "SandeepKomal/paranoid-sre", "tier": 2, "row": 1.5, "role": "agent skill", "deps": ["kubernetes"]},
+    {"id": "git3d", "name": "git3d-universe", "repo": "SandeepKomal/Git3D-Universe", "tier": 2, "row": 3, "role": "renderer", "deps": ["kubernetes"]},
+    {"id": "kubernetes", "name": "kubernetes-k8s", "repo": "SandeepKomal/kubernetes-k8s", "tier": 3, "row": 1.5, "role": "control plane", "deps": []}
+  ]
+}

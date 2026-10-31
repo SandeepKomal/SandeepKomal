@@ -1,0 +1,73 @@
+name: Chaos
+
+on:
+  issues:
+    types: [opened]
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+# Injections and the reconciler both rewrite chaos/state.json; run them one at a time.
+concurrency:
+  group: chaos
+  cancel-in-progress: false
+
+jobs:
+  inject:
+    if: github.event_name == 'issues' && startsWith(github.event.issue.title, 'chaos:')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write # commit the new incident and the re-rendered cluster
+      issues: write # reply to the issue and close it
+    steps:
+      # Credentials stay for the push in publish.sh; this workflow uploads no artifacts.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 zizmor: ignore[artipacked]
+
+      - name: Inject fault
+        id: chaos
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          CHAOS_COMMENT: ${{ runner.temp }}/comment.md
+        run: python3 chaos/engine.py inject
+
+      - name: Publish
+        if: steps.chaos.outputs.result == 'accepted'
+        env:
+          MESSAGE: ${{ steps.chaos.outputs.message }}
+        run: .github/scripts/publish.sh
+
+      - name: Reply and close
+        if: steps.chaos.outputs.result != 'ignored'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          RESULT: ${{ steps.chaos.outputs.result }}
+          CHAOS_COMMENT: ${{ runner.temp }}/comment.md
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --body-file "$CHAOS_COMMENT"
+          if [ "$RESULT" = accepted ]; then reason=completed; else reason="not planned"; fi
+          gh issue close "$ISSUE_NUMBER" --reason "$reason"
+
+  reconcile:
+    if: github.event_name != 'issues'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write # commit healed incidents and the re-rendered cluster
+    steps:
+      # Credentials stay for the push in publish.sh; this workflow uploads no artifacts.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 zizmor: ignore[artipacked]
+
+      - name: Heal due faults
+        id: chaos
+        run: python3 chaos/engine.py reconcile
+
+      - name: Publish
+        env:
+          MESSAGE: "${{ steps.chaos.outputs.message || 'chaos: refresh cluster metrics' }}"
+        run: .github/scripts/publish.sh
