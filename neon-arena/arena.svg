@@ -2,7 +2,7 @@
 <title>SandeepKomal: 2258 contributions, longest streak 49 days</title>
 <desc>3D contribution terrain for @SandeepKomal: 2258 contributions over 68 active days, current streak 49 days, longest streak 49 days, busiest day 2026-10-31 with 372 contributions.</desc>
 <defs>
-  <radialGradient id="bg" cx="62%" cy="58%" r="85%"><stop offset="0" stop-color="#0a0e24"/><stop offset=".55" stop-color="#060a1a"/><stop offset="1" stop-color="#030308"/></radialGradient>
+  <radialGradient id="bg" cx="62%" cy="58%" r="85%"><stop offset="0" stop-color="#0d1117"/><stop offset=".55" stop-color="#0d1117"/><stop offset="1" stop-color="#0d1117"/></radialGradient>
   <radialGradient id="nebA"><stop offset="0" stop-color="#3d2bd9" stop-opacity="0.2"/><stop offset="1" stop-color="#3d2bd9" stop-opacity="0"/></radialGradient>
   <radialGradient id="nebB"><stop offset="0" stop-color="#0077ff" stop-opacity="0.16"/><stop offset="1" stop-color="#0077ff" stop-opacity="0"/></radialGradient>
   <radialGradient id="gridFade" cx="50%" cy="58%" r="52%"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>

@@ -40,6 +40,10 @@ jobs:
           theme: daylight
           output: profile/git3d-universe-light.svg
 
+      # Swap each render's own background for GitHub's page colour so it blends in.
+      - name: Blend into the profile page
+        run: python3 chaos/blend.py --apply profile/git3d-universe.svg dark profile/git3d-universe-light.svg light
+
       - name: Validate
         env:
           EXPECTED_LOGIN: ${{ github.repository_owner }}
