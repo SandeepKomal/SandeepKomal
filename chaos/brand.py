@@ -1,21 +1,23 @@
 """Render the profile README panels.
 
-Black (GitHub's dark page colour) or white, GitHub's own typefaces (Hubot Sans
-and Mona Sans, SIL OFL), and a terminal running through every section. Each
-panel is written twice, ``name.svg`` for dark mode and ``name-light.svg`` for
-light mode, and the README picks one with prefers-color-scheme.
+Black (GitHub's dark page colour) or white, headings in Hubot Sans (SIL OFL)
+drawn from traced glyphs, body text in the viewer's system font, and a
+terminal running through every section. Each panel is written twice,
+``name.svg`` for dark mode and ``name-light.svg`` for light mode, and the
+README picks one with prefers-color-scheme.
 
 Static panels are rendered by ``python3 chaos/brand.py``. The hero and the
 production panel depend on the chaos state and are re-rendered by engine.py
-after every injection or heal. Images and fonts are embedded, so nothing loads
-at view time. Content that matters is visible without animation; motion only
-decorates.
+after every injection or heal. No font is embedded and images are inlined, so
+each panel is a single small request. Content that matters is visible
+without animation; motion only decorates.
 """
 
 from __future__ import annotations
 
 import base64
 import json
+import re
 import sys
 from html import escape
 from pathlib import Path
@@ -77,10 +79,15 @@ STATE_TONE = {
     "cut": "cut",
 }
 MOTION = "@media (prefers-reduced-motion:reduce){*{animation:none!important}}"
-FONT_FILES = {"Hubot": "hubot-display", "Mona": "mona-400", "MonaW": "mona-wide-600"}
-
-
-# --------------------------------------------------------------------------- helpers
+SANS = (
+    "-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif"
+)
+# Body text uses the viewer's system font, as GitHub itself does; no font is embedded.
+TEXT_CSS = (
+    f"[font-family=Mona]{{font-family:{SANS};font-weight:400}}"
+    f"[font-family=MonaW]{{font-family:{SANS};font-weight:600}}"
+)
+GLYPHS = json.loads((FONTS / "hubot-glyphs.json").read_text())
 
 
 def data_uri(path: Path) -> str:
@@ -88,15 +95,28 @@ def data_uri(path: Path) -> str:
     return f"data:{mime};base64,{base64.b64encode(path.read_bytes()).decode()}"
 
 
-def font_faces(body: str) -> str:
-    faces = []
-    for family, file in FONT_FILES.items():
-        if f'font-family="{family}"' in body:
-            data = base64.b64encode((FONTS / f"{file}.woff2").read_bytes()).decode()
-            faces.append(
-                f"@font-face{{font-family:{family};src:url(data:font/woff2;base64,{data}) format('woff2')}}"
-            )
-    return "".join(faces)
+def hubot(
+    x: float, y: float, text: str, size: float, fill: str, anchor: str = "start"
+) -> str:
+    """Headings in Hubot Sans, drawn from traced glyphs so no font is embedded."""
+    scale = size / GLYPHS["upm"]
+    glyphs = [GLYPHS["glyphs"].get(ch, GLYPHS["glyphs"][" "]) for ch in text]
+    width = sum(g["adv"] for g in glyphs) * scale
+    start = x - width / 2 if anchor == "middle" else x - width if anchor == "end" else x
+    uses, pen = [], 0.0
+    for ch, g in zip(text, glyphs):
+        if g["d"]:
+            uses.append(f'<use href="#h{ord(ch):x}" x="{pen:.0f}"/>')
+        pen += g["adv"]
+    return f'<g fill="{fill}" transform="translate({start:.1f} {y}) scale({scale:.5f})">{"".join(uses)}</g>'
+
+
+def glyph_defs(body: str) -> str:
+    used = sorted(set(re.findall(r'href="#h([0-9a-f]+)"', body)))
+    return "".join(
+        f'<path id="h{code}" d="{GLYPHS["glyphs"][chr(int(code, 16))]["d"]}"/>'
+        for code in used
+    )
 
 
 def svg(
@@ -119,7 +139,7 @@ def svg(
     )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" '
-        f'role="img" aria-label="{escape(label)}"><defs>{title}</defs><style>{font_faces(body)}{css}{MOTION}</style>'
+        f'role="img" aria-label="{escape(label)}"><defs>{title}{glyph_defs(body)}</defs><style>{TEXT_CSS}{css}{MOTION}</style>'
         f"{fill}{body}</svg>\n"
     )
 
@@ -344,10 +364,7 @@ def hero(t, label, severity, states, metrics) -> str:
             f'<text x="600" y="62" text-anchor="middle" font-family="MonaW" font-size="13" letter-spacing="4" '
             f'fill="{t["muted"]}">SENIOR CLOUD OPERATIONS ENGINEER</text>'
         ),
-        (
-            '<text x="600" y="146" text-anchor="middle" font-family="Hubot" font-size="70" fill="url(#title)">'
-            "SANDEEP KOMAL POTHU</text>"
-        ),
+        (hubot(600, 146, "SANDEEP KOMAL POTHU", 70, "url(#title)", "middle")),
         (
             f'<text x="600" y="190" text-anchor="middle" font-family="Mona" font-size="21" fill="{t["muted"]}">'
             "I keep production boring. You're welcome to try and break it.</text>"
@@ -377,7 +394,7 @@ def section(t, kicker: str, title: str, sub: str) -> str:
         f'<stop offset=".5" stop-color="{ACCENT}"/><stop offset="1" stop-color="#1fc8e3" stop-opacity="0"/></linearGradient>'
         f'<text x="600" y="58" text-anchor="middle" font-family="MonaW" font-size="13" letter-spacing="4" '
         f'fill="{t["muted"]}">{escape(kicker)}</text>'
-        f'<text x="600" y="128" text-anchor="middle" font-family="Hubot" font-size="58" fill="url(#title)">{escape(title)}</text>'
+        f"{hubot(600, 128, title, 58, 'url(#title)', 'middle')}"
         f'<text x="600" y="170" text-anchor="middle" font-family="Mona" font-size="19" fill="{t["muted"]}">{escape(sub)}</text>'
         f'<line x1="420" y1="204" x2="780" y2="204" stroke="{t["line"]}"/>'
         '<g class="scan"><rect x="540" y="203" width="120" height="2" fill="url(#rule)"/></g>'
@@ -616,7 +633,7 @@ def project_card(t, project, index: int) -> str:
             f'<text x="48" y="357" font-family="MonaW" font-size="12" letter-spacing="2" fill="{t["muted"]}">'
             f"{escape(category.upper())}</text>"
         ),
-        f'<text x="28" y="396" font-family="Hubot" font-size="28" fill="{t["text"]}">{escape(name.upper())}</text>',
+        hubot(28, 396, name.upper(), 28, t["text"]),
     ]
     for i, line in enumerate(wrap(text, 62)):
         body.append(
@@ -714,7 +731,7 @@ def stats(t) -> str:
         x = 72 + (i % per_row) * cell
         top = y + (i // per_row) * 104
         body.append(
-            f'<text x="{x:.0f}" y="{top + 44}" font-family="Hubot" font-size="44" fill="url(#title)">{value:,}</text>'
+            f"{hubot(x, top + 44, f'{value:,}', 44, 'url(#title)')}"
             f'<text x="{x:.0f}" y="{top + 72}" font-family="MonaW" font-size="12" letter-spacing="2" '
             f'fill="{t["muted"]}">{label}</text>'
         )
