@@ -215,7 +215,9 @@ class ThemeTest(unittest.TestCase):
         m = engine.metrics(config, fresh_state(), T0)
         doc = brand.hero(brand.THEMES["dark"], "Partial outage", "bad", states, m)
         self.assertIn("kubectl get pod blast-radius", doc)
-        self.assertIn("SANDEEP KOMAL POTHU", doc)
+        self.assertIn(
+            "Sandeep Komal Pothu", doc
+        )  # the heading itself is drawn as glyph paths
 
 
 class StatsTest(unittest.TestCase):
