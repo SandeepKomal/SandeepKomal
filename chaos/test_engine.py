@@ -300,6 +300,18 @@ class StatsTest(unittest.TestCase):
             stats.OUT.write_text(original)
 
 
+class ReadmeTest(unittest.TestCase):
+    def test_every_panel_the_readme_uses_exists(self):
+        import re
+
+        root = Path(__file__).resolve().parent.parent
+        readme = (root / "README.md").read_text()
+        paths = set(re.findall(r'(?:src|srcset)="([^"]+\.svg)"', readme))
+        self.assertTrue(paths)
+        for path in paths:
+            self.assertTrue((root / path).exists(), path)
+
+
 class CliTest(unittest.TestCase):
     def test_unknown_command_fails(self):
         self.assertEqual(engine.main(["engine.py", "explode"]), 2)

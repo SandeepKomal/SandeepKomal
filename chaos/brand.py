@@ -795,8 +795,13 @@ SECTIONS = {
         "WHAT I RUN",
         "The tools behind the systems I build and operate.",
     ),
+    "sec-stats": (
+        "04 · STATS",
+        "BY THE NUMBERS",
+        "Twelve months on GitHub, refreshed daily.",
+    ),
     "sec-projects": (
-        "04 · PROJECTS",
+        "05 · PROJECTS",
         "THINGS I SHIPPED",
         "Built, secured and running in public.",
     ),
