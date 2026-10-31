@@ -276,6 +276,12 @@ class StatsTest(unittest.TestCase):
         self.assertEqual([lang["name"] for lang in s["languages"]], ["Python", "HCL"])
         self.assertAlmostEqual(s["languages"][0]["share"], 0.75)
 
+    def test_updated_is_stamped_in_ist(self):
+        import stats
+
+        when = stats.datetime(2026, 10, 31, 19, 41, tzinfo=stats.timezone.utc)
+        self.assertEqual(stats.stamp(when), "2026-11-01 01:11 IST")
+
     def test_missing_token_fails_without_writing(self):
         import stats
 

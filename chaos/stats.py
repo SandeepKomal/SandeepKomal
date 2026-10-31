@@ -17,10 +17,11 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parent.parent / "brand" / "stats.json"
+CLOCK = OUT.with_name("theme.json")
 API = "https://api.github.com/graphql"
 QUERY = """
 query($login: String!) {
@@ -88,6 +89,14 @@ def streaks(days: list[tuple[str, int]]) -> tuple[int, int]:
     return current, longest
 
 
+def stamp(current: datetime) -> str:
+    """When the stats were taken, on the same IST clock that sets the theme."""
+    local = current + timedelta(
+        minutes=json.loads(CLOCK.read_text())["utc_offset_minutes"]
+    )
+    return local.strftime("%Y-%m-%d %H:%M IST")
+
+
 def summarise(user: dict) -> dict:
     collection = user["contributionsCollection"]
     weeks = collection["contributionCalendar"]["weeks"]
@@ -108,7 +117,7 @@ def summarise(user: dict) -> dict:
     total = sum(v["bytes"] for v in languages.values()) or 1
     top = sorted(languages.items(), key=lambda kv: -kv[1]["bytes"])[:5]
     return {
-        "updated": datetime.now(timezone.utc).date().isoformat(),
+        "updated": stamp(datetime.now(timezone.utc)),
         "contributions": collection["contributionCalendar"]["totalContributions"],
         "commits": collection["totalCommitContributions"],
         "pull_requests": collection["totalPullRequestContributions"],
