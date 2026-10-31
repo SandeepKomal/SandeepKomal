@@ -314,6 +314,40 @@ class ReadmeTest(unittest.TestCase):
             self.assertTrue((root / path).exists(), path)
 
 
+class ClockThemeTest(unittest.TestCase):
+    def test_ist_day_and_night(self):
+        at = engine.parse_time
+        self.assertEqual(
+            engine.clock_theme(at("2026-11-01T00:29:00Z")), "dark"
+        )  # 05:59 IST
+        self.assertEqual(
+            engine.clock_theme(at("2026-11-01T00:30:00Z")), "light"
+        )  # 06:00 IST
+        self.assertEqual(
+            engine.clock_theme(at("2026-11-01T12:29:00Z")), "light"
+        )  # 17:59 IST
+        self.assertEqual(
+            engine.clock_theme(at("2026-11-01T12:30:00Z")), "dark"
+        )  # 18:00 IST
+
+    def test_every_panel_switches_together(self):
+        import re
+
+        readme = (Path(__file__).resolve().parent.parent / "README.md").read_text()
+        for theme, suffix in (("dark", ""), ("light", "-light")):
+            text = engine.apply_theme(readme, theme)
+            pairs = re.findall(r'srcset="([^"]+)"><img src="([^"]+)"', text)
+            self.assertGreater(len(pairs), 20)
+            for source, fallback in pairs:
+                self.assertEqual(source, fallback)
+                self.assertEqual(
+                    source.endswith("-light.svg"), theme == "light", source
+                )
+            self.assertIn(f"neon-arena/arena{suffix}.svg", text)
+            self.assertIn(f"profile/git3d-universe{suffix}.svg", text)
+            self.assertEqual(engine.apply_theme(text, theme), text)
+
+
 class CliTest(unittest.TestCase):
     def test_unknown_command_fails(self):
         self.assertEqual(engine.main(["engine.py", "explode"]), 2)

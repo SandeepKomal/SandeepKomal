@@ -34,6 +34,7 @@ TITLE_RE = re.compile(
     r"^\s*chaos:\s*([a-z]{1,20})\s+([a-z0-9-]{1,40})\s*$", re.IGNORECASE
 )
 LOGIN_RE = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$")
+THEME_PATH = REPO_ROOT / "brand" / "theme.json"
 README_START = "<!-- chaos:start -->"
 README_END = "<!-- chaos:end -->"
 
@@ -342,8 +343,35 @@ def next_target(config: dict, state: dict, states: dict[str, str]) -> str:
     return ids[start]
 
 
+PICTURE_RE = re.compile(
+    r'<picture><source media="\(prefers-color-scheme: dark\)" srcset="([^"]+?)(?:-light)?\.svg"><img src="[^"]+"'
+)
+
+
+def clock_theme(current: datetime) -> str:
+    """Dark at night and light by day on the owner's clock (IST by default)."""
+    clock = json.loads(THEME_PATH.read_text(encoding="utf-8"))
+    local = current + timedelta(minutes=clock["utc_offset_minutes"])
+    return (
+        "light" if clock["day_start"] <= local.hour < clock["night_start"] else "dark"
+    )
+
+
+def apply_theme(text: str, theme: str) -> str:
+    """Point every panel's dark source and fallback at the same file, so every
+    viewer, on any device or GitHub theme, sees the clock's theme."""
+    suffix = "-light" if theme == "light" else ""
+    return PICTURE_RE.sub(
+        lambda m: (
+            f'<picture><source media="(prefers-color-scheme: dark)" srcset="{m.group(1)}{suffix}.svg">'
+            f'<img src="{m.group(1)}{suffix}.svg"'
+        ),
+        text,
+    )
+
+
 def picture(name: str, alt: str, width: str = "100%") -> str:
-    """A brand panel that follows the viewer's GitHub theme."""
+    """A brand panel; apply_theme picks which variant it shows."""
     return (
         f'<picture><source media="(prefers-color-scheme: dark)" srcset="brand/{name}.svg">'
         f'<img src="brand/{name}-light.svg" width="{width}" alt="{alt}"></picture>'
@@ -414,7 +442,9 @@ def render(config: dict, state: dict, current: datetime) -> None:
         if start != -1 and end > start:
             block = render_readme_block(config, state, current)
             text = text[:start] + block + text[end + len(README_END) :]
-            README_PATH.write_text(text, encoding="utf-8")
+        README_PATH.write_text(
+            apply_theme(text, clock_theme(current)), encoding="utf-8"
+        )
 
 
 # --------------------------------------------------------------------------- cli
