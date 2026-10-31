@@ -23,8 +23,9 @@ jobs:
       contents: write # commit the new incident and the re-rendered cluster
       issues: write # reply to the issue and close it
     steps:
-      # Credentials stay for the push in publish.sh; this workflow uploads no artifacts.
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 zizmor: ignore[artipacked]
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Inject fault
         id: chaos
@@ -38,6 +39,7 @@ jobs:
       - name: Publish
         if: steps.chaos.outputs.result == 'accepted'
         env:
+          GH_TOKEN: ${{ github.token }}
           MESSAGE: ${{ steps.chaos.outputs.message }}
         run: .github/scripts/publish.sh
 
@@ -60,8 +62,9 @@ jobs:
     permissions:
       contents: write # commit healed incidents and the re-rendered cluster
     steps:
-      # Credentials stay for the push in publish.sh; this workflow uploads no artifacts.
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 zizmor: ignore[artipacked]
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Heal due faults
         id: chaos
@@ -69,5 +72,6 @@ jobs:
 
       - name: Publish
         env:
+          GH_TOKEN: ${{ github.token }}
           MESSAGE: "${{ steps.chaos.outputs.message || 'chaos: refresh cluster metrics' }}"
         run: .github/scripts/publish.sh

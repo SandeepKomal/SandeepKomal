@@ -11,6 +11,8 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
+# checkout keeps no credentials; the token is used for this push only
+git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git commit -q -m "$MESSAGE"
