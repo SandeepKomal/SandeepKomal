@@ -19,6 +19,7 @@ import base64
 import json
 import re
 import sys
+from datetime import datetime
 from html import escape
 from pathlib import Path
 
@@ -430,10 +431,10 @@ def whoami(t) -> str:
     return svg(t, 1200, height, "".join(body), "whoami: " + ABOUT, css)
 
 
-def production(t, config, states, label, severity, metrics) -> str:
+def production(t, config, states, label, severity, metrics, target) -> str:
     services = config["services"]
     row_h, top = 46, 128
-    height = top + len(services) * row_h + 130
+    height = top + len(services) * row_h + 200
     body = [
         terminal_frame(
             t, 40, 10, 1120, height - 20, "kubectl get pods -n production --watch"
@@ -476,7 +477,16 @@ def production(t, config, states, label, severity, metrics) -> str:
     body.append(
         f'<rect class="sweep" x="56" y="{top - 16}" width="1088" height="{row_h}" rx="8" fill="{ACCENT}" fill-opacity=".07"/>'
     )
-    body.append(status_bar(t, height - 92, label, severity, states, metrics))
+    body.append(status_bar(t, height - 162, label, severity, states, metrics))
+    notes = (
+        "pick a fault below: an Action injects it, follows the dependency graph and replies on your issue",
+        f"the reconciler heals it in 20 to 45 minutes · next target: {target} · edit the issue title to pick another",
+    )
+    for i, note in enumerate(notes):
+        body.append(
+            f'<text x="72" y="{height - 82 + i * 26}" font-family="{MONO}" font-size="13.5" fill="{t["muted"]}">'
+            f'<tspan fill="{ACCENT}"># </tspan>{escape(note)}</text>'
+        )
     css = (
         ".blink{animation:blink 1.2s steps(2,jump-none) infinite}@keyframes blink{50%{opacity:.35}}"
         f".sweep{{animation:sweep 8s ease-in-out infinite alternate}}"
@@ -488,6 +498,58 @@ def production(t, config, states, label, severity, metrics) -> str:
     )
 
 
+REASONS = {"kill": "Killed", "latency": "Latency", "partition": "Partitioned"}
+
+
+def events(t, incidents: list[dict]) -> str:
+    """Recent breaks as kubectl events: who broke what, how far it spread, how long it took to heal."""
+    recent = list(reversed(incidents))[:6]
+    if not recent:
+        body = terminal_frame(
+            t, 40, 10, 1120, 130, "kubectl get events -n production"
+        ) + (
+            f'<text x="72" y="110" font-family="{MONO}" font-size="16" fill="{t["muted"]}">'
+            "No resources found in production namespace. Nobody has broken it yet.</text>"
+        )
+        return svg(t, 1200, 150, body, "Recent breaks: nobody has broken it yet.")
+    row_h, top = 40, 128
+    height = top + len(recent) * row_h + 40
+    body = [
+        terminal_frame(t, 40, 10, 1120, height - 20, "kubectl get events -n production")
+    ]
+    for x, name in (
+        (72, "STARTED (UTC)"),
+        (290, "TYPE"),
+        (400, "REASON"),
+        (560, "OBJECT"),
+        (760, "MESSAGE"),
+    ):
+        body.append(
+            f'<text x="{x}" y="{top - 20}" font-family="{MONO}" font-size="13" letter-spacing="1" fill="{t["muted"]}">{name}</text>'
+        )
+    for i, inc in enumerate(recent):
+        y = top + 14 + i * row_h
+        healed = inc.get("healed")
+        kind, tone = ("Normal", t["ok"]) if healed else ("Warning", t["bad"])
+        spread = len(inc["blast"])
+        if healed:
+            minutes = (
+                datetime.fromisoformat(healed.replace("Z", "+00:00"))
+                - datetime.fromisoformat(inc["started"].replace("Z", "+00:00"))
+            ).total_seconds() / 60
+            message = f"by @{inc['agent']} · {spread} hit · healed in {minutes:.0f}m"
+        else:
+            message = f"by @{inc['agent']} · {spread} hit · healing"
+        body.append(
+            f'<text x="72" y="{y}" font-family="{MONO}" font-size="15" fill="{t["muted"]}">{escape(inc["started"][:16].replace("T", " "))}</text>'
+            f'<text x="290" y="{y}" font-family="{MONO}" font-size="15" fill="{tone}">{kind}</text>'
+            f'<text x="400" y="{y}" font-family="{MONO}" font-size="15" fill="{t["text"]}">{REASONS.get(inc["fault"], inc["fault"])}</text>'
+            f'<text x="560" y="{y}" font-family="{MONO}" font-size="15" fill="{t["text"]}">pod/{escape(inc["target"])}</text>'
+            f'<text x="760" y="{y}" font-family="{MONO}" font-size="15" fill="{t["muted"]}">{escape(message)}</text>'
+        )
+    return svg(t, 1200, height, "".join(body), f"Recent breaks: {len(recent)} shown.")
+
+
 FAULT_BUTTONS = {
     "kill": ("KILL A POD", "✕"),
     "latency": ("INJECT LATENCY", "◷"),
@@ -497,17 +559,18 @@ FAULT_BUTTONS = {
 
 def button(t, fault: str) -> str:
     label, glyph = FAULT_BUTTONS[fault]
-    w, h = 380, 76
+    w, h = 400, 96
     mid = h / 2
     body = (
-        f'<rect x="2" y="2" width="{w - 4}" height="{h - 4}" rx="{(h - 4) / 2}" fill="{t["btn"]}"/>'
-        f'<circle cx="40" cy="{mid}" r="19" fill="{t["btn_text"]}" fill-opacity=".12"/>'
-        f'<text x="40" y="{mid + 6}" text-anchor="middle" font-family="{MONO}" font-size="17" fill="{t["btn_text"]}">{glyph}</text>'
-        f'<text x="74" y="{mid + 6}" font-family="MonaW" font-size="16" letter-spacing="2" fill="{t["btn_text"]}">{label}</text>'
-        f'<g class="nudge"><text x="{w - 34}" y="{mid + 7}" text-anchor="middle" font-family="MonaW" font-size="20" '
-        f'fill="{t["btn_text"]}">→</text></g>'
+        f'<rect x="12" y="12" width="{w - 24}" height="{h - 24}" rx="{(h - 24) / 2}" fill="{t["surface"]}" '
+        f'stroke="{t["line"]}"/>'
+        f'<circle cx="52" cy="{mid}" r="19" fill="{ACCENT}" fill-opacity=".14"/>'
+        f'<text x="52" y="{mid + 6}" text-anchor="middle" font-family="{MONO}" font-size="17" fill="{ACCENT}">{glyph}</text>'
+        f'<text x="84" y="{mid + 6}" font-family="MonaW" font-size="16" letter-spacing="2" fill="{t["text"]}">{label}</text>'
+        f'<g class="nudge"><text x="{w - 46}" y="{mid + 7}" text-anchor="middle" font-family="MonaW" font-size="20" '
+        f'fill="{t["text"]}">→</text></g>'
     )
-    return svg(t, w, h, body, label, NUDGE, background=False)
+    return svg(t, w, h, body, label, NUDGE)
 
 
 STACK = [
@@ -661,7 +724,7 @@ def project_card(t, project, index: int) -> str:
         ".trace{stroke-dasharray:90 910;animation:trace 7s linear infinite}@keyframes trace{to{stroke-dashoffset:-1000}}"
         + NUDGE
     )
-    return svg(t, w, h, "".join(body), f"{name}: {text}", css, background=False)
+    return svg(t, w, h, "".join(body), f"{name}: {text}", css)
 
 
 LINKS = [
@@ -691,7 +754,7 @@ def link_button(t, key) -> str:
         f'<g class="nudge"><text x="{w - 36}" y="{mid + 8}" text-anchor="middle" font-family="MonaW" font-size="22" '
         f'fill="{t["text"]}">↗</text></g>'
     )
-    return svg(t, w, h, body, f"{label}: {sub}", NUDGE, background=False)
+    return svg(t, w, h, body, f"{label}: {sub}", NUDGE)
 
 
 def footer(t) -> str:
@@ -788,9 +851,16 @@ def stats(t) -> str:
 # --------------------------------------------------------------------------- entry points
 
 
-def render_live(config, states, label, severity, metrics) -> list[Path]:
-    return write("hero", lambda t: hero(t, label, severity, states, metrics)) + write(
-        "production", lambda t: production(t, config, states, label, severity, metrics)
+def render_live(
+    config, states, label, severity, metrics, incidents, target
+) -> list[Path]:
+    return (
+        write("hero", lambda t: hero(t, label, severity, states, metrics))
+        + write(
+            "production",
+            lambda t: production(t, config, states, label, severity, metrics, target),
+        )
+        + write("events", lambda t: events(t, incidents))
     )
 
 

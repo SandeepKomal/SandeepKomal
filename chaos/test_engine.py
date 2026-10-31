@@ -159,10 +159,13 @@ class ClusterTest(unittest.TestCase):
         t = brand.THEMES["dark"]
         for doc in (
             brand.hero(t, label, severity, states, m),
-            brand.production(t, self.config, states, label, severity, m),
+            brand.production(t, self.config, states, label, severity, m, "profile"),
         ):
             xml.dom.minidom.parseString(doc)
             self.assertIn("Major outage", doc)
+        events = brand.events(t, state["incidents"])
+        xml.dom.minidom.parseString(events)
+        self.assertIn("pod/kubernetes", events)
         block = engine.render_readme_block(self.config, state, T0)
         self.assertTrue(
             block.startswith(engine.README_START) and block.endswith(engine.README_END)
@@ -346,6 +349,34 @@ class ClockThemeTest(unittest.TestCase):
             self.assertIn(f"neon-arena/arena{suffix}.svg", text)
             self.assertIn(f"profile/git3d-universe{suffix}.svg", text)
             self.assertEqual(engine.apply_theme(text, theme), text)
+
+
+class SeamlessTest(unittest.TestCase):
+    def test_readme_is_images_only(self):
+        """Markdown text and tables follow the viewer's GitHub theme, not the clock,
+        so the README must be one block of images with no blank lines between them."""
+        import re
+
+        readme = (Path(__file__).resolve().parent.parent / "README.md").read_text()
+        self.assertNotIn("\n\n", readme.strip())
+        body = re.sub(
+            r"<picture>.*?</picture>|</?a[^>]*>|</?p[^>]*>|<!--.*?-->",
+            "",
+            readme,
+            flags=re.DOTALL,
+        )
+        self.assertEqual(body.strip(), "")
+        for tag in re.findall(r"<img [^>]+>", readme):
+            self.assertIn('align="top"', tag)
+
+    def test_empty_events_panel(self):
+        import xml.dom.minidom
+
+        import brand
+
+        doc = brand.events(brand.THEMES["dark"], [])
+        xml.dom.minidom.parseString(doc)
+        self.assertIn("No resources found", doc)
 
 
 class CliTest(unittest.TestCase):

@@ -6,7 +6,7 @@ set -euo pipefail
 
 files=("$@")
 if [ ${#files[@]} -eq 0 ]; then
-  files=(chaos/state.json brand/hero.svg brand/hero-light.svg brand/production.svg brand/production-light.svg README.md)
+  files=(chaos/state.json brand/hero.svg brand/hero-light.svg brand/production.svg brand/production-light.svg brand/events.svg brand/events-light.svg README.md)
 fi
 
 git add "${files[@]}"
