@@ -84,4 +84,4 @@ _Nobody has broken it yet._
 <a href="https://sandeepkomal.github.io/"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-website.svg"><img src="brand/link-website-light.svg" width="49%" alt="Website"></picture></a>
 </p>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/footer.svg"><img src="brand/footer-light.svg" width="100%" alt="Independent project, not affiliated with GitHub."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/footer.svg"><img src="brand/footer-light.svg" width="100%" alt="exit 0"></picture>
