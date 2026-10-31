@@ -2,7 +2,6 @@ name: Neon Arena
 
 on:
   schedule:
-    # Hourly so the day/night theme flips close to the set times.
     - cron: "41 * * * *"
   workflow_dispatch:
   push:
@@ -11,89 +10,65 @@ on:
     paths:
       - .github/workflows/neon-arena.yml
 
-# Only repository contents are needed: generate the SVG and commit it.
-permissions:
-  contents: write
+permissions: {}
 
 concurrency:
   group: neon-arena
   cancel-in-progress: false
 
-env:
-  # Your local IANA timezone, e.g. Asia/Kolkata, America/New_York, Europe/London
-  NEON_TIMEZONE: America/New_York
-  # Daylight theme from 06:00 local time, aurora (night) from 18:00
-  NEON_DAY_START: "06"
-  NEON_NIGHT_START: "18"
-
 jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
+    permissions:
+      contents: write # commit the rendered SVGs
     steps:
-      - name: Checkout profile repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - name: Pick theme by local time
-        id: theme
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          if ! TZ="${NEON_TIMEZONE}" date >/dev/null 2>&1; then
-            echo "ERROR: Invalid IANA timezone: ${NEON_TIMEZONE}"
-            exit 1
-          fi
-
-          # 10# forces base 10 so hours like 08 and 09 are not read as octal
-          HOUR=$((10#$(TZ="${NEON_TIMEZONE}" date +%H)))
-
-          if [ "${HOUR}" -ge "$((10#${NEON_DAY_START}))" ] && [ "${HOUR}" -lt "$((10#${NEON_NIGHT_START}))" ]; then
-            THEME="daylight"
-          else
-            THEME="aurora"
-          fi
-
-          echo "Local hour: ${HOUR} -> theme: ${THEME}"
-          echo "theme=${THEME}" >> "$GITHUB_OUTPUT"
-
-      - name: Generate Neon Arena
+      # One render per GitHub theme; the README picks with prefers-color-scheme.
+      - name: Render for dark mode
         uses: SandeepKomal/neon-arena@933658603b49090272b1163aaeebcc5ab8d7ae94 # main, pre-release
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          theme: ${{ steps.theme.outputs.theme }}
+          theme: aurora
           output: neon-arena/arena.svg
 
-      - name: Publish generated SVG
-        shell: bash
+      - name: Render for light mode
+        uses: SandeepKomal/neon-arena@933658603b49090272b1163aaeebcc5ab8d7ae94 # main, pre-release
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          theme: daylight
+          output: neon-arena/arena-light.svg
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-
-          test -s neon-arena/arena.svg
-          grep -q "<svg" neon-arena/arena.svg
-
-          git add neon-arena/arena.svg
-
+          # checkout keeps no credentials; the token is used for this push only
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          for svg in neon-arena/arena.svg neon-arena/arena-light.svg; do
+            test -s "$svg"
+            grep -q "<svg" "$svg"
+          done
+          git add neon-arena/arena.svg neon-arena/arena-light.svg
           if git diff --cached --quiet; then
-            echo "No Neon Arena changes."
+            echo "No changes."
             exit 0
           fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: refresh Neon Arena (${{ steps.theme.outputs.theme }})"
-
+          git commit -q -m "chore: refresh Neon Arena"
           # Other profile workflows also push to main, so rebase and retry.
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              echo "Neon Arena published."
+          for attempt in 1 2 3 4; do
+            git fetch -q origin main
+            git rebase -q origin/main
+            if git push -q origin HEAD:main; then
               exit 0
             fi
-            sleep 2
+            sleep $((attempt * 2))
           done
-
-          echo "Failed to publish Neon Arena after 3 attempts."
+          echo "Push failed after 4 attempts." >&2
           exit 1
