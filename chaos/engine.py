@@ -14,6 +14,7 @@ environment variables and is matched against strict patterns before use.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -337,7 +338,8 @@ def next_target(config: dict, state: dict, states: dict[str, str]) -> str:
 
 
 PICTURE_RE = re.compile(
-    r'<picture><source media="\(prefers-color-scheme: dark\)" srcset="([^"]+?)(?:-light)?\.svg"><img src="[^"]+"'
+    r'<picture><source media="\(prefers-color-scheme: dark\)" '
+    r'srcset="([^"?]+?)(?:-light)?\.svg(?:\?v=[0-9a-f]+)?"><img src="[^"]+"'
 )
 
 
@@ -350,17 +352,26 @@ def clock_theme(current: datetime) -> str:
     )
 
 
+def versioned(path: str) -> str:
+    """Brand panels get a content hash in their URL, so GitHub's image cache never
+    serves an old copy after a re-render. The contribution renders change hourly
+    without touching the README and are left as plain paths."""
+    file = REPO_ROOT / path
+    if not path.startswith("brand/") or not file.exists():
+        return path
+    return f"{path}?v={hashlib.sha256(file.read_bytes()).hexdigest()[:10]}"
+
+
 def apply_theme(text: str, theme: str) -> str:
     """Point every panel's dark source and fallback at the same file, so every
     viewer, on any device or GitHub theme, sees the clock's theme."""
     suffix = "-light" if theme == "light" else ""
-    return PICTURE_RE.sub(
-        lambda m: (
-            f'<picture><source media="(prefers-color-scheme: dark)" srcset="{m.group(1)}{suffix}.svg">'
-            f'<img src="{m.group(1)}{suffix}.svg"'
-        ),
-        text,
-    )
+
+    def swap(m: re.Match) -> str:
+        url = versioned(f"{m.group(1)}{suffix}.svg")
+        return f'<picture><source media="(prefers-color-scheme: dark)" srcset="{url}"><img src="{url}"'
+
+    return PICTURE_RE.sub(swap, text)
 
 
 def picture(name: str, alt: str, width: str = "100%") -> str:
