@@ -1,16 +1,16 @@
-<a href="https://sandeepkomal.github.io/"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/hero.svg"><img src="brand/hero-light.svg" width="100%" alt="Sandeep Komal Pothu, Senior Cloud Operations Engineer"></picture></a>
+<a href="https://sandeepkomal.github.io/"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/hero.svg"><img src="brand/hero.svg" width="100%" alt="Sandeep Komal Pothu, Senior Cloud Operations Engineer"></picture></a>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/whoami.svg"><img src="brand/whoami-light.svg" width="100%" alt="whoami: automate the repeatable, secure the critical, observe the whole system."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/whoami.svg"><img src="brand/whoami.svg" width="100%" alt="whoami: automate the repeatable, secure the critical, observe the whole system."></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-production.svg"><img src="brand/sec-production-light.svg" width="100%" alt="01 Production: break my production"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-production.svg"><img src="brand/sec-production.svg" width="100%" alt="01 Production: break my production"></picture>
 
 <!-- chaos:start -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/production.svg"><img src="brand/production-light.svg" width="100%" alt="kubectl get pods: production is All systems operational."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/production.svg"><img src="brand/production.svg" width="100%" alt="kubectl get pods: production is All systems operational."></picture>
 
 <p align="center">
-<a href="https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log."><picture><source media="(prefers-color-scheme: dark)" srcset="brand/btn-kill.svg"><img src="brand/btn-kill-light.svg" width="32%" alt="Kill a pod on profile"></picture></a>
-<a href="https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log."><picture><source media="(prefers-color-scheme: dark)" srcset="brand/btn-latency.svg"><img src="brand/btn-latency-light.svg" width="32%" alt="Inject latency on profile"></picture></a>
-<a href="https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log."><picture><source media="(prefers-color-scheme: dark)" srcset="brand/btn-partition.svg"><img src="brand/btn-partition-light.svg" width="32%" alt="Cut the network on profile"></picture></a>
+<a href="https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20kill%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log."><picture><source media="(prefers-color-scheme: dark)" srcset="brand/btn-kill.svg"><img src="brand/btn-kill.svg" width="32%" alt="Kill a pod on profile"></picture></a>
+<a href="https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20latency%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log."><picture><source media="(prefers-color-scheme: dark)" srcset="brand/btn-latency.svg"><img src="brand/btn-latency.svg" width="32%" alt="Inject latency on profile"></picture></a>
+<a href="https://github.com/SandeepKomal/SandeepKomal/issues/new?title=chaos%3A%20partition%20profile&body=Press%20%2A%2ASubmit%20new%20issue%2A%2A%20and%20a%20GitHub%20Action%20injects%20this%20fault%20into%20the%20cluster%20on%20the%20profile.%20It%20replies%20with%20the%20blast%20radius%20and%20closes%20the%20issue.%0A%0AThe%20cluster%20heals%20itself.%20Your%20handle%20stays%20in%20the%20incident%20log."><picture><source media="(prefers-color-scheme: dark)" srcset="brand/btn-partition.svg"><img src="brand/btn-partition.svg" width="32%" alt="Cut the network on profile"></picture></a>
 </p>
 
 <p align="center"><sub>Next target: <code>profile</code>. Edit the issue title to pick another service.</sub></p>
@@ -50,38 +50,38 @@ _Nobody has broken it yet._
 
 </details>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-3d.svg"><img src="brand/sec-3d-light.svg" width="100%" alt="02 Contributions: my year in 3D"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-3d.svg"><img src="brand/sec-3d.svg" width="100%" alt="02 Contributions: my year in 3D"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="profile/git3d-universe.svg"><img src="profile/git3d-universe-light.svg" width="100%" alt="Git3D Universe: a year of contributions as a 3D universe"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="profile/git3d-universe.svg"><img src="profile/git3d-universe.svg" width="100%" alt="Git3D Universe: a year of contributions as a 3D universe"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="neon-arena/arena.svg"><img src="neon-arena/arena-light.svg" width="100%" alt="Neon Arena: a year of contributions as a neon 3D stadium"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="neon-arena/arena.svg"><img src="neon-arena/arena.svg" width="100%" alt="Neon Arena: a year of contributions as a neon 3D stadium"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-stack.svg"><img src="brand/sec-stack-light.svg" width="100%" alt="03 Stack: what I run"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-stack.svg"><img src="brand/sec-stack.svg" width="100%" alt="03 Stack: what I run"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/stack.svg"><img src="brand/stack-light.svg" width="100%" alt="tree ~/stack: cloud, platform, automation, security, observability and secrets tooling"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/stack.svg"><img src="brand/stack.svg" width="100%" alt="tree ~/stack: cloud, platform, automation, security, observability and secrets tooling"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-stats.svg"><img src="brand/sec-stats-light.svg" width="100%" alt="04 Stats: by the numbers"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-stats.svg"><img src="brand/sec-stats.svg" width="100%" alt="04 Stats: by the numbers"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/stats.svg"><img src="brand/stats-light.svg" width="100%" alt="GitHub stats for the last twelve months"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/stats.svg"><img src="brand/stats.svg" width="100%" alt="GitHub stats for the last twelve months"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-projects.svg"><img src="brand/sec-projects-light.svg" width="100%" alt="05 Projects: things I shipped"></picture>
-
-<p align="center">
-<a href="https://github.com/SandeepKomal/komorapy_v4"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-komora.svg"><img src="brand/card-komora-light.svg" width="49%" alt="KOMORA: Flask storefront on Kubernetes: restricted pods, default-deny networking, Kyverno, scanned CI/CD."></picture></a>
-<a href="https://github.com/SandeepKomal/paste-safe"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-paste-safe.svg"><img src="brand/card-paste-safe-light.svg" width="49%" alt="Paste-Safe: Strips secrets from logs before you paste them into an AI, then restores them. Runs in your browser."></picture></a>
-<a href="https://github.com/SandeepKomal/Git3D-Universe"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-git3d-universe.svg"><img src="brand/card-git3d-universe-light.svg" width="49%" alt="Git3D Universe: A year of GitHub activity as a living 3D universe, with top repositories orbiting as planets."></picture></a>
-<a href="https://github.com/SandeepKomal/Neon-Arena"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-neon-arena.svg"><img src="brand/card-neon-arena-light.svg" width="49%" alt="Neon Arena: A year of contributions as a neon 3D stadium: lit bars, an LED ribbon and a streak light-cycle."></picture></a>
-<a href="https://github.com/SandeepKomal/README-Glassfolio"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-glassfolio.svg"><img src="brand/card-glassfolio-light.svg" width="49%" alt="README-Glassfolio: Turns any GitHub username into a live, themed, self-updating profile README."></picture></a>
-<a href="https://github.com/SandeepKomal/DevSecOps"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-devsecops.svg"><img src="brand/card-devsecops-light.svg" width="49%" alt="DevSecOps: Defense-in-depth lab: secrets, SAST, SCA, IaC, container and DAST scanning with SBOMs."></picture></a>
-</p>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-contact.svg"><img src="brand/sec-contact-light.svg" width="100%" alt="06 Contact: let's talk"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-projects.svg"><img src="brand/sec-projects.svg" width="100%" alt="05 Projects: things I shipped"></picture>
 
 <p align="center">
-<a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-linkedin.svg"><img src="brand/link-linkedin-light.svg" width="49%" alt="Linkedin"></picture></a>
-<a href="mailto:sandeepkomalp@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-email.svg"><img src="brand/link-email-light.svg" width="49%" alt="Email"></picture></a>
-<a href="https://sandeepkomalp.medium.com"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-medium.svg"><img src="brand/link-medium-light.svg" width="49%" alt="Medium"></picture></a>
-<a href="https://sandeepkomal.github.io/"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-website.svg"><img src="brand/link-website-light.svg" width="49%" alt="Website"></picture></a>
+<a href="https://github.com/SandeepKomal/komorapy_v4"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-komora.svg"><img src="brand/card-komora.svg" width="49%" alt="KOMORA: Flask storefront on Kubernetes: restricted pods, default-deny networking, Kyverno, scanned CI/CD."></picture></a>
+<a href="https://github.com/SandeepKomal/paste-safe"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-paste-safe.svg"><img src="brand/card-paste-safe.svg" width="49%" alt="Paste-Safe: Strips secrets from logs before you paste them into an AI, then restores them. Runs in your browser."></picture></a>
+<a href="https://github.com/SandeepKomal/Git3D-Universe"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-git3d-universe.svg"><img src="brand/card-git3d-universe.svg" width="49%" alt="Git3D Universe: A year of GitHub activity as a living 3D universe, with top repositories orbiting as planets."></picture></a>
+<a href="https://github.com/SandeepKomal/Neon-Arena"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-neon-arena.svg"><img src="brand/card-neon-arena.svg" width="49%" alt="Neon Arena: A year of contributions as a neon 3D stadium: lit bars, an LED ribbon and a streak light-cycle."></picture></a>
+<a href="https://github.com/SandeepKomal/README-Glassfolio"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-glassfolio.svg"><img src="brand/card-glassfolio.svg" width="49%" alt="README-Glassfolio: Turns any GitHub username into a live, themed, self-updating profile README."></picture></a>
+<a href="https://github.com/SandeepKomal/DevSecOps"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/card-devsecops.svg"><img src="brand/card-devsecops.svg" width="49%" alt="DevSecOps: Defense-in-depth lab: secrets, SAST, SCA, IaC, container and DAST scanning with SBOMs."></picture></a>
 </p>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="brand/footer.svg"><img src="brand/footer-light.svg" width="100%" alt="exit 0"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/sec-contact.svg"><img src="brand/sec-contact.svg" width="100%" alt="06 Contact: let's talk"></picture>
+
+<p align="center">
+<a href="https://www.linkedin.com/in/sandeep-komal-pothu-ba4497283"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-linkedin.svg"><img src="brand/link-linkedin.svg" width="49%" alt="Linkedin"></picture></a>
+<a href="mailto:sandeepkomalp@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-email.svg"><img src="brand/link-email.svg" width="49%" alt="Email"></picture></a>
+<a href="https://sandeepkomalp.medium.com"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-medium.svg"><img src="brand/link-medium.svg" width="49%" alt="Medium"></picture></a>
+<a href="https://sandeepkomal.github.io/"><picture><source media="(prefers-color-scheme: dark)" srcset="brand/link-website.svg"><img src="brand/link-website.svg" width="49%" alt="Website"></picture></a>
+</p>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="brand/footer.svg"><img src="brand/footer.svg" width="100%" alt="exit 0"></picture>
